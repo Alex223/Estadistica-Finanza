@@ -1,5 +1,0 @@
-Estadistica-Finanza
-===================
-
-Finazas
-tonteras
