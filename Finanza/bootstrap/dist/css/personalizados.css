@@ -1,0 +1,19 @@
+  .barra_información{
+            width: 100%;
+            height:  30px; 
+            background-color: #639BF8;
+            right:0px;
+            top:95%;
+            position:absolute;
+                     }
+                     
+    .barra_separador{
+                         
+            width: 5px;
+            height: 30px; 
+            background-color: white;
+            right: 100%;
+            top:0%;
+            position:relative;
+                         
+                     }
