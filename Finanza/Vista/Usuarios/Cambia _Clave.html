@@ -1,14 +1,49 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+
 <html>
-    <head>
-        <title></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
+<head>
+    
+
+<script>
+    function Cambia_clave(){
+        
+          valor = document.getElementById("cont1").value;
+          valor1 = document.getElementById("cont2").value;
+          if(valor.length === 0 || valor1.length ===0){
+              alert("Se debe ingresar una contraseña!");
+              
+          }else{
+              if(valor===valor1){
+                  alert("Tu contraseña se a actualizado satisfactoriamente");
+                  
+              }else{ alert("Las contraseñas ingresadas debe ser iguales!");}
+              
+          }
+    }
+    
+</script>
+
+</head>
     <body>
-        <div>TODO write content</div>
+        <div id="cambia_clave" > 
+            
+            <form class="form-signin">
+                        <h2 class="form-signin-heading">Cambiar Contraseña</h2>
+                        <div style="text-align: left">
+                        <h5>Por favor ingresa una nueva contraseña</h5> 
+                         </div>
+                        <input id="cont1" class="form-control" type="password" placeholder="Nueva Contraseña">
+                        
+                        </br>
+                        <div style="text-align: left">
+                        <h5>Confirma tu nueva contraseña</h5> 
+                        </div>
+                        <input id="cont2" class="form-control" type="password" placeholder="Confirmación">
+                        </br>
+                         
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Cambia_clave();">Cambiar</button>
+                    </form>
+        
+        </div>
     </body>
+
 </html>

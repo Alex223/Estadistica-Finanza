@@ -8,8 +8,16 @@
             function ingreso_usuario(){
                 valor = document.getElementById("user1").value;
                 valor2 = document.getElementById("text1").value;
-                if(valor2.length === 0 || valor.length === 0 || (/^\s+$/.test(valor))) {alert("Falta nick o contraseña");}
-                else{if(valor === "alex" && valor2 === "1234") RETURN;}}
+                if( valor.length === 0 || valor2.length === 0) {alert("Falta nick o contraseña");}
+                else{
+                    if(valor === "alex" && valor2 === "1234"){ alert( "Bienvenido " + valor);valor = document.getElementById("contenido_dinamico").value; }
+                    else{alert("Usuario no existente, favor re-ingrese sus datos!");}
+        
+        }
+            
+                 
+    
+    }
             
            </script>
                    

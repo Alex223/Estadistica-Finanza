@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" type="text/css"/>
     <link rel="stylesheet" href="/bootstrap/dist/css/personalizados.css" type="text/css">
     <link rel="stylesheet" href="bootstrap/examples/navbar-static-top/navbar-static-top.css" type="text/css"/>
+    <link rel="stylesheet" href="/bootstrap/examples/signin/signin.css" type="text/css"/>
 
     
     
@@ -64,11 +65,10 @@
                       <a href="/index.html" class="dropdown-toggle" data-toggle="dropdown">Usuario<b class="caret"></b></a>
                        <ul class="dropdown-menu" >
                         <li><a href="#" onclick="cargar('#contenido_dinamico','/Vista/Login.html');" >Cambiar de Usuario</a></li>
-                        <li><a href="#">Cambiar contraseña</a></li>
-                        <li><a href="#">Cerrar sesi&oacute;n</a></li>
-                        <li><a href="#">Editar perfil</a></li>
+                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Usuarios/Cambia+_Clave.html');">Cambiar contraseña</a></li>
+                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Login.html');">Cerrar sesi&oacute;n</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Login.html');">Salir</a></li>
+                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Home.html');">Salir</a></li>
                  
                       </ul>
                     </li>
