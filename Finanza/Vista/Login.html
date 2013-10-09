@@ -4,20 +4,29 @@
         <title>Login</title>
         
         <link rel="stylesheet" href="/bootstrap/examples/signin/signin.css" type="text/css">
-        
+           <script>
+            function ingreso_usuario(){
+                valor = document.getElementById("user1").value;
+                valor2 = document.getElementById("text1").value;
+                if(valor2.length === 0 || valor.length === 0 || (/^\s+$/.test(valor))) {alert("Falta nick o contraseña");}
+                else{if(valor === "alex" && valor2 === "1234") RETURN;}}
+            
+           </script>
+                   
+            
     </head>
     <body>
                 <div id="Login">
 
 
                     <form class="form-signin">
-                        <h2 class="form-signin-heading">Por favor Identificate</h2>
+                        <h2 class="form-signin-heading">Por favor identificate</h2>
 
-                        <input class=   "form-control" type="text" autofocus="" placeholder="Usuario">
-                        <input class="form-control" type="password" placeholder="Contraseña">
+                        <input id="user1" class="form-control" type="text" autofocus="" placeholder="Usuario">
+                        <input id="text1" class="form-control" type="password" placeholder="Contraseña">
                          <!--<label class="checkbox"><input type="checkbox" value="remember-me">Recordame</label> -->
 
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="ingreso_usuario();">Entrar</button>
                     </form>
 
                 </div>

@@ -14,6 +14,8 @@
     <link href="/bootstrap/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" type="text/css"/>
     <link rel="stylesheet" href="/bootstrap/dist/css/personalizados.css" type="text/css">
+    <link rel="stylesheet" href="bootstrap/examples/navbar-static-top/navbar-static-top.css" type="text/css"/>
+
     
     
     
@@ -48,11 +50,8 @@
       <div class="container"  >
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" onclick="cargar('#contenido_dinamico','/Vista/Login.html');" >Finanza Estadistico</a>
+          <a class="navbar-brand" href="#" onclick="cargar('#contenido_dinamico','/Vista/Home.html');" >Finanza Estadistico</a>
          
         </div>
         <div class="navbar-collapse collapse" >
@@ -64,26 +63,53 @@
                      <li class="dropdown" >
                       <a href="/index.html" class="dropdown-toggle" data-toggle="dropdown">Usuario<b class="caret"></b></a>
                        <ul class="dropdown-menu" >
-                        <li><a href="#">Cambiar de Usuario</a></li>
+                        <li><a href="#" onclick="cargar('#contenido_dinamico','/Vista/Login.html');" >Cambiar de Usuario</a></li>
                         <li><a href="#">Cambiar contraseña</a></li>
                         <li><a href="#">Cerrar sesi&oacute;n</a></li>
                         <li><a href="#">Editar perfil</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Login.html')">Salir</a></li>
+                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Login.html');">Salir</a></li>
                  
                       </ul>
                     </li>
             
-                     <!-- Maestro-->
+                     <!---->
+                     
+                    <li class="dropdown" >
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modulos <b class="caret"></b></a>
+                      <ul class="dropdown-menu" >
+                        <li><a href="#">Bancos</a></li>
+                        <li><a href="#">Documentos por cobrar</a></li>
+                        <li><a href="#">Depositos Promedio</a></li>
+                        <li><a href="#">Remesas Aduanas</a></li>
+                        <li><a href="#">Coberturas</a></li>
+                        <li><a href="#">Deudas comex</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Flujo de cajas</a></li>
+                       
+                      
+                      </ul>
+                    </li>
+                    
+                    
+                     <!--Adminitración-->
             
                     <li class="dropdown" >
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administraci&oacute;n <b class="caret"></b></a>
-                      <ul class="dropdown-menu" >
-                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Usuarios/Lista_Usuarios.html');" >Modulo usuarios</a></li>
-                        <li><a href="#">Modulos Bancos</a></li>
-                        <li><a href="#">Modulos dirección</a></li>
+                      <ul class="dropdown-menu"  >
+                          
+                          
+                           <!-- <li class="dropdown-submenu">
+                             <a tabindex="-1" href="#" onclick="cargar('#contenido_dinamico', '/Vista/Usuarios/Lista_Usuarios.html');" >Modulo de Usuarios</a>
+                                            <ul class="dropdown-menu">          
+                                               <li><a href="#">Crear Usuario</a></li>
+                                               <li><a href="#">Mostrar Usuarios</a></li>
+                                            </ul>
+                            </li> -->
+                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Usuarios/Lista_Usuarios.html');">Mostrar Usuarios</a></li>
+                        <li><a href="#">Modulos Parametros</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Modulo Perfil</a></li>
+                        <li><a href="#">Modulo Perfiles</a></li>
                         
                       </ul>
                     </li>
@@ -94,8 +120,6 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sistema <b class="caret"></b></a>
                       <ul class="dropdown-menu" >
                         <li><a href="#">Ayuda</a></li>
-                        <li><a href="#"></a></li>
-                        <li><a href="#">Something else here</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Acerca de...</a></li>
                       
@@ -105,7 +129,7 @@
           <ul class="nav navbar-nav navbar-right">
            
             <!-- <li><a href="#">Static top</a></li>-->
-            <li class="active"><a href="#" style="background:#639BF8">Volver</a></li>
+            <li id="boton_primario" class="hidden"><a href="#" style="background:#639BF8">Volver</a></li>
           </ul>
         </div>
       </div>
