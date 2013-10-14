@@ -57,60 +57,48 @@ and open the template in the editor.
             }
             
        
-function parseNumber(input) {
-    var r = "", i = 0, c = "", s = input + " ";
-    if (s.charAt(0) === " ") {
-        
-        r="1";
-        return "Se debe ingresar numeros!";
-    } 
-    else{
-    while (i-1 < s.length) {        
-        c = s.charAt(i++);
-        if (c >= "0" || c <= "9") {
-         r="";
-         continue;
-         
-        }
-        else {
-              r="1";
-              return "Debe ingresar solo numero!";
-              break;
-        }
-       
-        
-    }
-    return r;
+function valida_numero(dato) {
     
+    c="";
+    if(dato===""){c="0";}
+    else{
+        //es un numero
+        if (!isNaN(dato)){c="1";}
+        else{c="2";}
+   }
+    
+return c;
 
 
-}
 };
-
 
     function valida_ingreso(){
         var valor = document.getElementById("carpeta").value;
-        var valor1 = document.getElementById("carpeta").value;
+        var valor1 = document.getElementById("proveedor").value;
+        var valor2 = document.getElementById("cif").value;
+        var valor3 = document.getElementById("otros").value;
+        var valor4 = document.getElementById("Cantidad").value;        
         
         
+      if (valor === "") {alert('Se debe ingresa una carpeta!');}
+      if (valor1 === ""){alert('Se debe ingresa un proveedor!');}
+      if (valida_numero(valor2) === "0") {alert("Se debe ingresar cif");} 
+        else{
+             if(valida_numero(valor2) === "2"){alert("Se debe ingresar solo números para el cif");}
+       }
+      if (valida_numero(valor3) === "0") {alert("Se debe ingresar Otros$");} 
+        else{
+             if(valida_numero(valor3) === "2"){alert("Se debe ingresar solo números para Otros$");}
+       }
+      if (valida_numero(valor3) === "0") {alert("Se debe ingresar Cantidad");} 
+        else{
+             if(valida_numero(valor3) === "2"){alert("Se debe ingresar solo números para Cantidad");}
+       }
         
-        
-      //  if (valor === "" || proveedor==="" || ) {
-            
-            
-            
-            
-       // }
-        
-        
-        
-        
-        //{parseNumber(valor);  }
-        //else{alert('Se ingresa registro exitoso!');
-            
-       // redireccionar('#contenido_dinamico', '/Vista/Datos_Cabranza/Lista_Datos_Cabranza.html'); 
-      //  }
-        
+       
+                     
+         if (valor !=="" && valor1 !== "" && valida_numero(valor2)=== "1" && valida_numero(valor3) === "1" && valida_numero(valor4) === "1"){ alert('Se ingresa exitosamenete el registro');
+         redireccionar('#contenido_dinamico', 'Vista/Aduanas/Listado_Aduanas.html');}     
         
     }; 
 
@@ -124,7 +112,7 @@ function parseNumber(input) {
 
 
                <form class="form-signin"  >
-                        <h2 class="form-signin-heading">Ingresa Aduana</h2>
+                        <h2 class="form-signin-heading">Ingreso Aduana</h2>
                         
                         <br/>
                        
