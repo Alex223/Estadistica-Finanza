@@ -1,0 +1,149 @@
+
+<body onload="fecha_acual();">	
+
+    <div>
+            
+            
+              <!--Vista de ingresos de las trasacciones de los bancos a la cuenta de empresa-->
+              <h1></h1>
+              
+              
+              <form class="form-horizontal" >
+                  
+                  
+                      
+                  <div class="form-group">
+                      
+                      <div class="panel panel-default">
+                            
+                            <div class="panel-heading" style="text-align: left; background:#639BF8" ><h2>Bancos</h2></div>
+                            
+                                
+                                
+                              
+                            
+                                <br/>
+               
+                            
+                            
+                            
+                            
+                            
+              <table id="listado" class="table table-striped">
+                  <tr>
+                      <td colspan="4"> 
+                               <select class="form-control">
+                                    <option>Banco de Chile</option>
+                                    <option>Banco de Chile(US$)</option>
+                                    <option>Banco BCI</option>
+                                    <option>Banco Santander(US$)</option>
+                                    <option>Banco Santander</option>
+                                    <option>Banco Corbanca</option>
+                                    <option>Banco de Chile Agricola</option>
+                                    
+                               </select>
+                       </td>
+                       
+                       <td colspan="2">Depositos</td>
+                       <td>       
+                           <script type="text/javascript">
+    
+    function fecha(){
+        
+       window.onload = function(){
+		new JsDatePick({
+			useMode:2,
+			target:"inputField",
+			dateFormat:"%d-%M-%Y"
+			
+		});
+	}; 
+        
+    };
+    
+	function hola(){
+          var valor = document.getElementById("fecha").value;  
+           
+                alert("se añade a "+ valor);
+          document.getElementById("fecha").innerHTML  = valor +" <div id='nuevo'> por la creta </div>";
+           
+           
+
+      
+        
+        alert("se añade a "+ valor);
+            
+            
+            
+            
+        };
+        
+        
+       function fecha_actual(){
+               alert("pasa    ");
+              var valor = document.getElementById("fecha1").value;
+             // var nuevo_div = document.createElement('div');
+         
+         //obtener fecha actual     
+                var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+                var f=new Date();
+               valor =document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
+                alert("la fecha es: " + valor);
+       }; 
+       
+        window.onload=function(){alert('pasa');};
+</script>
+                           
+                           
+                           <div id="fecha">
+                           
+                               <label id="fecha_1" >Fecha</label>
+                          <!-- <input type="text" size="12" id="inputField" onclick="javascript:hola();"/>-->
+                           </div>
+                        
+                       
+                       
+                       
+                       </td>
+                       
+                       
+                       
+                       
+                       <td colspan="2">Conciliación</td>
+                      
+                  </tr>
+                  
+                  <tr>
+                      <td>Fecha</td><td>Numero de Cheque</td><td>Detalle</td> <td>Giros</td><td>0 día</td><td>1 día</td><td>Saldo</td><td>CH x COB</td><td>Valor</td>
+                  </tr>
+                  
+                  <tr>
+                      <td>13/03/2013</td><td> - </td><td>Saldo Anteriores</td> <td> - </td><td> - </td><td> - </td><td>39.284.993</td><td> - </td><td> - </td>
+                  </tr>
+                  
+                  <tr>
+                      <td>08/01/2013</td><td>667</td><td>PATRICK INOSTROZA</td><td> - </td><td> - </td><td> - </td><td>39.249.165</td><td>N° 667</td><td>35.828</td>
+                  </tr>
+                  
+                   <tr>
+                      <td>08/01/2013</td><td>18</td><td>CRISTIAN AVILA</td><td>360.917</td><td> - </td><td> - </td><td>38.888.248</td><td>N° 018</td><td>360.917</td>
+                  </tr>
+                  
+               </table>
+                 
+                      </div>
+                      </div>
+                      
+                     
+                  
+                  
+                  
+                  
+                  <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', 'Vista/Modulo+Bancos/Ingreso_Cuentas_Bancos.html');">Ingresar</button>  
+              </form>
+              
+              
+        </div>
+
+ </body>

@@ -7,8 +7,139 @@ and open the template in the editor.
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <script>
+            
+            function fecha_actual(){
+             var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+             var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+             var f=new Date();
+             
+             var fecha =diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+             
+             var valor = document.getElementById("fecha_1").value;
+        
+             //valor = "<label id='fecha_1'>"+ fecha +"</label>";
+             
+               elemento1 = document.createElement('div'); 
+               
+               elemento1.appendChild(document.createTextNode(fecha ));
+               
+                elemento1.id = 'fecha_1';
+                
+                elemento2 = document.getElementById('fecha');
+    
+                elemento2.appendChild(elemento1);
+               
+               
+           };
+           ///Cargar un div dentro de otro div por evento listener
+        function addEvent(obj, evType, fn){
+            if (obj.addEventListener){
+              obj.addEventListener(evType, fn, false);
+              return true;
+            } else if (obj.attachEvent){
+              var r = obj.attachEvent("on"+evType, fn);
+              return r;
+            } else {
+              return false;
+            }
+           }
+           addEvent(window, 'load', fecha_actual());
+        
+        
+            //window.onload(function(){fecha_actual();});
+            
+             
+            function cargar(div, desde)
+            {
+                 $(div).load(desde);
+            }
+            
+       
+         
+    </script>
+    
+        
     </head>
     <body>
-        <div>TODO write content</div>
+              
+            
+              <!--Vista de ingresos de las trasacciones de los bancos a la cuenta de empresa-->
+              <h1></h1>
+              
+              
+              <form class="form-horizontal" >
+                  
+                  
+                      
+                  <div class="form-group">
+                      
+                      <div class="panel panel-default">
+                            
+                            <div class="panel-heading" style="text-align: left; background:#639BF8" ><h2>Bancos</h2></div>
+                            
+                            
+                            <table class="table table-striped">
+                                
+                                <tr>
+                                    <td><label id="fecha_1">Fecha:</label></td><td > <div id="fecha"> </div> </td><td colspan="4"></td>
+                                    
+                                </tr> 
+                          
+                                <tr>
+                                   
+                                  <td></td> <td>Fecha Venta </td><td> Cheque Venta</td><td>Al Flujo</td><td>Letra Venta</td> <td>Al Flujo</td> 
+                                   
+                                </tr> 
+                            
+                                <tr>
+                                   <td>Día</td> <td>Totales </td><td> Cheque Venta</td><td>Al Flujo</td><td>Letra Venta</td> <td>Al Flujo</td> 
+                                   
+                                    
+                                </tr>   
+                                
+                                  <tr>
+                                   <td> - </td> <td>Cuadratura </td><td> - </td><td>0</td><td> - </td> <td>0</td> 
+                                   
+                                    
+                                </tr> 
+                                 <tr>
+                                   <td>Lunes</td> <td> 18/03/2013 </td><td> 55.244.302 </td><td> 0 </td><td> 0 </td> <td> 0  </td> 
+                                   
+                                </tr> 
+                                   <tr>
+                                   <td>Martes</td> <td> 19/03/2013 </td><td> 11.804.256 </td><td> 0 </td><td> 0 </td> <td> 0  </td> 
+                                   
+                                </tr> 
+                                  <tr>
+                                   <td>Miercoles</td> <td> 20/03/2013 </td><td> 15.151.686 </td><td> 55.244.302 </td><td> 0 </td> <td> 0  </td> 
+                                   
+                                </tr> 
+                                
+                            <tr>
+                                   <td>Jueves</td> <td> 21/03/2013 </td><td> 10.676.867 </td><td> 11.804.256 </td><td> 0 </td> <td> 0  </td> 
+                                   
+                                </tr> 
+                                
+                            
+                            
+                             </table>  
+                            
+                            
+                           
+    
+                     </div>
+                  </div>
+                  
+                  
+                   <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', '/Vista/Datos_Cabranza/Ingreso_Dato_Cabranza.html');">Ingresar</button>  
+              
+              </form>
+              
+                      
     </body>
 </html>
+
+
+

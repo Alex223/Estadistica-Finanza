@@ -9,61 +9,137 @@
         <title>
      
     </title>
+        <script>
+            
+            function fecha_actual(){
+             var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+             var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+             var f=new Date();
+             
+             var fecha =diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+             
+             var valor = document.getElementById("fecha_1").value;
+        
+             //valor = "<label id='fecha_1'>"+ fecha +"</label>";
+             
+               elemento1 = document.createElement('div'); 
+               
+               elemento1.appendChild(document.createTextNode(fecha));
+               
+                elemento1.id = 'fecha_1';
+                
+                elemento2 = document.getElementById('fecha');
+    
+                elemento2.appendChild(elemento1);
+               
+               
+           };
+           ///Cargar un div dentro de otro div por evento listener
+        function addEvent(obj, evType, fn){
+            if (obj.addEventListener){
+              obj.addEventListener(evType, fn, false);
+              return true;
+            } else if (obj.attachEvent){
+              var r = obj.attachEvent("on"+evType, fn);
+              return r;
+            } else {
+              return false;
+            }
+           }
+           addEvent(window, 'load', fecha_actual());
+        
+        
+            //window.onload(function(){fecha_actual();});
+            
+             
+            function cargar(div, desde)
+            {
+                 $(div).load(desde);
+            }
+            
+       
+function parseNumber(input) {
+    var r = "", i = 0, c = "", s = input + " ";
+    if (s.charAt(0) === " ") {
+        
+        r="1";
+        return "Se debe ingresar numeros!";
+    } 
+    else{
+    while (i-1 < s.length) {        
+        c = s.charAt(i++);
+        if (c >= "0" || c <= "9") {
+         r="";
+         continue;
+         
+        }
+        else {
+              r="1";
+              return "Debe ingresar solo numero!";
+              break;
+        }
+       
+        
+    }
+    return r;
+    
 
-    <link rel="stylesheet" href="/Boostrap/bootstrap.css">
-     
-    <link rel="stylesheet" href="signin.css">
- 
-    <link rel="stylesheet" type="text/css" href="chrome://TurnOfftheLights/content/css/light.css">
-    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" type="text/css"/>
-    <link rel="stylesheet" href="../bootstrap/examples/signin/signin.css" type="text/css">
 
-</head><body><div class="container"><form class="form-signin"><h2 class="form-signin-heading">
-      Ingresos Aduanas
+}
+};
+         function valida_ingreso(){
+        var valor = document.getElementById("monto").value;
+        
+        if (parseNumber(valor) === "1") {parseNumber(valor);  }
+        else{alert('Se ingresa registro exitoso!');
+            
+        redireccionar('#contenido_dinamico', '/Vista/Datos_Cabranza/Lista_Datos_Cabranza.html'); 
+        }
+        
+        
+    }; 
+           
+
       
- </h2>
+    </script>
+    
+</head>
+
+       <body>
                 
-            
-  <div class="btn-group">
-       
-    <button type="button" class="btn btn-default dropdown-toggle nav  navbar-right" data-toggle="dropdown">
-       
-          Dropdown
-          
-        <span class="caret"></span>
-          </button>
-           aaa
-    
-     
-   
-    <ul class="dropdown-menu">
-      <li><a href="#">Dropdown link</a></li>    
-      <li><a href="#">Dropdown link</a></li>
-    </ul>
-            
-  </div>
-                
-                <input class="form-control" type="text" autofocus="" placeholder="Email address">
-    <input class="form-control" type="password" placeholder="Password">
-    <label class="checkbox"><input type="checkbox" value="remember-me">
+           <div id="ingreso_cuentas_bancos">
+
+
+               <form class="form-signin"  >
+                        <h2 class="form-signin-heading">Ingresa Datos Cobranza</h2>
+                       
+                        <label id="fecha_1"></label>
+                        
+                      <div id="fecha">Fecha: </div>
+                      
+                       <br/>
+                        <label> Tipo de ingreso </label>
+                       
+                         <select class="form-control">
+                                    <option>Cheque</option>
+                                    <option>Letra</option>
+                              
+                                    
+                               </select>  
+
+                     <br/>
+                <input class="form-control" type="text" id='nonto' autofocus="" placeholder="Monto">
+                 <br/>
+                 
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', 'Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html');">Cancelar</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="javascript:valida_ingreso();">Ingresar</button>
+                    
+                    </form>
+           
+           
+           </div>
         
-        
-    
-        
-       Recordame
-        
-    </label>
-    
-    
-    
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
-      Entrar
-    </button></form></div>
-        
-        
-        
-        
-        
+           
 
     </body>
 </html>  

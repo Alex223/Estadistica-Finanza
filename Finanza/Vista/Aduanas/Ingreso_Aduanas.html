@@ -1,0 +1,164 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        
+        <script>
+                   function fecha_actual(){
+             var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+             var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+             var f=new Date();
+             
+             var fecha =diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+             
+             var valor = document.getElementById("fecha_1").value;
+        
+             //valor = "<label id='fecha_1'>"+ fecha +"</label>";
+             
+               elemento1 = document.createElement('div'); 
+               
+               elemento1.appendChild(document.createTextNode(fecha));
+               
+                elemento1.id = 'fecha_1';
+                
+                elemento2 = document.getElementById('fecha');
+    
+                elemento2.appendChild(elemento1);
+               
+               
+           };
+           ///Cargar un div dentro de otro div por evento listener
+        function addEvent(obj, evType, fn){
+            if (obj.addEventListener){
+              obj.addEventListener(evType, fn, false);
+              return true;
+            } else if (obj.attachEvent){
+              var r = obj.attachEvent("on"+evType, fn);
+              return r;
+            } else {
+              return false;
+            }
+           }
+           addEvent(window, 'load', fecha_actual());
+        
+        
+            //window.onload(function(){fecha_actual();});
+            
+             
+            function cargar(div, desde)
+            {
+                 $(div).load(desde);
+            }
+            
+       
+function parseNumber(input) {
+    var r = "", i = 0, c = "", s = input + " ";
+    if (s.charAt(0) === " ") {
+        
+        r="1";
+        return "Se debe ingresar numeros!";
+    } 
+    else{
+    while (i-1 < s.length) {        
+        c = s.charAt(i++);
+        if (c >= "0" || c <= "9") {
+         r="";
+         continue;
+         
+        }
+        else {
+              r="1";
+              return "Debe ingresar solo numero!";
+              break;
+        }
+       
+        
+    }
+    return r;
+    
+
+
+}
+};
+
+
+    function valida_ingreso(){
+        var valor = document.getElementById("carpeta").value;
+        var valor1 = document.getElementById("carpeta").value;
+        
+        
+        
+        
+      //  if (valor === "" || proveedor==="" || ) {
+            
+            
+            
+            
+       // }
+        
+        
+        
+        
+        //{parseNumber(valor);  }
+        //else{alert('Se ingresa registro exitoso!');
+            
+       // redireccionar('#contenido_dinamico', '/Vista/Datos_Cabranza/Lista_Datos_Cabranza.html'); 
+      //  }
+        
+        
+    }; 
+
+            
+        </script>
+        
+    </head>
+    <body>
+        
+         <div id="Ingreso_Aduana">
+
+
+               <form class="form-signin"  >
+                        <h2 class="form-signin-heading">Ingresa Aduana</h2>
+                        
+                        <br/>
+                       
+                         <input class="form-control" type="text" id='carpeta' autofocus="" placeholder="Carpeta">
+                          
+                         <input class="form-control" type="text" id='proveedor' autofocus="" placeholder="Proveedor">
+                          
+                         <input class="form-control" type="text" id='cif' autofocus="" placeholder="Cif">
+                         
+                         <input class="form-control" type="text" id='otros' autofocus="" placeholder="Otros $">
+                         
+                         <label id="fecha_1"></label>
+                        
+                         <div id="fecha">Fecha: </div>
+                      
+                         
+                        
+                        <input class="form-control" type="text" id='Cantidad' autofocus="" placeholder="Cantidad">
+                        
+                     
+
+                   
+                 <br/>
+                 
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', 'Vista/Aduanas/Listado_Aduanas.html');">Cancelar</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="javascript:valida_ingreso();">Ingresar</button>
+                    
+                    </form>
+           
+           
+           </div>
+        
+           
+        
+        
+    </body>
+</html>

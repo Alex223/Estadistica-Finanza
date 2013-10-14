@@ -1,13 +1,124 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Ingresos Cuentas Bancos</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script>
+            function Ingreso_Cuentas_Bancos(){
+                 var valor = document.getElementById("num_cheque").value;
+                 var valor1 = document.getElementById("detalle_cheque").value;
+                 var valor2 = document.getElementById("giro").value;
+                 
+              if(parseNumber(valor) === "") {
+                  
+                  if(parseNumber(valor2)===""){
+                      
+                      if(valor1===""){
+                          
+                          alert ('Debe ingresar un detalle!');
+                      }
+                      else{
+                         alert("registro ingresado");redireccionar('#contenido_dinamico', 'Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html'); 
+                      }
+                  }else{alert( parseNumber(valor2) + " ,Favor ingrese giro o deposito");}
+                  
+              }
+              else{alert( parseNumber(valor)+ " ,favor de ingresar numero de cheque.");}
+              
+              
+            };
+         
+	
+
+function parseNumber(input) {
+    var r = "", i = 0, c = "", s = input + " ";
+    if (s.charAt(0) === " ") {
+        
+        r="1";
+        return "Se debe ingresar numeros!";
+    } 
+    else{
+    while (i-1 < s.length) {        
+        c = s.charAt(i++);
+        if (c >= "0" || c <= "9") {
+         r="";
+         continue;
+         
+        }
+        else {
+              r="1";
+              return "Debe ingresar solo numero!";
+              break;
+        }
+       
+        
+    }
+    return r;
+
+}
+};
+  //*function redireccionar(div, pagina) 
+//{
+  //$(div).load(pagina);
+          
+//} 
+//setTimeout ("redireccionar()", 1);*//
+
+            
+        </script>
+        
     </head>
     <body>
         <div>
             
-            <!--Ingreso de las trasacciones de los bancos a la cuenta de empresa-->
+          
+             <div id="ingreso_cuentas_bancos">
+
+
+                    <form class="form-signin">
+                        <h2 class="form-signin-heading">Ingresa Cuenta Banco</h2>
+                        <div style="text-align: left">
+                        <label id="fecha">  Fecha:</label>
+                        </div>
+                        
+                        
+                         <select class="form-control">
+                                    <option>Banco de Chile</option>
+                                    <option>Banco de Chile(US$)</option>
+                                    <option>Banco BCI</option>
+                                    <option>Banco Santander(US$)</option>
+                                    <option>Banco Santander</option>
+                                    <option>Banco Corbanca</option>
+                                    <option>Banco de Chile Agricola</option>
+                                    
+                               </select>
+                        
+                        <input id="num_cheque" class="form-control" type="text" autofocus="" placeholder="Número cheque">
+                        <input id="detalle_cheque" class="form-control" type="text" autofocus="" placeholder="Detalle">
+                           <div class="clearfix">
+                               
+                               <div class="input">
+                                                          <label><input type="radio" value="option2" name="optionsRadios">
+                                                                 <span>Deposito</span>
+                                                          </label>
+                                                            
+                                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            
+                                                          <label><input type="radio" value="option1" name="optionsRadios" checked="">
+                                                                 <span>Giro</span>
+                                                          </label>
+                               </div>
+                           </div>
+                        
+                        
+                        <input id="giro" class="form-control" type="text" autofocus="" placeholder="Deposito o Giro">
+                       
+                         <!--<label class="checkbox"><input type="checkbox" value="remember-me">Recordame</label> -->
+                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', 'Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html');">Cancelar</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Ingreso_Cuentas_Bancos();">Ingresar</button>
+                    </form>
+
+                </div>
             
             
             
