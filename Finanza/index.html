@@ -44,7 +44,38 @@
 
                     } 
             setTimeout ("redireccionar()", 1);
-    </script>
+            
+            //Funcion recarga div por metodo reques
+            
+            function detalle(pagina, id, divIdentificador)
+                {
+                    $.ajax({
+                        async: true,
+                        dataType: "html",
+                        method: "post",
+                        contentType: "application/x-www-form-urlencoded",
+                        data: "id=" + id,
+                        url: pagina + ".php",
+                        beforeSend: function() {
+                            var x = $('#' + divIdentificador);
+                            x.html("'<br>...<br>'");
+                           //x.html(""<br>...<br>"");
+                        },
+                        success: function(datos) {
+
+                            $('#' + divIdentificador).html(datos);
+
+                        },
+                        timeout: 20000,
+                        error: function() {
+                            var x = $('#' + divIdentificador);
+                            x.html("<br>Error<br>");
+
+                        }
+                    });
+                    return false;
+                }        
+  </script>
     
     
      
@@ -99,9 +130,9 @@
                         <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Datos_Cabranza/Lista_Datos_Cabranza.html');">Documentos por cobrar</a></li>
                         <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Aduanas/Listado_Aduanas.html');">Remesas Aduanas</a></li>
                         <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Coberturas/Listado_Coberturas.html');">Coberturas</a></li>
-                        <li><a href="#">Deudas comex</a></li>
+                        <!--<li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Deuda_Comex/Listado_Deuda_Comex.html');">Deudas comex</a></li>-->
                         <li class="divider"></li>
-                        <li><a href="#">Flujo de cajas</a></li>
+                        <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Flujo_Caja/Flujo_Caja.html');">Flujo de cajas</a></li>
                        
                       
                       </ul>

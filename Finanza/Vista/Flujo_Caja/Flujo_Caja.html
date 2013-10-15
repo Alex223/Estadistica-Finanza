@@ -1,0 +1,94 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="/HighCharts/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="/HighCharts/highcharts.js"></script>
+        <script type="text/javascript" src="/HighCharts/exporting.js"></script>
+        
+        <script type="text/javascript">
+	var chart;
+	$(document).ready(function() {
+
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'graficaLineal', 	// Le doy el nombre a la gráfica
+				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
+			},
+			title: {
+				text: 'Proyección a Corto Plazo'	// Titulo (Opcional)
+			},
+			subtitle: {
+				text: 'Millones de pesos'		// Subtitulo (Opcional)
+			},
+			// Pongo los datos en el eje de las 'X'
+			xAxis: {
+				categories: ['Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre',
+'Diciembre','Enero','Febrero','Marzo','Abril','Mayo','Junio'],
+				// Pongo el título para el eje de las 'X'
+				title: {
+					text: 'Meses (Años 2013-2014)'
+				}
+			},
+			yAxis: { 
+                                  
+                               //  categories: [-300000,-200000,-100000, 0],
+				// Pongo el título para el eje de las 'Y'
+				title: {
+					text: 'Pesos($)'
+				}
+			},
+			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
+			tooltip: {
+				enabled: true,
+				formatter: function() {
+					return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': $'+ this.y +' '+this.series.name;
+				}
+			},
+			// Doy opciones a la gráfica
+			plotOptions: {
+				line: {
+					dataLabels: {
+						enabled: true
+					},
+					enableMouseTracking: true
+				}
+			},
+			// Doy los datos de la gráfica para dibujarlas
+			series: [{
+		                name: 'Periodos',
+		                data: [650000,750000,380000,536000,1041000,270000,500000,160000,246200,379700,352700,450500,809000,749300,704800,1140800,1088600]
+                                    // },
+                                   //  {
+                                  //    name: 'Visitantes Únicos',
+                                 //    data: [21,278,203,370,810,213,0,134,1991,3122,2870,3655,6400,5818,5581,8529,8261]
+                                // },
+                               //  {
+                              //   name: 'Páginas Vistas',
+                             //  data: [1064,1648,1040,1076,2012,397,0,325,3732,6067,5226,6482,11503,11937,9751,16061,15643]
+		            }],
+		});	
+	});				
+</script>
+        
+    </head>
+    
+    
+    <body>
+        <h1></h1>
+          <div class="panel panel-default" >
+                            
+                            <div class="panel-heading" style="text-align: left; background:#639BF8;" ><h2>Flujo de Caja</h2></div>
+                            
+                                <div id="graficaLineal" style="width: 100%; height: 500px; margin: 0 auto"></div>
+          </div>
+        
+                            
+    </body>
+</html>
