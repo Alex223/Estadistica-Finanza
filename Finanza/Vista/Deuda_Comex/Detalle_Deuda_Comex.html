@@ -22,36 +22,76 @@ and open the template in the editor.
                       
                   <div class="form-group">
                       
-                      <div class="panel panel-default" style="overflow-x: scroll">
+                      <div class="panel panel-default" >
                             
-                            <div class="panel-heading" style="text-align: left; background:#639BF8; width: 1493px" ><h2>Deuda Comex</h2></div>
+                            <div class="panel-heading" style="text-align: left;background:#639BF8"  ><h2>Detalle Deuda Comex</h2></div>
                             
                             
-                            <table class="table table-striped">
+                            <table class="table table-bordered">
                                 
                                 <tr>
-                                    <td></td><td colspan="22">Coberturas de Importación al día</td>
-                                </tr> 
-                                
-                                <tr>
-                                     <td>Estado LC</td> <td>CTA</td><td>En bodega</td><td>Carpeta</td><td>Banco o Proveedor</td><td></td> <td>Fecha Venta</td> <td>Fecha Cobertura</td><td>Fecha Flujo</td><td>Us$</td><td>Al cambio<p>$478,28<P>$481,73</td>  <td>Enero</td> <td>Febrero</td> <td>Marzo</td> <td>Abril</td><td>Mayo</td> <td>Junio</td> <td>Julio</td> <td>Agosto</td><td>Septiembre</td> <td>Octubre</td> <td>Noviembre</td> <td>Diciembre</td> 
-                                </tr> 
-                                 <tr>
-                                     <td>2</td> <td>Chile</td><td>2</td><td>1596</td><td>KENKUO</td><td>7</td>  <td> - </td> <td> - </td> <td>04/07/2013</td><td>110.475,00</td><td>53.218.636</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-                                </tr> 
+                                    <td>LC</td><td>11.988.606,36</td>
+                                </tr>
+                                   <tr>
+                                    <td>TT</td><td>856.349,04</td>
+                                </tr>
+                                   <tr>
+                                    <td>Saldo</td><td>12.844.955,40</td>
+                                </tr>
+                                   <tr>
+                                    <td>Comprobación</td><td>0,00</td>
+                                </tr>
+                                   
                                 
                              </table>  
-                            
-                            
-                           
+                            <Br/>
+                            <!--  -->
+                            <table class="table table-bordered">
+                                
+                                <tr>
+                                    <td>Banco</td><td>LC</td><td>Ocupada</td><td>Disponible</td><td>%Ocupado</td><td>Comprobación</td>
+                                </tr>
+                                   
+                                  <tr>
+                                    <td>Chile</td><td>10.000.000,00</td><td>3.802.232,52 </td><td>6.197.767,48</td><td>61,98</td><td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>BCI</td><td>3.000.000,00</td><td>0,00</td><td>3.000.000,00 </td><td> - </td><td> - </td>
+                                </tr>
+                                   <tr>
+                                    <td>Santander</td><td>6.000.000,00</td><td>5.790.838,88</td><td>209.161,12 </td><td>96,51</td><td>0</td>
+                                </tr>
+                                   <tr>
+                                    <td>Totales</td><td>19.000.000,00</td><td>11.988.606,36</td><td>7.011.393,64 </td><td>63,10</td><td></td>
+                                </tr>
+                                
+                             </table>  
+                            <br/>
+                              <table class="table table-bordered">
+                                
+                                <tr>
+                                    <td>Chile</td><td>0,00</td>
+                                </tr>
+                                   <tr>
+                                    <td>BCI</td><td> 0,00</td>
+                                </tr>
+                                   <tr>
+                                    <td>Santander</td><td>2.000.000,00</td>
+                                </tr>
+                                   <tr>
+                                    <td>Totales</td><td>2.000.000,00</td>
+                                </tr>
+                                   
+                                
+                             </table>  
     
-                     </div>
-                  </div>
+                     
+                
                   
                   
-                   <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', '/Vista/Coberturas/Ingreso_Corbetura.html');">Ingresar</button>  
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', '/Vista/Deuda_Comex/Listado_Deuda_Comex.html');">Deuda Comex</button>  
-              
+                      <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', '/Vista/Coberturas/Listado_Coberturas.html');">Cobertura</button>  
+                      </div>
+              </div>
               </form>
           </div>
     </body>
