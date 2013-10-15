@@ -10,7 +10,7 @@ and open the template in the editor.
     </head>
     <body>
           <h1></h1>
-              
+          <div id='listado_cobertura'  >   
               
               <form class="form-horizontal" >
                   
@@ -18,26 +18,24 @@ and open the template in the editor.
                       
                   <div class="form-group">
                       
-                      <div class="panel panel-default">
+                      <div class="panel panel-default" style="overflow-x: scroll">
                             
-                            <div class="panel-heading" style="text-align: left; background:#639BF8" ><h2>Cobertura</h2></div>
+                            <div class="panel-heading" style="text-align: left; background:#639BF8; width: 1493px" ><h2>Cobertura</h2></div>
                             
                             
                             <table class="table table-striped">
                                 
                                 <tr>
-                                    <td></td><td colspan="23">Coberturas de Importación al día</td>
+                                    <td></td><td colspan="22">Coberturas de Importación al día</td>
                                 </tr> 
                                 
+                                <tr>
+                                     <td>Estado LC</td> <td>CTA</td><td>En bodega</td><td>Carpeta</td><td>Banco o Proveedor</td><td></td> <td>Fecha Venta</td> <td>Fecha Cobertura</td><td>Fecha Flujo</td><td>Us$</td><td>Al cambio<p>$478,28<P>$481,73</td>  <td>Enero</td> <td>Febrero</td> <td>Marzo</td> <td>Abril</td><td>Mayo</td> <td>Junio</td> <td>Julio</td> <td>Agosto</td><td>Septiembre</td> <td>Octubre</td> <td>Noviembre</td> <td>Diciembre</td> 
+                                </tr> 
                                  <tr>
-                                   
-                                     <td>Estado LC</td> <td>CTA</td><td>En bodega</td><td>Carpeta</td><td>Banco o Proveedor</td><td></td> <td>Fecha Venta</td> <td>Fecha Cobertura</td><td>Fecha Flujo</td><td>Us$</td><td>Al cambio<p>$478,28<P>$481,73</td> <td colspan="12">meses</td> 
-                                  
+                                     <td>2</td> <td>Chile</td><td>2</td><td>1596</td><td>KENKUO</td><td>7</td>  <td> - </td> <td> - </td> <td>04/07/2013</td><td>110.475,00</td><td>53.218.636</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
                                 </tr> 
-                          
                                 
-                                                  
-                            
                              </table>  
                             
                             
@@ -47,8 +45,9 @@ and open the template in the editor.
                   </div>
                   
                   
-                   <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', '/Vista/Aduanas/Ingreso_Aduanas.html');">Ingresar</button>  
+                   <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', '/Vista/Coberturas/Ingreso_Corbetura.html');">Ingresar</button>  
               
               </form>
+          </div>
     </body>
 </html>

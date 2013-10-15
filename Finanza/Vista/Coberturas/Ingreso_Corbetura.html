@@ -7,8 +7,145 @@ and open the template in the editor.
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <script>
+                   function fecha_actual(){
+             var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+             var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+             var f=new Date();
+             
+             var fecha =diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+             var valor = document.getElementById("fecha_1").value;
+        
+                  
+             
+                elemento1 = document.createElement('div'); 
+               
+                elemento1.appendChild(document.createTextNode(fecha));
+               
+                elemento1.id = 'fecha_1';
+                
+                elemento2 = document.getElementById('fecha');
+    
+                elemento2.appendChild(elemento1);
+               
+               
+           };
+           ///Cargar un div dentro de otro div por evento listener
+        function addEvent(obj, evType, fn){
+            if (obj.addEventListener){
+              obj.addEventListener(evType, fn, false);
+              return true;
+            } else if (obj.attachEvent){
+              var r = obj.attachEvent("on"+evType, fn);
+              return r;
+            } else {
+              return false;
+            }
+           }
+           addEvent(window, 'load', fecha_actual());
+        
+        
+            //window.onload(function(){fecha_actual();});
+            
+             
+            function cargar(div, desde)
+            {
+                 $(div).load(desde);
+            }
+            
+       
+function valida_numero(dato) {
+    
+    c="";
+    if(dato===""){c="0";}
+    else{
+        //es un numero
+        if (!isNaN(dato)){c="1";}
+        else{c="2";}
+   }
+    
+return c;
+
+
+};
+
+    function valida_ingreso(){
+        var valor = document.getElementById("carpeta").value;
+        var valor1 = document.getElementById("banco").value;
+        var valor2 = document.getElementById("bodega").value;
+        var valor3 = document.getElementById("dolar").value;
+        //var valor4 = document.getElementById("Cantidad").value;        
+        
+        
+      if (valor === "") {alert('Se debe ingresa una carpeta!');}
+      if (valor1 === ""){alert('Se debe ingresa un proveedor!');}
+      if (valida_numero(valor2) === "0") {alert("Se debe ingresar cif");} 
+        else{
+             if(valida_numero(valor2) === "2"){alert("Se debe ingresar solo números para el cif");}
+       }
+      if (valida_numero(valor3) === "0") {alert("Se debe ingresar Otros$");} 
+        else{
+             if(valida_numero(valor3) === "2"){alert("Se debe ingresar solo números para Otros$");}
+       }
+      if (valida_numero(valor3) === "0") {alert("Se debe ingresar Cantidad");} 
+        else{
+             if(valida_numero(valor3) === "2"){alert("Se debe ingresar solo números para Cantidad");}
+       }
+        
+       
+                     
+         if (valor !=="" && valor1 !== "" && valida_numero(valor2)=== "1" && valida_numero(valor3) === "1" ){ alert('Se ingresa exitosamenete el registro');
+         redireccionar('#contenido_dinamico', 'Vista/Coberturas/Listado_Coberturas.html');}     
+        
+    }; 
+
+            
+        </script>
+        
     </head>
     <body>
-        <div>TODO write content</div>
+        
+         <div id="Ingreso_Corbertura">
+
+
+               <form class="form-signin">
+                   
+                        <h2 class="form-signin-heading">Ingreso Corbertura</h2>
+                        
+                        <br/>
+                        <label> Cuenta conrriente  </label>
+                         
+                         <select class="form-control">
+                                    <option>Banco de Chile</option>
+                                    <option>Banco Santander</option>
+                                    <option>TT</option>
+                         </select>
+                       
+                         <input class="form-control" type="text" id='bodega' autofocus="" placeholder="Cantidad en bodega">
+                          
+                         <input class="form-control" type="text" id='carpeta' autofocus="" placeholder="Carpeta">
+                            
+                         <input class="form-control" type="text" id='banco' autofocus="" placeholder="Banco o Proveedor">
+                         
+                         <div id="fecha">Fecha Venta </div>
+                         
+                         <div id="fecha1">Fecha Cobertura </div>
+                         
+                         <div id="fecha2">Fecha Flujo </div> 
+                         
+                         <input class="form-control" type="text" id='dolar' autofocus="" placeholder="Us $">
+                         
+                        
+
+                   
+                 <br/>
+                 
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', 'Vista/Coberturas/Listado_Coberturas.html');">Cancelar</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="javascript:valida_ingreso();">Ingresar</button>
+                    
+                    </form>
+           
+           
+           </div>
     </body>
 </html>

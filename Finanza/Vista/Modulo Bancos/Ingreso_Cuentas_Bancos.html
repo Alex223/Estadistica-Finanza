@@ -18,7 +18,7 @@
                           alert ('Debe ingresar un detalle!');
                       }
                       else{
-                         alert("registro ingresado");redireccionar('#contenido_dinamico', 'Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html'); 
+                         alert("registro ingresado");redireccionar('#contenido_dinamico', '/Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html'); 
                       }
                   }else{alert( parseNumber(valor2) + " ,Favor ingrese giro o deposito");}
                   
@@ -57,25 +57,19 @@ function parseNumber(input) {
 
 }
 };
-  //*function redireccionar(div, pagina) 
-//{
-  //$(div).load(pagina);
-          
-//} 
-//setTimeout ("redireccionar()", 1);*//
 
             
         </script>
         
     </head>
     <body>
-        <div>
+        
             
           
-             <div id="ingreso_cuentas_bancos">
+        <div id='ingreso_cuenta_banco'>
 
 
-                    <form class="form-signin">
+            <form class="form-horizontal" action="#">
                         <h2 class="form-signin-heading">Ingresa Cuenta Banco</h2>
                         <div style="text-align: left">
                         <label id="fecha">  Fecha:</label>
@@ -95,35 +89,32 @@ function parseNumber(input) {
                         
                         <input id="num_cheque" class="form-control" type="text" autofocus="" placeholder="Número cheque">
                         <input id="detalle_cheque" class="form-control" type="text" autofocus="" placeholder="Detalle">
-                           <div class="clearfix">
-                               
-                               <div class="input">
-                                                          <label><input type="radio" value="option2" name="optionsRadios">
+                          
+                              
+                                                          <input type="radio" value="option2" name="optionsRadios"  checked="">
                                                                  <span>Deposito</span>
-                                                          </label>
-                                                            
+                                                          
                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             
-                                                          <label><input type="radio" value="option1" name="optionsRadios" checked="">
+                                                          <label><input type="radio" value="option1" name="optionsRadios">
                                                                  <span>Giro</span>
                                                           </label>
-                               </div>
-                           </div>
+                           
+                         
                         
                         
                         <input id="giro" class="form-control" type="text" autofocus="" placeholder="Deposito o Giro">
                        
-                         <!--<label class="checkbox"><input type="checkbox" value="remember-me">Recordame</label> -->
-                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', 'Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html');">Cancelar</button>
+                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', '/Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html');">Cancelar</button>
                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Ingreso_Cuentas_Bancos();">Ingresar</button>
                     </form>
 
-                </div>
+               
             
             
             
+     </div>       
             
-            
-        </div>
+        
     </body>
 </html>
