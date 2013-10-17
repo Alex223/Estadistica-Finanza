@@ -3,39 +3,64 @@
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         
+        <script>
+            
+            
+            function dobleclick(id){
+               //alert('pasa!'+id);   
+               var dato = document.getElementById(id).value;
+               alert('pasa !'+dato);   
+               var cuadro_editador  ="<input class='form-control' type='text' id='editor' autofocus='' placeholder='"+ dato +"'/>";
+               document.getElementById("id_1").innerHTML=cuadro_editador;}
+                          
+        </script> 
         
     </head>
     <body>
-        <div>
+        
+        <h1></h1>
+      <form class="">
             
-                <div class="panel panel-default">
+                <div  class="form-horizontal">
                   <!-- Default panel contents -->
-                  <div class="panel-heading"><h1>Usuarios </h1></div>
-                  <div class="panel-body">
-                    
-                  </div>
-
+                  <div class="panel-heading" style="text-align: left; background:#639BF8"><h1>Usuarios </h1></div>
+            
+                 
                   <!-- Tabla dinaminca de usuarios -->
                   <table class="table table-striped">
+                      
                     
                       <tr>
-                          <td> ID </td><td> Nombre </td><td> Apellido Paterno </td><td> Apellido Materno </td><td>Cargo</td>
+                          <td> ID </td><td>rut:</td><td> Nombre </td><td> Apellido Paterno </td><td> Apellido Materno </td><td>Cargo</td>
+                          
+                      </tr>  
+                     
+                      </table>
+                      
+                  <div id='contenido_tabla'>
+                  
+                      <table class="table table-striped"> 
+                      <tr>
+                          <td ondblclick="dobleclick('id_1');"><div id='id_1' onkeypress="alert('pasa!');"> 001</div> </td><td>17.777.745-5</td><td> Alex </td><td> Martinez </td><td> Andrade </td><td> Ejecutivo de comex</td>
                           
                       </tr>  
                       <tr>
-                          <td> 001 </td><td> Alex </td><td> Martinez </td><td> Andrade </td><td> Ejecutivo de comex</td>
-                          
-                      </tr>  
-                      <tr>
-                          <td> ID </td><td> Fernando </td><td> Garcia </td><td> Valenzuela </td><td>Cobrador</td>
+                          <td> 002 </td><td>12.000.000-3</td><td> Fernando </td><td> Garcia </td><td> Valenzuela </td><td>Cobrador</td>
                           
                       </tr>  
                   </table>
-</div>
+                 </div>
+                  
 
-            
-            
+        
+        
+        
+         
+                   
         </div>
+
+           <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargarL('/Vista/Usuarios/Cambia+_Clave','cambia_clave' , 'id_1');">Buscar</button>
+          
+           </form>  
     </body>
 </html>

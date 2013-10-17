@@ -47,7 +47,7 @@
             
             //Funcion recarga div por metodo reques
             
-            function detalle(pagina, id, divIdentificador)
+            function cargarL(pagina, id, divIdentificador)
                 {
                     $.ajax({
                         async: true,
@@ -55,7 +55,7 @@
                         method: "post",
                         contentType: "application/x-www-form-urlencoded",
                         data: "id=" + id,
-                        url: pagina + ".php",
+                        url: pagina + ".html",// ".php",
                         beforeSend: function() {
                             var x = $('#' + divIdentificador);
                             x.html("'<br>...<br>'");
