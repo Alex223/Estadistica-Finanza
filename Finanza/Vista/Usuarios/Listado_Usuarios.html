@@ -6,13 +6,44 @@
         <script>
             
             
-            function dobleclick(id){
-               //alert('pasa!'+id);   
-               var dato = document.getElementById(id).value;
-               alert('pasa !'+dato);   
-               var cuadro_editador  ="<input class='form-control' type='text' id='editor' autofocus='' placeholder='"+ dato +"'/>";
-               document.getElementById("id_1").innerHTML=cuadro_editador;}
-                          
+            function dobleclick(id,objetivo){
+       
+               var dato = document.getElementById(id);
+               
+               var cuadro_editador  ="<input class='form-control' type='text' id='editor' autofocus='' onchange=';' onfocus='' placeholder='"+ dato.innerHTML +"'/>";
+               document.getElementById(objetivo).innerHTML=cuadro_editador;}
+                       
+            function TeclearEnter(e) {
+                  
+                  if (e.keyCode === 13) {
+                      
+                       var dato = document.getElementById('editor').getAttribute('placeholder');
+                       var dato2 = document.getElementById('editor').value;
+                    
+                     
+                   if( dato === dato2 ){
+                       
+                       alert("Es el mismo dato!");
+                       
+                       
+                       
+                   }
+                   
+                   else{
+                       
+                       
+                       alert('¿desea realmente modificar el registro '+ dato +' por el: '+ dato2 +'?');
+                       
+                       
+                       
+                       
+                   }
+                   
+
+                                         }
+                };
+    
+    
         </script> 
         
     </head>
@@ -29,7 +60,7 @@
                   <!-- Tabla dinaminca de usuarios -->
                   <table class="table table-striped">
                       
-                    
+                      
                       <tr>
                           <td> ID </td><td>rut:</td><td> Nombre </td><td> Apellido Paterno </td><td> Apellido Materno </td><td>Cargo</td>
                           
@@ -41,7 +72,7 @@
                   
                       <table class="table table-striped"> 
                       <tr>
-                          <td ondblclick="dobleclick('id_1');"><div id='id_1' onkeypress="alert('pasa!');"> 001</div> </td><td>17.777.745-5</td><td> Alex </td><td> Martinez </td><td> Andrade </td><td> Ejecutivo de comex</td>
+                          <td ><div id='id_1'  onkeypress="TeclearEnter(event);"> <a  href="#"><span id='id_2' ondblclick="dobleclick('id_2','id_3');">001</span></a> </div> </td><td><div id='id_3'  onkeypress="TeclearEnter(event);">17.777.745-5</div></td><td> Alex </td><td> Martinez </td><td> Andrade </td><td> Ejecutivo de comex</td>
                           
                       </tr>  
                       <tr>
@@ -59,7 +90,7 @@
                    
         </div>
 
-           <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargarL('/Vista/Usuarios/Cambia+_Clave','cambia_clave' , 'id_1');">Buscar</button>
+         <!--  <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargarL('/Vista/Usuarios/Cambia+_Clave','cambia_clave' , 'id_1');">Buscar</button>-->
           
            </form>  
     </body>
