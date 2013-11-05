@@ -69,7 +69,7 @@ function parseNumber(input) {
         <div id='ingreso_cuenta_banco'>
 
 
-            <form class="form-horizontal" action="#">
+            <form class="form-horizontal" >
                         <h2 class="form-signin-heading">Ingresa Cuenta Banco</h2>
                         <div style="text-align: left">
                         <label id="fecha">  Fecha:</label>
@@ -105,7 +105,7 @@ function parseNumber(input) {
                         
                         <input id="giro" class="form-control" type="text" autofocus="" placeholder="Deposito o Giro">
                        
-                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargar('#contenido_dinamico', '/Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html');">Cancelar</button>
+                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargarPHP('/Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html', '#contenido_dinamico');">Cancelar</button>
                         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Ingreso_Cuentas_Bancos();">Guardar</button>
                     </form>
 
