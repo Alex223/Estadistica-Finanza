@@ -18,8 +18,8 @@
 
                     
                         
-                        $sql1 = "delete from usuario where ID_USUARIO=".$id;
-                   
+                        
+                         $sql1 = "update usuario set ESTADO=0 where ID_USUARIO=".$id;
                         
                         $resultado1 = mysql_query($sql1);
 
@@ -29,7 +29,7 @@
                         }
 
                        if ($resultado1) {
-                            echo "Registro Eliminado";
+                            echo "Usuario Deshabilitado!";
                             exit;
                         }
             

@@ -2,6 +2,9 @@
 require_once '../../Modelo/usuario.php';
 require_once '../../Modelo/Conexion.php';
 
+
+
+
 $conexión = new Conexion();
 $conexión -> conectar();
 
@@ -16,7 +19,7 @@ $usuario->setNOMBRE_2($_POST['NOMBRE_2']);
 $usuario->setAP_PA($_POST['AP_PA']);
 $usuario->setAP_MA($_POST['AP_MA']);
 $usuario->setUSER_LOGIN($_POST['USER_LOGIN']);
-$usuario->setUSER_LOGIN($_POST['PASSWORD']);
+$usuario->setPASSWORD($_POST['PASSWORD']);
 $id_cargo=   $_POST['id_cargo'];
    
    
@@ -35,7 +38,7 @@ $id_cargo=   $_POST['id_cargo'];
 
                     
                         
-                        $sql1 = "insert into usuario(NOMBRE_1,NOMBRE_2,AP_PA,AP_MA,RUT,RUT_DV,USER_LOGIN,PASSWORD,ESTADO) values('".$usuario->getNOMBRE_1()."','".$usuario->getNOMBRE_2()."','".$usuario->getAP_PA()."','".$usuario->getAP_MA()."',".$usuario->getRUT().",'".$usuario->getRUT_DV()."','".$usuario->getUSER_LOGIN()."','".$usuario->getPASSWORD()."',0)";
+                        $sql1 = "insert into usuario(NOMBRE_1,NOMBRE_2,AP_PA,AP_MA,RUT,RUT_DV,USER_LOGIN,PASSWORD,ESTADO) values('".$usuario->getNOMBRE_1()."','".$usuario->getNOMBRE_2()."','".$usuario->getAP_PA()."','".$usuario->getAP_MA()."',".$usuario->getRUT().",'".$usuario->getRUT_DV()."','".$usuario->getUSER_LOGIN()."','".$usuario->getPASSWORD()."',1)";
                    
                         
                         $resultado1 = mysql_query($sql1);

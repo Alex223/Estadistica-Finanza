@@ -2,32 +2,29 @@
 <html>
 <head>
     
-
-<script>
-    function Cambia_clave(){
-        
-          valor = document.getElementById("cont1").value;
-          valor1 = document.getElementById("cont2").value;
-          if(valor.length === 0 || valor1.length ===0){
-              alert("Se debe ingresar una contraseña!");
-              
-          }else{
-              if(valor===valor1){
-                  alert("Tu contraseña se a actualizado satisfactoriamente");redireccionar('#contenido_dinamico', 'Vista/home.html');
-                  
-              }else{ alert("Las contraseñas ingresadas debe ser iguales!");}
-              
-          }
-    }
+ 
     
-</script>
-
 </head>
     <body>
         <div id="cambia_clave" > 
             
-            <form class="form-signin">
-                        <h2 class="form-signin-heading">Cambiar Contraseña</h2>
+           
+          
+            <form class="form-signin" onsubmit="return false;">
+                
+                
+                <h2 class="form-signin-heading">Cambiar Contraseña</h2>
+                
+                
+                
+                        <div style="text-align: left">
+                        <h5>Ingrese la actual Contraseña</h5> 
+                         </div>
+                
+                        <input id="cont0" class="form-control" type="password" placeholder="Actual Contraseña">
+                
+                
+                       
                         <div style="text-align: left">
                         <h5>Por favor ingresa una nueva contraseña</h5> 
                          </div>
@@ -38,12 +35,15 @@
                         <h5>Confirma tu nueva contraseña</h5> 
                         </div>
                         <input id="cont2" class="form-control" type="password" placeholder="Confirmación">
-                        </br>
+                        <br/>
+                        
+                        
                          
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Cambia_clave();">Cambiar</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="ValidaVacio();">Cambiar</button>
                     </form>
         
         </div>
     </body>
 
 </html>
+

@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 <html>
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script  src="/bootstrap/js/validarut.js"></script>
-      
-        <script>
+        
+        
+           <script>
           function addEvent(obj, evType, fn){
             if (obj.addEventListener){
               obj.addEventListener(evType, fn, false);
@@ -18,19 +19,18 @@
               return false;
             }
            }
-           addEvent(window, 'load', listarUsuarios('contenido_tabla'));
-           addEvent(window, 'load', paginacion('usuario','paginacion' ));
+           addEvent(window, 'load', listarBancos('contenido_tabla'));
+           addEvent(window, 'load', paginacion('bancos','paginacion' ));
         </script>
-        
     </head>
     <body>
-        
         <h1></h1>
-      <form>
+        
+         <form >
             
                 <div  class="form-horizontal">
                   <!-- Default panel contents -->
-                  <div class="panel-heading" style="text-align: left; background:#639BF8"><h1>Usuarios </h1></div>
+                  <div class="panel-heading" style="text-align: left; background:#639BF8"><h2>Bancos </h2></div>
             
                  
                   <!-- Tabla dinaminca de usuarios -->
@@ -50,6 +50,6 @@
         </div>
 
        
-           </form>   
+           </form> 
     </body>
 </html>

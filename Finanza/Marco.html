@@ -1,0 +1,190 @@
+        <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/bootstrap/assets/ico/favicon.png">
+    
+    
+    <title>Finanza-Estad&iacute;stica</title>
+
+    <!-- Bootstrap core CSS -->  
+    <link href="/bootstrap/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/bootstrap/dist/css/personalizados.css" type="text/css">
+    <link rel="stylesheet" href="bootstrap/examples/navbar-static-top/navbar-static-top.css" type="text/css"/>
+    <link rel="stylesheet" href="/bootstrap/examples/signin/signin.css" type="text/css"/>
+    <link rel="stylesheet" href="/bootstrap/examples/navbar/navbar.css" type="text/css"/>
+    <link rel="stylesheet" href="/bootstrap/examples/carousel/carousel.css" type="text/css">
+    <link rel="stylesheet" href="/bootstrap/examples/navbar-fixed-top/navbar-fixed-top.css" type="text/css"/>
+    <link rel="stylesheet" href="/bootstrap/examples/jumbotron/jumbotron.css" type="text/css">
+    <link rel="stylesheet" href="/bootstrap/assets/css/docs.css" type="text/css"/>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <!-- para datepicker-->
+ 
+
+    <link rel="stylesheet" type="text/css" media="all" href="/bootstrap/datepicker/jsDatePick_ltr.min.css" />
+    <script type="text/javascript" src="/bootstrap/datepicker/jsDatePick.min.1.3.js"></script>
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  
+   <!-- <script src="/bootstrap/js/jquety.dropdown.js" ></script>-->
+   
+    <script src="/bootstrap/js/dropdown.js" ></script>
+    <script src="/bootstrap/js/Funciones_Ajax_Controlador.js" ></script>
+   
+    <style>
+        body{
+            
+            background: #f5f5f5;
+            
+        }
+        
+    </style>
+  
+  
+
+   
+    
+     
+    
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+      <script src="/bootstrap/assets/js/html5shiv.js"></script>
+      <script src="/bootstrap/assets/js/respond.min.js"></script>
+      
+   
+      	
+      
+    
+  </head>
+
+  <body style="overflow-y:hidden;overflow-x:hidden" >
+      
+      
+   
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" style="background:#639BF8" >
+      <div class="container"  >
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+          </button>
+          <a class="navbar-brand" href="#" onclick="cargarPHP('#contenido_dinamico','/Vista/Home.html');" >Finanza Estadistico</a>
+         
+        </div>
+        <div class="navbar-collapse collapse" >
+            
+          <ul class="nav navbar-nav" >
+         <!--   <li class="active"><a href="#" style="background:#639BF8">Usuario</a></li>-->
+                     <!-- usuario--> 
+                
+                     <li class="dropdown" >
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario<b class="caret"></b></a>
+                       <ul class="dropdown-menu" >
+                        <li><a href="#" onclick="exit(0);" >Cambiar de Usuario</a></li>
+                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Vista/Usuarios/Cambia+_Clave.html');">Cambiar contraseña</a></li>
+                       <!-- <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Login.html');">Cerrar sesi&oacute;n</a></li>-->
+                        <li class="divider"></li>
+                        <li><a href="#" onclick="exit(1);">Salir</a></li>
+                 
+                      </ul>
+                    </li>
+            
+                     <!---->
+                     
+                    <li class="dropdown" >
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modulos <b class="caret"></b></a>
+                      <ul class="dropdown-menu" >
+                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', 'Vista/Modulo+Bancos/Listados_Cuentas_Bancos.html');">Bancos</a></li>
+                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Vista/Datos_Cabranza/Lista_Datos_Cabranza.html');">Documentos por cobrar</a></li>
+                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Vista/Aduanas/Listado_Aduanas.html');">Remesas Aduanas</a></li>
+                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Vista/Coberturas/Listado_Coberturas.html');">Coberturas</a></li>
+                        <!--<li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Deuda_Comex/Listado_Deuda_Comex.html');">Deudas comex</a></li>-->
+                        <li class="divider"></li>
+                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Vista/Flujo_Caja/Flujo_Caja.html');">Flujo de cajas</a></li>
+                       
+                      
+                      </ul>
+                    </li>
+                    
+                    
+                     <!--Adminitración-->
+            
+                    <li class="dropdown" >
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administraci&oacute;n <b class="caret"></b></a>
+                      <ul class="dropdown-menu"  >
+                          
+                          
+                           <!-- <li class="dropdown-submenu">
+                             <a tabindex="-1" href="#" onclick="cargar('#contenido_dinamico', '/Vista/Usuarios/Lista_Usuarios.html');" >Modulo de Usuarios</a>
+                                            <ul class="dropdown-menu">          
+                                               <li><a href="#">Crear Usuario</a></li>
+                                               <li><a href="#">Mostrar Usuarios</a></li>
+                                            </ul>
+                            </li> -->
+                        <li><a href="#" onclick="cargarPHP( '#contenido_dinamico', '/Vista/Usuarios/Listado_Usuarios.html' );">Mostrar Usuarios</a></li>
+                        <li><a href="#" onclick="cargarPHP( '#contenido_dinamico', '/Vista/Modulo_Parametricos/Parametricos.html' );">Modulos Parametros</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Modulo Perfiles</a></li>
+                        
+                                                                                                                                                                           </ul>
+                    </li>
+                    
+                    <!-- Sistema -->
+                    
+                    <li class="dropdown" >
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sistema <b class="caret"></b></a>
+                      <ul class="dropdown-menu" >
+                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Vista/Sistema/Ayuda.html');">Ayuda</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Vista/Sistema/Sobre.html');">Acerca de...</a></li>
+                      
+                      </ul>
+                    </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+           
+            <!-- <li><a href="#">Static top</a></li>-->
+            <li id="boton_primario" class="hidden"><a href="#" style="background:#639BF8">Volver</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  
+    <div class="container">
+        
+        <div style="background-color:black;border-bottom-color:red;border-radius: 5px;height: 50%" ></div>
+        
+        
+        <div id="contenido_dinamico" style="text-align: center">
+            
+            <h1>Bienvenido!!</h1>
+            
+               <script language="php">
+ echo( "Hola");
+</script>
+            <img src="bootstrap/assets/ico/hj-empresa.jpg">
+        </div>
+        
+    </div> 
+    
+    
+     <div class="barra_información">
+       <!--  <div class="barra_separador"> </div> -->
+    </div>
+    
+   
+    <script src="/bootstrap/assets/js/jquery.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    
+  
+  </body>
+  
+  
+</html>
+ <!-- mfn-->

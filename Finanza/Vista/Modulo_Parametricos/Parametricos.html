@@ -1,0 +1,53 @@
+<script>
+    
+       function addEvent(obj, evType, fn){
+            if (obj.addEventListener){
+              obj.addEventListener(evType, fn, false);
+              return true;
+            } else if (obj.attachEvent){
+              var r = obj.attachEvent("on"+evType, fn);
+              return r;
+            } else {
+              return false;
+            }
+           }
+           addEvent(window, 'load', cargarPHP( '#contenido', '/Vista/Bancos/Listado_Bancos.html' ));
+</script>
+        .
+        <center>
+        <table>
+            <tr>
+                
+                <td colspan="2"> <div class="panel-heading" style="text-align: left; background:#639BF8;color: black"><h1>Datos Parametricos</h1></div> </td>
+                
+            </tr>
+            
+            <tr>
+               
+                <td valign="top" >
+                   
+                 <div style="border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px">   
+                  <div class="panel-heading" style="text-align: left; background:#639BF8;color: black"><h3>Lista de Datos</h3></div>    
+              <ul class="nav nav-pills nav-stacked">
+              
+                <li><a href="#" onclick="cargarPHP( '#contenido', '/Vista/Bancos/Listado_Bancos.html' );">Bancos</a></li>
+                 <li><a href="#" onclick="cargarPHP( '#contenido', '/Vista/Cargos/Listado_Cargos.html' );">Cargos</a></li>
+                  <li><a href="#" onclick="cargarPHP( '#contenido', '/Vista/Monedas/Listado_Monedas.html' );">Monedas</a></li>
+              </ul>
+                
+                </div>
+               </td>
+               <td  valign="top" >
+                   <div id="contenido"  style="border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px"> 
+                   </div>  
+                </td>
+                 
+                
+            </tr>
+           
+            
+            
+            
+        </table>
+        </center>   
+        

@@ -7,7 +7,7 @@ class Conexion {
     }
     function conectar(){
         
-        return mysql_connect("localhost","root","1234   ");
+        return mysql_connect("localhost","root","1234");
         
         
     }

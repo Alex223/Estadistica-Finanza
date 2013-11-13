@@ -20,7 +20,8 @@ class usuario {
     var $AP_MA;
     var $USER_LOGIN;
     var $PASSWORD;
-    var $id_cargo;
+    var $id_USER;
+    VAR $ESTADO;
 
     function __construct() {
         
@@ -90,14 +91,26 @@ class usuario {
         $this->PASSWORD = $PASSWORD;
     }
 
-    public function getId_cargo() {
-        return $this->id_cargo;
+   
+
+    public function getESTADO() {
+        return $this->ESTADO;
     }
 
-    public function setId_cargo($id_cargo) {
-        $this->id_cargo = $id_cargo;
+    public function setESTADO($ESTADO) {
+        $this->ESTADO = $ESTADO;
+    }
+    public function getId_USER() {
+        return $this->id_USER;
     }
 
+    public function setId_USER($id_USER) {
+        $this->id_USER = $id_USER;
+    }
+
+
+
+    
 }
 
 ?>
