@@ -1,14 +1,55 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
+
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Lista Tipo Monedas</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        
+           <script>
+          function addEvent(obj, evType, fn){
+            if (obj.addEventListener){
+              obj.addEventListener(evType, fn, false);
+              return true;
+            } else if (obj.attachEvent){
+              var r = obj.attachEvent("on"+evType, fn);
+              return r;
+            } else {
+              return false;
+            }
+           }
+           addEvent(window, 'load', listarTipoMonedas('contenido_tabla'));
+          // addEvent(window, 'load', paginacion('bancos','paginacion' ));
+        </script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1></h1>
+        
+         <form >
+            
+                <div  class="form-horizontal">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading" style="text-align: left; background:#639BF8"><h2>Tipo Moneda </h2></div>
+            
+                 
+                  <!-- Tabla dinaminca de usuarios -->
+               
+                      
+                  <div id='contenido_tabla'>
+                  
+                 
+                    
+            
+                 </div>
+                  
+                  <h2 id='paginacion'></h2>
+        
+         
+                   
+        </div>
+
+       
+           </form> 
     </body>
 </html>

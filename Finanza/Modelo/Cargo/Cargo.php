@@ -13,6 +13,7 @@
 class Cargo {
     var $id;
     var $Cargo;
+    var $Descripcion;
     function __construct() {
         
     }
@@ -32,10 +33,16 @@ class Cargo {
     public function setCargo($Cargo) {
         $this->Cargo = $Cargo;
     }
+    public function getDescripcion() {
+        return $this->Descripcion;
+    }
 
-        
+    public function setDescripcion($Descripcion) {
+        $this->Descripcion = $Descripcion;
+    }
 
-    //put your code here
+            
+
 }
 
 ?>
