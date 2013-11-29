@@ -871,52 +871,51 @@ function listarTipoMonedas(id){
 
 //******************************* Modulo Bancos****************************************
 
-function CargasSeleccion(){
+function CargasSeleccion(lugar,id){
     
            
                        $.ajax({
                         type:"POST",
                             url: "/Controlador/ModuloBancos/SeleccionBancos.php",
-                        data:{}
-                        }).done(function(msg){
-                          
-                       
-                        if (msg === "0"){
-                            
-                            //no hay ningún banco ingresado
-                            alert("No hay registros de Bancos, se debe ingresar primero al menos uno!");
-                            cargarPHP('#contenido_dinamico','/Vista/Home.html');
-                            
-                        }else{
-                           
-                         document.getElementById('selecccion').innerHTML = msg;  
-                         var dato = document.getElementById('selectpicker'); 
-                         document.getElementById('selectpicker').innerHTML =ListaModuloBanco(dato,msg);
-                        // document.getElementById('selecccion').innerHTML = msg;    
-                            
-                        }
-                        
-                        }); 
-                        
+                        data:{id:id}
+                        }).done(function(msg){document.getElementById(lugar).innerHTML = msg;}); 
+                    
+                            }
+
                          
                              
                          
     
-    
-}
- function ListaModuloBanco(dato,select){
+    //ListarModuloBancos lista los flujos de un bancos según el día indicado, en el lugar especificado.
+    //por defecto la fecha la inicia la vista, luego la tabla trabaja con la fecha.
+
+ function ListaModuloBanco(lugar, seleccionado, fecha){
      
-     
+      
       $.ajax({
                         type:"POST",
                             url: "/Controlador/ModuloBancos/ListarModuloBancos.php",
-                        data:{idDato: dato, select:select}
+                        data:{fecha: fecha, seleccionado:seleccionado}
                         }).done(function(msg){
      
-                                    
-                               });
+                                
+                         if (msg === "no hay bancos"){
+                            
+                            //no hay ningún banco ingresado
+                            alert("No hay registros de Bancos, se debe ingresar primero al menos uno, en el modulo datos parametricos!");
+                            cargarPHP('#contenido_dinamico','/Vista/Modulo_Parametricos/Parametricos.html');
+                            
+                        }else{
+                           
+                         document.getElementById(lugar).innerHTML = msg;  
+                         
+                          
+                        }
+                        
+                        
+                                         });
  
                 
-                }
+                                                  }
 
 

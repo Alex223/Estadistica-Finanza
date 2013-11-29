@@ -88,7 +88,7 @@
                                 <td align='center'><div id='id7_".$indice."'><span name='SALDOBA' id='id8_".$indice."' ondblclick=" .'"'."dobleclickB('id8_".$indice."','id7_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$banco->getSaldo()."</span></div></td>    
                                 <td align='center'><div id='id9_".$indice."'><span name='TIPO_MONEDA' id='id10_".$indice."' ondblclick=" .'"'."dobleclickB('id10_".$indice."','id9_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$ID_NOM_MON."</span></div> </td>
                                 <td><td>
-                                 </tr> 
+                                </tr> 
 
 "); 
                                 

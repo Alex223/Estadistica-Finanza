@@ -1,53 +1,48 @@
-
+<!DOCTYPE HTML>
 <html>
-    <head>
-        
-        <title></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  	<script type="text/javascript" src="/bootstrap/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="/bootstrap/assets/js/jquery.js"></script>
-          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-                  
-        <link rel="stylesheet" type="text/css" media="all" href="/bootstrap/bootstrap-datepicker/css/datepicker.css" />
-        <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="../bootstrap/less/dropdowns.less">
-        <link href="/bootstrap/bootstrap-datepicker/css/prettify/prettify.css" rel="stylesheet">
-         <script src="/bootstrap/bootstrap-datepicker/css/prettify/prettify.js"></script>   
-        
-        
-            
-	<script>
-		$(function(){
-			window.prettyPrint && prettyPrint();
-			$('#dp1').datepicker({
-				format: 'mm-dd-yyyy',
-                                todayBtn: 'linked'
-			});
-            
-		          
-		});
-                
-                window.onload = function(){alert('hola');};
-	</script>
-            
-        
-    </head>     
-    <body>
-     
-        <div class="well">
-            <input type="text" class="span2" value="02-16-2012" id="dp1" >
-          </div>
+  <head>
+
+    
+
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap-theme.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" type="text/css"/> 
+    <link rel="stylesheet" href="../bootstrap/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" type="text/css"/>
       
 
 
-
-
-    </body>
-</html>
 
 
     
-      
-          
-          
+   <script src="../bootstrap/assets/js/jquery.js"></script>
+   <script src="../bootstrap/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js"></script>
+   <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+   
+  </head>
+  <body>
+    <div id="datetimepicker" class="well">
+        <div class="input-append date">
+            <input type="text" readonly="">
+            <span class="add-on">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </span>
+        </div>
+    </div>
+   
+    
+ 
+    <script type="text/javascript">
+      $('#datetimepicker').datetimepicker({
+        format: 'dd/MM/yyyy'
         
+        
+      });
+    </script>
+    
+    
+    
+    
+    
+
+    
+  </body>
+</html>

@@ -2,19 +2,56 @@
 <head>
     <title></title>
     
-      <link href="../../bootstrap/assets/css/bootstrap-select.css" rel="stylesheet"  type="text/css"/>
-    <link rel="stylesheet" href="../../bootstrap/assets/css/docs.css" type="text/css">
-    <script src="../../bootstrap/assets/js/bootstrap-select.js" type="text/javascript"></script>
+    
+   
   
-    <script>$('.selectpicker').selectpicker({
-        size:"auto"
+    <link rel="stylesheet" href="../../bootstrap/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../../bootstrap/dist/css/bootstrap.css" type="text/css">
+
+      
+
+
+    
+    <script src="/bootstrap/assets/js/jquery.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js"></script>
+   <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
         
-       //show-menu-arrow show-tick"  
-    });
-     $('.selectpicker').selectpicker('refresh');
+  
        
-    </script>
     <script>
+               
+            function fecha_actual(){
+             var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+             var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+             var f=new Date();
+             
+             var fecha =diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+             
+             //var valor = document.getElementById("fecha_1").value;
+        
+               elemento1 = document.createElement('div'); 
+               
+               elemento1.appendChild(document.createTextNode(fecha ));
+               
+                elemento1.id = 'fecha_1';
+                
+                elemento2 = document.getElementById('fecha');
+    
+                elemento2.appendChild(elemento1);
+               
+               
+           };
+    
+    
+            function fecha_inicio(){
+             
+             var f=new Date();
+             var fecha = f.getDate() + "/" + f.getMonth() + "/" + f.getFullYear();
+             return fecha;
+               
+               
+           };
+    
     
      function addEvent(obj, evType, fn){
             if (obj.addEventListener){
@@ -27,7 +64,13 @@
               return false;
             }
            }
-           addEvent(window, 'load', CargasSeleccion());
+           
+           addEvent(window, 'load', ListaModuloBanco('contenido_tabla', 1, fecha_inicio()));
+           addEvent(window, 'load', CargasSeleccion('selecccion',1));
+    
+    
+    
+    
     
     
     
@@ -49,140 +92,49 @@
               <form class="form-horizontal" >
                   
                   
+                  
+                  
+                  
                       
-                  <div class="form-group">
+             <div  class="form-horizontal">
+                  <!-- Default panel contents -->
+             
+                  
+                   <div class="panel-heading" style="text-align: left; background:#639BF8"><h2>Trasacciones Bancos </h2></div>
+                   
+                 <table class='table table-striped' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'>
+                      <tr>
+                          <td align="left"><b>Banco:</b></td><td align="left"><div id='selecccion' class="well"></div></td>
+                          <td align="left"><b >Fecha:</b></td><td align="left">  <div id="datetimepicker" class="well"><div class="input-append date"><input type="text" readonly=""><span class="glyphicon glyphicon-calendar "></span></div></div></td>
+                          <td></td><td></td><td></td> <td></td>
+                      </tr> 
                       
-                      <div class="panel panel-default">
-                            
-                                    <div class="panel-heading" style="text-align: left; background:#639BF8"><h2>Bancos</h2></div>
-                            
-                                
-                                
-                              
-                            
-                                <br/>
-               
-                            
-                            
-                            
-                            
-                            
-              <table id="listado" class="table table-striped">
-                  <tr>
-                      <td colspan="4"> 
-                          
-                          <div id='selecccion'>
-                               <!-- <select class="selectpicker show-menu-arrow show-tick" data-width="auto">
-                                     <option>Banco de Chile</option>
-                                     <option>Banco de Chile(US$)</option>
-                                     <option>Banco BCI</option>
-                                     <option>Banco Santander(US$)</option>
-                                     <option>Banco Santander</option>
-                                     <option>Banco Corbanca</option>
-                                     <option>Banco de Chile Agricola</option>
-
-                                </select>-->
-                              
-                              </div>
-                       </td>
-                       
-                        <td colspan="2">Depositos</td>
-                       <td>       
-                           <script type="text/javascript">
-    
-    function fecha(){
-        
-       window.onload = function(){
-		new JsDatePick({
-			useMode:2,
-			target:"inputField",
-			dateFormat:"%d-%M-%Y"
-			
-		});
-	}; 
-        
-    };
-    
-	function hola(){
-          var valor = document.getElementById("fecha").value;  
-           
-                alert("se añade a "+ valor);
-          document.getElementById("fecha").innerHTML  = valor +" <div id='nuevo'> por la creta </div>";
-           
-           
-
-      
-        
-        alert("se añade a "+ valor);
-            
-            
-            
-            
-        };
-        
-        
-       function fecha_actual(){
-               alert("pasa");
-              var valor = document.getElementById("fecha1").value;
-             // var nuevo_div = document.createElement('div');
-         
-         //obtener fecha actual     
-                var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-                var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
-                var f=new Date();
-               valor =document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
-                alert("la fecha es: " + valor);
-       }; 
-       
-        window.onload=function(){alert('pasa');};
-</script>
-                           
-                           
-                           <div id="fecha">
-                           
-                               <label id="fecha_1" >Fecha</label>
-                          <!-- <input type="text" size="12" id="inputField" onclick="javascript:hola();"/>-->
-                           </div>
-                        
-                       
-                       
-                       
-                       </td>
-                       
-                       
-                       
-                       
-                       <td colspan="2">Conciliación</td>
                       
-                  </tr>
-                  
-                  <tr>
-                      <td>Fecha</td><td>Numero de Cheque</td><td>Detalle</td> <td>Giros</td><td>0 día</td><td>1 día</td><td>Saldo</td><td>CH x COB</td><td>Valor</td>
-                  </tr>
-                  
-                  <tr>
-                      <td>13/03/2013</td><td> - </td><td>Saldo Anteriores</td> <td> - </td><td> - </td><td> - </td><td>39.284.993</td><td> - </td><td> - </td>
-                  </tr>
-                  
-                  <tr>
-                      <td>08/01/2013</td><td>667</td><td>PATRICK INOSTROZA</td><td> - </td><td> - </td><td> - </td><td>39.249.165</td><td>N° 667</td><td>35.828</td>
-                  </tr>
-                  
-                   <tr>
-                      <td>08/01/2013</td><td>18</td><td>CRISTIAN AVILA</td><td>360.917</td><td> - </td><td> - </td><td>38.888.248</td><td>N° 018</td><td>360.917</td>
-                  </tr>
-                  
-               </table>
+                  </table>  
                  
-                      </div>
-                      </div>
+                  <!-- Tabla dinaminca de usuarios -->
+                <script type="text/javascript">
+      $('#datetimepicker').datetimepicker({
+        format: 'dd/MM/yyyy'
+        
+      });
+    </script> 
                       
-                     
+                  <div id='contenido_tabla'>
                   
+                 
+                    
+            
+                 </div>
                   
+                  <h2 id='paginacion'></h2>
+        
+         
+                    
+            </div>
                   
-                  
-                  <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargarPHP( '#contenido_dinamico', '/Vista/Modulo+Bancos/Ingreso_Cuentas_Bancos.html');">Ingresar</button>  
+                      
+                
               </form>
               
               

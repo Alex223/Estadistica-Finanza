@@ -4,7 +4,7 @@ include_once '../../Modelo/Banco/Banco.php';
 include_once '../../Modelo/TipoMoneda/TipoMoneda.php';
 include_once '../../Modelo/Conexion.php';
 
-
+  $id = $_POST["id"];
 
    $conexión = new Conexion();
     $conexión -> conectar();
@@ -44,8 +44,8 @@ include_once '../../Modelo/Conexion.php';
                             }
 
                  
-                          
-                    $resultadoQuery = "<select class='selectpicker' id='selectpicker'>";
+                          $i=1;
+                    $resultadoQuery = "<select class='selectpicker' id='selectpicker' onchange=".'"'.";".'"'.">";
 
                     while ($fila = mysql_fetch_assoc($resultado1)) {
 
@@ -63,9 +63,19 @@ include_once '../../Modelo/Conexion.php';
                        
                             if($banco->getIdTipoMoneda() == $fila2["ID_TIPO_MONEDA"]){$TIPO->setNombre($fila2["NOMBRETM"]); }
                             }
+                            
+                            
+                            if( $i == $id){
+                           $resultadoQuery .="<option selected value='".$banco->getId()."' >".$banco->getId()."| ".$banco->getNombre()."-".$banco->getNumeroCuenta()." -> ".$TIPO->getNombre()."</option>"; 
+                            }
+                            else{
                                 
-                           $resultadoQuery .="<option value='".$banco->getId()."' >".$banco->getId()."| ".$banco->getNombre()."-".$banco->getNumeroCuenta()." -> ".$TIPO->getNombre()."</option>"; 
-                        }   
+                                $resultadoQuery .="<option value='".$banco->getId()."' >".$banco->getId()."| ".$banco->getNombre()."-".$banco->getNumeroCuenta()." -> ".$TIPO->getNombre()."</option>";  
+                                
+                            }
+                           $i++;
+                           
+                            }   
                         
                         
                         $resultadoQuery .= "</select>";
