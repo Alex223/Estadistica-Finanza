@@ -52,7 +52,7 @@ $conexión -> conectar();
 
                                 function redireccionar() 
                                 {
-                                location.href='/index.html';
+                                location.href='/Estadistica-Finanza/Finanza/index.html';
                                 } 
                                 setTimeout ('redireccionar()', 0);
                                   </script>";
@@ -97,7 +97,7 @@ $conexión -> conectar();
                                 
                            
                                  echo "<script>alert('Bienvenido ".$usuario->getNOMBRE_1()." ".$usuario->getAP_PA()." ".$usuario->getAP_MA()."');</script>
-                                <script>function redireccionar(){location.href='/Marco.html';} 
+                                <script>function redireccionar(){location.href='/Estadistica-Finanza/Finanza/Marco.html';} 
                                          setTimeout ('redireccionar()', 0);
                                 </script>";
                                 }

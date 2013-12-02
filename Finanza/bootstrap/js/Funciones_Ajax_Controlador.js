@@ -20,7 +20,7 @@
                        
                        alert("Es el mismo dato! '"+dato+"'" );
                        
-                       cargarPHP( '/Controlador/Usuarios/Listado_Usuario.php','#contenido_dinamico' );  
+                       cargarPHP( '/Estadistica-Finanza/Finanza/Controlador/Usuarios/Listado_Usuario.php','#contenido_dinamico' );  
                      
                    }
                    
@@ -32,13 +32,13 @@
                             
                        $.ajax({
                         type:"POST",
-                        url: "/Controlador/Usuarios/ModificaRegistro.php",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Usuarios/ModificaRegistro.php",
                         data:{id:idReg,col:columna,valor:dato2}
                         }).done(function(msg){
                         alert(msg);
                         }); 
                         
-                        cargarPHP( '#contenido_dinamico', '/Vista/Usuarios/Listado_Usuarios.html' );
+                        cargarPHP( '#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Usuarios/Listado_Usuarios.html' );
                              
                          }
                             
@@ -96,7 +96,7 @@
                   
                         $.ajax({
                         type:"POST",
-                        url: "/Controlador/Usuarios/EliminarUsuario.php",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Usuarios/EliminarUsuario.php",
                         data:{id:id}
                         }).done(function(msg){
                         alert(msg);
@@ -105,7 +105,7 @@
              
               }
            
-         cargarPHP( '#contenido_dinamico', '/Vista/Usuarios/Listado_Usuarios.html' );
+         cargarPHP( '#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Usuarios/Listado_Usuarios.html' );
     
     
     }
@@ -155,7 +155,7 @@
         }else{  
                         $.ajax({
                         type:"POST",
-                        url: "/Controlador/Usuarios/CreaUsuario.php",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Usuarios/CreaUsuario.php",
                         data:{RUT:dato.substring(0,8),
                             RUT_DV:dato.substring(9,10),
                             NOMBRE_1:dato2,
@@ -170,7 +170,7 @@
                         alert(msg);
                         });
                         
-                       cargarPHP( '#contenido_dinamico', '/Vista/Usuarios/Listado_Usuarios.html');
+                       cargarPHP( '#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Usuarios/Listado_Usuarios.html');
                }
     }
 
@@ -180,7 +180,7 @@ function listarUsuarios(id){
     
       $.ajax({
                         type:"POST",
-                        url: "/Controlador/Usuarios/ListarUsuarios.php",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Usuarios/ListarUsuarios.php",
                         data:{}
                         }).done(function(msg){
                             
@@ -197,7 +197,7 @@ function listarUsuarios(id){
           
               $.ajax({
                         type:"POST",
-                        url: "/Controlador/Paginacion/paginacion.php",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Paginacion/paginacion.php",
                         data:{tabla:tabla}
                         }).done(function(msg){
                           
@@ -265,13 +265,13 @@ function listarUsuarios(id){
             
                
                if (r === true){
-                  var url="/Controlador/CerrarSeccion/CerrarSeccion.php";
+                  var url="/Estadistica-Finanza/Finanza/Controlador/CerrarSeccion/CerrarSeccion.php";
                     $.ajax({   
                         type: "POST",
                         url:url,
                         data:{},
                         success: function(){       
-                        redireccionar('/index.html').setTimeout ('redireccionar()', 0);
+                        redireccionar('/Estadistica-Finanza/Finanza/index.html').setTimeout ('redireccionar()', 0);
                         }
                     });
                 
@@ -325,7 +325,7 @@ function listarUsuarios(id){
                   var r=confirm('¿Desea realmente actualizar la contraseña?');
                    if (r === true){
                        
-                  var url="/Controlador/ValidaContrasena/ValidaContrasena.php";
+                  var url="/Estadistica-Finanza/Finanza/Controlador/ValidaContrasena/ValidaContrasena.php";
                     $.ajax({   
                         type: "POST",
                         url:url,
@@ -337,7 +337,7 @@ function listarUsuarios(id){
                             else{
                                 if(ms === "1"){
                                     alert("Contraseña actualizada.");
-                                    redireccionar('/Marco.html').setTimeout ('redireccionar()', 0);
+                                    redireccionar('/Estadistica-Finanza/Finanza/Marco.html').setTimeout ('redireccionar()', 0);
                                 }else{
                                     
                                     alert(ms);
@@ -363,7 +363,7 @@ function listarUsuarios(id){
     
       $.ajax({
                         type:"POST",
-                        url: "/Controlador/Bancos/ListarBancos.php",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Bancos/ListarBancos.php",
                         data:{}
                         }).done(function(msg){
                             
@@ -382,7 +382,7 @@ function listarUsuarios(id){
   
     document.getElementById('filaIngreso').innerHTML=cuadro_editador;
    
-    generaSelecBox('1','ingreso','/Controlador/Bancos/SelectBoxBancos.php','tipo_moneda','ID_TIPO_MONEDA','NOMBRETM','SelectBox',1,"no importa");
+    generaSelecBox('1','ingreso','/Estadistica-Finanza/Finanza/Controlador/Bancos/SelectBoxBancos.php','tipo_moneda','ID_TIPO_MONEDA','NOMBRETM','SelectBox',1,"no importa");
 
              //  $( "#ingreso" ).focus();
     
@@ -429,7 +429,7 @@ function listarUsuarios(id){
               
                   if (columna === 'TIPO_MONEDA'){
                           
-                      generaSelecBox('0','seleccion','/Controlador/Bancos/SelectBoxBancos.php','tipo_moneda','ID_TIPO_MONEDA','NOMBRETM',objetivo,idReg, dato.innerHTML);
+                      generaSelecBox('0','seleccion','/Estadistica-Finanza/Finanza/Controlador/Bancos/SelectBoxBancos.php','tipo_moneda','ID_TIPO_MONEDA','NOMBRETM',objetivo,idReg, dato.innerHTML);
                   }else{
               
                 cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocusb(event) "+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default' type='button'onclick="+'"'+"ModificaIngresoBanco();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";
@@ -446,7 +446,7 @@ function listarUsuarios(id){
           
            if (e.keyCode === 27) {
        
-              cargarPHP( '#contenido', '/Vista/Bancos/Listado_Bancos.html' );
+              cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Bancos/Listado_Bancos.html' );
         }
         
    
@@ -457,7 +457,7 @@ function listarUsuarios(id){
         
         if (e.keyCode === 27) {
         
-        cargarPHP( '#contenido_dinamico','/Vista/Usuarios/Listado_Usuarios.html' );
+        cargarPHP( '#contenido_dinamico','/Estadistica-Finanza/Finanza/Vista/Usuarios/Listado_Usuarios.html' );
         }
     
     }
@@ -482,7 +482,7 @@ function listarUsuarios(id){
                        
                        alert("Es el mismo dato! '"+dato+"'" );
                        
-                        cargarPHP( '#contenido', '/Vista/Bancos/Listado_Bancos.html' );
+                        cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Bancos/Listado_Bancos.html' );
                      
                    }
                    
@@ -494,13 +494,13 @@ function listarUsuarios(id){
                             
                        $.ajax({
                         type:"POST",
-                            url: "/Controlador/Bancos/ModificaRegistro.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Bancos/ModificaRegistro.php",
                         data:{id:idReg,col:columna,valor:dato2}
                         }).done(function(msg){
                         alert(msg);
                         }); 
                         
-                          cargarPHP( '#contenido', '/Vista/Bancos/Listado_Bancos.html' );
+                          cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Bancos/Listado_Bancos.html' );
                              
                          }
                             
@@ -519,7 +519,7 @@ function listarUsuarios(id){
                     if (anterior===id){
                          alert("Es el mismo dato!");
                        
-                        cargarPHP( '#contenido', '/Vista/Bancos/Listado_Bancos.html' );
+                        cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Bancos/Listado_Bancos.html' );
                        
                         
                     }
@@ -534,13 +534,13 @@ function listarUsuarios(id){
                             
                        $.ajax({
                         type:"POST",
-                            url: "/Controlador/Bancos/ModificaRegistro.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Bancos/ModificaRegistro.php",
                         data:{id:idReg,col:'tipo_moneda_ID_TIPO_MONEDA',valor:id}
                         }).done(function(msg){
                         alert(msg);
                         }); 
                         
-                          cargarPHP( '#contenido', '/Vista/Bancos/Listado_Bancos.html' );
+                          cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Bancos/Listado_Bancos.html' );
                              
                          }
                         
@@ -576,13 +576,13 @@ function validaIngresoBanco(dato,dato1,dato2){
                             
                        $.ajax({
                         type:"POST",
-                            url: "/Controlador/Bancos/IngresaBanco.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Bancos/IngresaBanco.php",
                         data:{nombre:campo1,numero:campo2,saldo:campo3,tipo:campo4}
                         }).done(function(msg){
                         alert(msg);
                         }); 
                         
-                          cargarPHP( '#contenido', '/Vista/Bancos/Listado_Bancos.html' );
+                          cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Bancos/Listado_Bancos.html' );
                              
                          }
         
@@ -596,7 +596,7 @@ function validaIngresoBanco(dato,dato1,dato2){
 function listarCargos(id){
           $.ajax({
                         type:"POST",
-                        url: "/Controlador/Cargos/ListarCargos.php",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Cargos/ListarCargos.php",
                         data:{}
                         }).done(function(msg){
                             
@@ -633,7 +633,7 @@ function listarCargos(id){
           
            if (e.keyCode === 27) {
        
-              cargarPHP( '#contenido', '/Vista/Cargos/Listado_Cargos.html' );
+              cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Cargos/Listado_Cargos.html' );
         }
     
        
@@ -668,13 +668,13 @@ function listarCargos(id){
                             
                        $.ajax({
                         type:"POST",
-                            url: "/Controlador/Cargos/ModificaRegistro.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Cargos/ModificaRegistro.php",
                         data:{id:idReg,col:columna,valor:dato2}
                         }).done(function(msg){
                         alert(msg);
                         }); 
                         
-                          cargarPHP( '#contenido', '/Vista/Cargos/Listado_Cargos.html' );
+                          cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Cargos/Listado_Cargos.html' );
                              
                          }
                             
@@ -718,13 +718,13 @@ function validaIngresoCargo(dato,dato1){
                             
                        $.ajax({
                         type:"POST",
-                            url: "/Controlador/Cargos/IngresaCargo.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Cargos/IngresaCargo.php",
                         data:{Titulo:campo1,Descripcion:campo2}
                         }).done(function(msg){
                         alert(msg);
                         }); 
                         
-                           cargarPHP( '#contenido', '/Vista/Cargos/Listado_Cargos.html' );
+                           cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Cargos/Listado_Cargos.html' );
                              
                          }
         
@@ -737,7 +737,7 @@ function validaIngresoCargo(dato,dato1){
 function listarTipoMonedas(id){
           $.ajax({
                         type:"POST",
-                        url: "/Controlador/TipoMonedas/ListarTipoMonedas.php",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/TipoMonedas/ListarTipoMonedas.php",
                         data:{}
                         }).done(function(msg){
                             
@@ -773,7 +773,7 @@ function listarTipoMonedas(id){
           
            if (e.keyCode === 27) {
        
-              cargarPHP( '#contenido', '/Vista/Monedas/Listado_Monedas.html' );
+              cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Monedas/Listado_Monedas.html' );
         }
     
        
@@ -795,7 +795,7 @@ function listarTipoMonedas(id){
                        
                        alert("Es el mismo dato! '"+dato+"'" );
                        
-                          cargarPHP( '#contenido', '/Vista/Monedas/Listado_Monedas.html' );
+                          cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Monedas/Listado_Monedas.html' );
                      
                    }
                    
@@ -807,13 +807,13 @@ function listarTipoMonedas(id){
                             
                        $.ajax({
                         type:"POST",
-                            url: "/Controlador/TipoMonedas/ModificaRegistro.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/TipoMonedas/ModificaRegistro.php",
                         data:{id:idReg,col:columna,valor:dato2}
                         }).done(function(msg){
                         alert(msg);
                         }); 
                         
-                           cargarPHP( '#contenido', '/Vista/Monedas/Listado_Monedas.html' );
+                           cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Monedas/Listado_Monedas.html' );
                              
                          }
                             
@@ -855,13 +855,13 @@ function listarTipoMonedas(id){
                             
                        $.ajax({
                         type:"POST",
-                            url: "/Controlador/TipoMonedas/IngresaTipoMoneda.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/TipoMonedas/IngresaTipoMoneda.php",
                         data:{Nombre:campo1}
                         }).done(function(msg){
                         alert(msg);
                         }); 
                         
-                         cargarPHP( '#contenido', '/Vista/Monedas/Listado_Monedas.html' );
+                         cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Monedas/Listado_Monedas.html' );
                              
                          }
         
@@ -876,7 +876,7 @@ function CargasSeleccion(lugar,id){
            
                        $.ajax({
                         type:"POST",
-                            url: "/Controlador/ModuloBancos/SeleccionBancos.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/ModuloBancos/SeleccionBancos.php",
                         data:{id:id}
                         }).done(function(msg){document.getElementById(lugar).innerHTML = msg;}); 
                     
@@ -894,7 +894,7 @@ function CargasSeleccion(lugar,id){
       
       $.ajax({
                         type:"POST",
-                            url: "/Controlador/ModuloBancos/ListarModuloBancos.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/ModuloBancos/ListarModuloBancos.php",
                         data:{fecha: fecha, seleccionado:seleccionado}
                         }).done(function(msg){
      
@@ -903,7 +903,7 @@ function CargasSeleccion(lugar,id){
                             
                             //no hay ningún banco ingresado
                             alert("No hay registros de Bancos, se debe ingresar primero al menos uno, en el modulo datos parametricos!");
-                            cargarPHP('#contenido_dinamico','/Vista/Modulo_Parametricos/Parametricos.html');
+                            cargarPHP('#contenido_dinamico','/Estadistica-Finanza/Finanza/Vista/Modulo_Parametricos/Parametricos.html');
                             
                         }else{
                            

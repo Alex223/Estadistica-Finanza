@@ -65,6 +65,11 @@
                                 
                                 $resultado2 = mysql_query($sql2);
                                 
+                                if (!$resultado2) {
+                            echo "No se pudo ejecutar con exito la consulta ($sql2) en la BD: " . mysql_error();
+                            
+                        }
+                                
                                 while ($fila2 = mysql_fetch_assoc($resultado2)) {
                                      
                                  $usuarioVsCargo = $fila2['Cargos_idCargos'];
@@ -73,6 +78,12 @@
                                  
                                  $sql3 = "SELECT Titulo FROM Cargos where idCargos =".$usuarioVsCargo;
                                  $resultado3 = mysql_query($sql3);
+                                 
+                                 
+                        if (!$resultado3) {
+                            echo "No se pudo ejecutar con exito la consulta ($sql3) en la BD: " . mysql_error()." \n#### Falta Asociar Cargo ###";
+                            
+                        }
                                             while ($fila3 = mysql_fetch_assoc($resultado3)) {
  
                                             $idCargo = $fila3['Titulo'];

@@ -1,5 +1,10 @@
 <?php
 
+require_once '../../Modelo/Conexion.php';
+
+
+
+
 
  $id=$_POST['id'];
             $col =$_POST['col'];
@@ -8,8 +13,8 @@
        
             
                                    
-                        $conexión = mysql_connect("localhost", "root", "1234");
-
+                        $conexión = new Conexion();
+                        $conexión -> conectar();
                         if (!$conexión) {
                             echo "No pudo conectarse a la BD: " . mysql_error();
                             exit;
