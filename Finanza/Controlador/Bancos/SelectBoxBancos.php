@@ -25,7 +25,7 @@ $TituloSelect =$_POST["TituloSelect"];
                             exit;
                         }
 
-                        if (!mysql_select_db("prueba")) {
+                        if (!mysql_select_db($conexión->base())) {
                             echo "No ha sido posible seleccionar la BD: " . mysql_error();
                             exit;
                         }

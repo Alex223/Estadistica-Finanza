@@ -17,5 +17,10 @@ class Conexion {
         return mysql_close($conexion);
         
     }
+    function base(){
+        $base ="prueba";
+        
+        return $base;
+     }
 }
 ?>
