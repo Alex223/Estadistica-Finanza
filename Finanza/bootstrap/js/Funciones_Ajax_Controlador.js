@@ -890,7 +890,7 @@ function CargasSeleccion(lugar,id){
     //por defecto la fecha la inicia la vista, luego la tabla trabaja con la fecha.
 
  function ListaModuloBanco(lugar, seleccionado, fecha){
-     
+   
       
       $.ajax({
                         type:"POST",
@@ -900,13 +900,13 @@ function CargasSeleccion(lugar,id){
      
                                 
                          if (msg === "no hay bancos"){
-                            
+                             
                             //no hay ningún banco ingresado
                             alert("No hay registros de Bancos, se debe ingresar primero al menos uno, en el modulo datos parametricos!");
                             cargarPHP('#contenido_dinamico','/Estadistica-Finanza/Finanza/Vista/Modulo_Parametricos/Parametricos.html');
                             
                         }else{
-                           
+                        
                          document.getElementById(lugar).innerHTML = msg;  
                          
                           
@@ -919,3 +919,192 @@ function CargasSeleccion(lugar,id){
                                                   }
 
 
+//***************************Modulo Bancos ******************************************
+
+
+
+//***************Modulo Remesas**************************
+function listarRemesaAduanas(id){
+    
+    
+         $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/RemesasAduanas/ListadoRemesaAduanas.php",
+                        data:{}
+                        }).done(function(msg){document.getElementById(id).innerHTML += msg;});
+                       
+                            
+    
+}
+
+
+
+function IngresarFilaAduana(){
+   
+   var tipoDerecho = selectTipoDerecho('ingreso3','crea'); 
+   var filaIngreso ="<tr>\n\
+                     <td><input class='form-control' id='ingreso' placeholder='Carpeta...'/></td> \n\
+                     <td colspan='2'><input class='form-control' id='ingreso1' placeholder='Proveedor...'/></td> \n\
+                     <td colspan='4'>\n\
+                     <table class='table table-striped' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'>\n\
+                     <tr><td colspan='2'>Datos Costo Cif</td></tr>\n\
+                     <tr>\n\
+                       <td>Cif: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_1' placeholder='Costo Cif...'/></td> \n\
+                     </tr>\n\
+                     <tr>\n\
+                       <td>Flete: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_2' placeholder='Costo Flete...'/></td> \n\
+                     </tr>\n\
+                     <tr>\n\
+                       <td>Prima: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_3' placeholder='Costo Prima...'/></td> \n\
+                     </tr>\n\
+                     <tr>\n\
+                      <td>Costo Cif: </td><td><div id='totalCif'></div></td>\n\
+                     </tr>\n\
+                     </table></td>\n\
+                     <td><div id='ingreso3'></div></td>\n\
+                     <td colspan='3'><input class='form-control' id='ingreso4' placeholder='Otro Cargo...'/></td>\n\
+                     <td colspan='2'><input class='form-control' id='ingreso5' placeholder='Fecha...'/></td>\n\
+                     <td colspan='3'><input class='form-control' id='ingreso6' placeholder='Carpeta Relacionada...'/></td>\n\
+                     <td colspan='1'><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoAduana('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','seleccion','ingreso4','ingreso5','ingreso6');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span>\n\
+                     <td colspan='12'></td>\n\
+                      </button>\n\
+                     </td>\n\
+                     </tr>";
+    document.getElementById('filaIngreso').innerHTML=filaIngreso;
+    $( "#ingreso" ).focus();
+}
+
+function sumaCif(){
+    
+    
+    var cif1 = document.getElementById('ingreso2_1').value+"";
+    var cif2 = document.getElementById('ingreso2_2').value+"";
+    var cif3 = document.getElementById('ingreso2_3').value+"";
+    var total=0.0; 
+    
+    
+    if (cif1===""){cif1=0;}
+    if (cif2===""){cif2=0;}
+    if (cif3===""){cif3=0;}
+    try{
+    total = parseFloat(cif1)+parseFloat(cif2)+parseFloat(cif3);
+} 
+catch(error){
+    
+ 
+}
+ if(isNaN(total)){
+       alert("Debes ingresar solo números!");
+       $( "#ingreso2_1" ).focus();
+     
+ }
+ document.getElementById('totalCif').innerHTML=total;
+
+}
+
+function selectTipoDerecho(id,tipo){
+    
+     $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/TiposDerechos/SelectTiposDerechos.php",
+                        data:{tipo:tipo}
+                        }).done(function(msg){
+                            if(msg === "0"){ 
+                                alert("No hay registros de Tipo Derecho, se debe ingresar primero al menos uno, en el modulo datos parametricos!");
+                                cargarPHP('#contenido_dinamico','/Estadistica-Finanza/Finanza/Vista/Modulo_Parametricos/Parametricos.html');
+                            }
+                            else{
+                               
+                            document.getElementById(id).innerHTML += msg;}
+                       });
+                        
+                          
+    
+    
+    
+}
+function validaIngresoAduana(d,d1,d2,d3,d4,d5,d6,d7,d8){
+ 
+   
+     var campo = document.getElementById(d).value;
+     var campo1 = document.getElementById(d1).value;
+     var campo2_1 = document.getElementById(d2).value;
+     var campo2_2 = document.getElementById(d3).value;
+     var campo2_3 = document.getElementById(d4).value;
+     var campo4 = document.getElementById(d5).value;
+     var campo5 = document.getElementById(d6).value;
+     var campo6 = document.getElementById(d7).value;
+     var campo7 = document.getElementById(d8).value;
+     
+     
+
+    
+    var control = 0;
+    var mensaje = "";
+    if (campo === ""){mensaje +='Falta el número de carpeta!\n';control=1;}
+    else{
+       if(isNaN(parseInt(campo))){mensaje +='Se debe ingresar sólo números para la carpeta!\n';control=1;}
+       }
+        
+    
+    if (campo1 === ""){mensaje +='Falta una Proveedor!\n';control=1;}
+    if (campo2_1 === "" && campo2_2==="" && campo2_3 ===""){ mensaje +='Falta al menos un costo Cif!\n';control=1;}
+    if (isNaN(parseFloat(campo5))){mensaje +='Se debe Ingresa una número en otro cargo!\n';control=1;}
+    if (campo6 === ""){mensaje +='Falta ingresar una fecha!\n';control=1;}
+    
+    if(campo7 !== ""){
+    
+    if (!verificaCarpeta(campo7)){mensaje +='No existe la carpeta ingresada!\n';control=1;}
+    }
+    if(control===0){
+        
+        
+                
+                       var r=confirm('¿Desea realmente ingresar un nuevo registro?');
+                         if (r === true){
+                             
+                            
+                       $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/RemesasAduanas/IngresaRemesaAduana.php",
+                        data:{ campo:campo,campo1:campo1,campo2_1:campo2_1,campo2_2:campo2_2,campo2_3:campo2_3,campo4:campo4,campo5:campo5, campo6:campo6, campo7:campo7}
+                        }).done(function(msg){
+                        alert(msg);
+                        }); 
+                        
+                         cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Aduanas/Listado_Aduanas.html');
+                             
+                         }
+        
+    }else{alert(mensaje);}
+    
+}
+
+function verificaCarpeta(carpeta){
+    
+     $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/CarpetasRelacionadas/BuscaCarpetaRelacionada.php",
+                        data:{carpeta:carpeta}
+                        }).done(function(msg){
+                        if (msg === "1"){return true;} 
+                        else{return false;}
+                        
+                        }); 
+    
+}
+
+
+function sessiont(id){
+    
+        $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Session/UsuarioSession.php",
+                        data:{}
+                        }).done(function(msg){
+                      
+                           document.getElementById(id).innerHTML += msg;
+                        });
+    
+    
+}

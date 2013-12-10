@@ -23,7 +23,9 @@
     <link rel="stylesheet" href="bootstrap/assets/css/docs.css" type="text/css"/>
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" type="text/css">
     
- 
+    
+   
+    
     
     <!-- para datepicker-->
    
@@ -143,17 +145,18 @@
                     <li class="dropdown" >
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sistema <b class="caret"></b></a>
                       <ul class="dropdown-menu" >
-                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Sistema/Ayuda.html');">Ayuda</a></li>
-                        <li class="divider"></li>
+                        <!--<li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Sistema/Ayuda.html');">Ayuda</a></li>
+                        <li class="divider"></li>-->
                         <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Sistema/Sobre.html');">Acerca de...</a></li>
                       
                       </ul>
                     </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-           
-            <!-- <li><a href="#">Static top</a></li>-->
-            <li id="boton_primario" class="hidden"><a href="#" style="background:#639BF8">Volver</a></li>
+              <li class="navbar-nav" style="background:#639BF8; color: black"><a href="#" ><i class="glyphicon glyphicon-user"></i></a></li>
+              <li class="navbar-nav" style="background:#639BF8; color: black"><a href="#" ><div id="usuarioLogin"></div></a></li>
+              <li id="boton_primario" class="navbar-nav"><a href="#" style="background:#639BF8;color: black" onclick="exit(1);">Salir <i class="glyphicon glyphicon-log-out"></i></a></li>
+            <li><a href="#" style="background:#639BF8;color: black" >Subir <i class="glyphicon glyphicon-circle-arrow-up"></i> </a></li>
           </ul>
         </div>
       </div>
@@ -169,9 +172,7 @@
             
             <h1>Bienvenido!!</h1>
             
-               <script language="php">
- echo( "Hola");
-</script>
+           
             <img src="bootstrap/assets/ico/hj-empresa.jpg">
         </div>
         
@@ -188,6 +189,21 @@
     
     
   
+     <script>
+                
+          function addEvent(obj, evType, fn){
+            if (obj.addEventListener){
+              obj.addEventListener(evType, fn, false);
+              return true;
+            } else if (obj.attachEvent){
+              var r = obj.attachEvent("on"+evType, fn);
+              return r;
+            } else {
+              return false;
+            }
+           }
+           addEvent(window, 'load', sessiont('usuarioLogin'));
+     </script> 
   </body>
   
   

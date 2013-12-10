@@ -45,7 +45,7 @@ include_once '../../Modelo/Conexion.php';
 
                  
                           $i=1;
-                    $resultadoQuery = "<select class='selectpicker' id='selectpicker' onchange=".'"'.";".'"'.">";
+                    $resultadoQuery = "<select class='selectpicker' id='selectpicker' onchange=".'"'."cambiaBanco()".'"'.";>";
 
                     while ($fila = mysql_fetch_assoc($resultado1)) {
 

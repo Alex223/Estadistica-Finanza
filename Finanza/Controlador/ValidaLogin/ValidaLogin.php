@@ -78,21 +78,44 @@ $conexión -> conectar();
                                $usuario->setAP_PA($fila['AP_PA']);
                                $usuario->setAP_MA($fila['AP_MA']);
                                $_SESSION["id_user"] =$fila['ID_USUARIO'];
+                               $_SESSION["nom_user"] =$fila['NOMBRE_1'];
+                               $_SESSION["ape_user"] =$fila['AP_PA'];
                            // }
                                 }  
                               
-                                
+                                $idCargo;
                                 IF ($usuario->getESTADO() == 1 ){
                                 
                                 $sql2 = "Select Cargos_idCargos from Usuario_vs_Cargos where usuario_ID_USUARIO=".$usuario->getId_USER();
                                 $resultado2 = mysql_query($sql2); 
                               
-                              
+                                 
                                 while ($fila2 = mysql_fetch_assoc($resultado2)) {
+                                    
+                                    $idCargo = $fila2["Cargos_idCargos"]; 
+                                    
+                                    
+                                }
+                                    
 
-                                                  $_SESSION["NombreCargo"] =$fila2['Titulo'];
+                                     $sql3 = "Select idCargos,Titulo from Cargos where idCargos=".$idCargo;
+                                     $resultado3 = mysql_query($sql3); 
+                                     
+                                     
+                                     while ($fila3 = mysql_fetch_assoc($resultado3)) {
+                                    
+                                         if($fila3["idCargos"]==$idCargo){
+                                             
+                                             $_SESSION["NombreCargo"] =$fila3['Titulo'];
+                                             
+                                         }
+                                         
+                                     
+                                     
+                                     
+                                         }
 
-                                } 
+                                
                                 
                                 
                            

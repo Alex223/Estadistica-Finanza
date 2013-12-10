@@ -6,19 +6,6 @@
    
   
    
-    <link rel="stylesheet" href="../../bootstrap/dist/css/bootstrap-theme.min.css" type="text/css"/>
-    <link rel="stylesheet" href="../../bootstrap/bootstrap-datetimepicker-0.0.11/css/bootstrap-combined.min.css" type="text/css"/> 
-    <link rel="stylesheet" href="../../bootstrap/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" type="text/css"/>
-      
-
-
-
-
-    
-    <script src="../../bootstrap/assets/js/jquery.js"></script>
-    <script src="../../bootstrap/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js"></script>
-   <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-  
        
     <script>
                
@@ -48,7 +35,20 @@
             function fecha_inicio(){
              
              var f=new Date();
-             var fecha = f.getDate() + "/" + f.getMonth() + "/" + f.getFullYear();
+             var mes = f.getMonth() +"";
+             var dia = f.getDate()+"";
+            // alert("AQUI "+mes.length);
+             if (mes.length === 1){
+                 
+                 mes = "0"+mes;
+                 
+             }
+             if (dia.length ===1){
+                 
+                 dia = "0"+dia;
+             }
+             
+             var fecha = f.getFullYear() + "-" + mes + "-" + dia;
              return fecha;
                
                
@@ -73,8 +73,22 @@
     
     
     
+    function cambiaBanco(){
+      
+         var banco = document.getElementById('selectpicker').value;
+       
+         ListaModuloBanco('contenido_tabla', banco, fecha_inicio());
+       
+        
+    } 
     
-    
+    function listaPorFecha(){
+        
+        var banco = document.getElementById('selectpicker').value;
+        var fecha = document.getElementById('fecha').value; 
+        ListaModuloBanco('contenido_tabla', banco, fecha_inicio());
+        
+    }
     
     
     </script>
@@ -105,9 +119,12 @@
                    <div class="panel-heading" style="text-align: left; background:#639BF8"><h2>Trasacciones Bancos </h2></div>
                    
                  <table class='table table-striped' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'>
-                      <tr>
-                          <td align="left"><b>Banco:</b></td><td align="left"><div id='selecccion' class="well"></div></td>
-                          <td align="left"><b >Fecha:</b></td><td align="left">  <div id="datetimepicker" class="well"><div class="input-append date"><input type="text" readonly=""><span class="glyphicon glyphicon-calendar "></span></div></div></td>
+                     <tr >
+                          <td  align="left"><b>Banco:</b></td><td align="left"><div id='selecccion' class="well"></div></td>
+                          <td align="left"><b >Fecha:</b></td><td align="left">  <div id="datetimepicker" class="well"><div class="input-append date"><input id="fecha" type="text" readonly=""><span class="glyphicon glyphicon-calendar "></span> <button class="btn btn-default btn-sm" type="button" onclick="ListaPorFecha()" >Mostrar</button></div></div>
+                             
+                          
+                          </td>
                           <td></td><td></td><td></td> <td></td>
                       </tr> 
                       
@@ -115,12 +132,7 @@
                   </table>  
                  
                   <!-- Tabla dinaminca de usuarios -->
-                <script type="text/javascript">
-      $('#datetimepicker').datetimepicker({
-        format: 'dd/MM/yyyy'
-        
-      });
-    </script> 
+            
                       
                   <div id='contenido_tabla'>
                   

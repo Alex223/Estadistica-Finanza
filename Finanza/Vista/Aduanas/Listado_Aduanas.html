@@ -7,59 +7,53 @@ and open the template in the editor.
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <script>
+                
+          function addEvent(obj, evType, fn){
+            if (obj.addEventListener){
+              obj.addEventListener(evType, fn, false);
+              return true;
+            } else if (obj.attachEvent){
+              var r = obj.attachEvent("on"+evType, fn);
+              return r;
+            } else {
+              return false;
+            }
+           }
+           addEvent(window, 'load', listarRemesaAduanas('contenido_tabla'));
+          
+        </script>
     </head>
     <body>
               <!--Vista de ingresos de las trasacciones de los bancos a la cuenta de empresa-->
               <h1></h1>
               
               
-              <form class="form-horizontal" >
-                  
-                  
+            <form >
+            
+                <div  class="form-horizontal">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading" style="text-align: left; background:#639BF8"><h2>Remesas Aduanas </h2></div>
+            
+                 
+                  <!-- Tabla dinaminca de usuarios -->
+               
                       
-                  <div class="form-group">
-                      
-                      <div class="panel panel-default">
-                            
-                            <div class="panel-heading" style="text-align: left; background:#639BF8" ><h2>Remesas Aduanas</h2></div>
-                            
-                            
-                            <table class="table table-striped">
-                                
-                                <tr>
-                                    <td>Estado</td><td style="background: yellow">0</td><td colspan="9">Gastos de internación</td><td style="background: yellow"> 0 </td><td colspan="8"></td>
-                                    
-                                </tr> 
-                                
-                                 <tr>
-                                   
-                                     <td colspan="2"></td> <td>Proveedor </td><td>Cif</td><td></td><td>6%</td><td>19%</td> <td>Total</td> <td>0,30%</td><td>473,44</td><td>Otros $</td><td>Total</td> <td colspan="2"></td> <td colspan="6">Mesiva</td> 
-                                   
-                                </tr> 
-                          
-                                 <tr>
-                                   
-                                     <td></td><td>Carpeta</td> <td colspan="9"> </td><td>Remesas</td><td>Fecha</td><td></td><td>3</td> <td>4</td> <td>5</td><td>6</td><td>7</td><td>8</td>  
-                                   
-                                </tr> 
-                                <tr>
-                                   
-                                    <td></td><td>1631E</td> <td>DILONG </td><td>85.494,42</td><td>0</td><td>0,00</td><td>16.243,94</td> <td>16.243,94</td> <td>254,35</td><td>7.810.948</td><td>350000</td><td>8.160.948</td><td>15/04/2013</td> <td>4</td><td>0</td><td>7.765.640</td><td>0</td><td>0</td><td>0</td><td>0</td> 
-                                   
-                                </tr>                         
-                            
-                             </table>  
-                            
-                            
-                           
-    
-                     </div>
-                  </div>
+                  <div class="panel panel-default" style="overflow-x: scroll" id='contenido_tabla'>
                   
+                 
+                    
+            
+                 </div>
                   
-                   <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="cargarPHP('#contenido_dinamico', '/Vista/Aduanas/Ingreso_Aduanas.html');">Ingresar</button>  
-              
-              </form>
+                  <h2 id='paginacion'></h2>
+        
+         
+                   
+        </div>
+
+       
+           </form> 
               
     </body>
 </html>
