@@ -85,7 +85,7 @@
                                 <td align='center'><div id_".$indice."'> <a  href='#'><span id='id2_".$indice."' >".$banco->getIdTipoMoneda()."</span></a></div></td>
                                 <td align='center'><div id='id3_".$indice."'><span name='NOMBREBA' id='id4_".$indice."'  ondblclick=" .'"'."dobleclickB('id4_".$indice."','id3_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$banco->getNombre()."</div></td>
                                 <td align='center'><div id='id5_".$indice."'><span name='NUMEROCUENTABA' id='id6_".$indice."' ondblclick=" .'"'."dobleclickB('id6_".$indice."','id5_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$banco->getNumeroCuenta()."</span></div> </td>
-                                <td align='center'><div id='id7_".$indice."'><span name='SALDOBA' id='id8_".$indice."' ondblclick=" .'"'."dobleclickB('id8_".$indice."','id7_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$banco->getSaldo()."</span></div></td>    
+                                <td align='center'><div id='id7_".$indice."'><span name='SALDOBA' id='id8_".$indice."' ondblclick=" .'"'."dobleclickB('id8_".$indice."','id7_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">". number_format($banco->getSaldo(), 2, ',','.')."</span></div></td>    
                                 <td align='center'><div id='id9_".$indice."'><span name='TIPO_MONEDA' id='id10_".$indice."' ondblclick=" .'"'."dobleclickB('id10_".$indice."','id9_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$ID_NOM_MON."</span></div> </td>
                                 <td><td>
                                 </tr> 

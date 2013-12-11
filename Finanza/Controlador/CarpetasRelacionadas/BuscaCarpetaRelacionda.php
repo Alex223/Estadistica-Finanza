@@ -48,22 +48,14 @@
                               echo "0";
                               exit;
                           }
-                          $i=0;
-                          while($fila=mysql_fetch_assoc($resultado)){
-                              
-                            
-                              $i++;
-                          }
-
-                          if($i === 1){
+                          else{
+                        
+                     
                               
                               echo "1";
                               exit;
-                          }
-                          else {
-                              
-                              echo "0";
-                              exit;
+                          
+                        
                               
                           }
 ?>

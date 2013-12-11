@@ -18,9 +18,9 @@
     $conexión -> conectar();
     
     
-    $cargoCif ->setCostoCif($_POST["campo2_1"]); if($cargoCif ->setCostoCif($_POST["campo2_1"]) == ""){$cargoCif ->setCostoCif(0);}
-    $cargoCif ->setFleteCif($_POST["campo2_2"]); if($cargoCif ->setFleteCif($_POST["campo2_1"]) == ""){$cargoCif ->setFleteCif(0);}
-    $cargoCif ->setPrimaCif($_POST["campo2_3"]); if($cargoCif ->setPrimaCif($_POST["campo2_1"]) == ""){$cargoCif ->setPrimaCif(0);}
+    $cargoCif ->setCostoCif($_POST["campo2_1"]); if($cargoCif ->getCostoCif($_POST["campo2_1"]) == ""){$cargoCif ->setCostoCif(0);}
+    $cargoCif ->setFleteCif($_POST["campo2_2"]); if($cargoCif ->getFleteCif($_POST["campo2_1"]) == ""){$cargoCif ->setFleteCif(0);}
+    $cargoCif ->setPrimaCif($_POST["campo2_3"]); if($cargoCif ->getPrimaCif($_POST["campo2_1"]) == ""){$cargoCif ->setPrimaCif(0);}
     
    $totalCostoCif =floatval($cargoCif->getCostoCif()) + floatval($cargoCif->getFleteCif()) + floatval($cargoCif->getPrimaCif());
     

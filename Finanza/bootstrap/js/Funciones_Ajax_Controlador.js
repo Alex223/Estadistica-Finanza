@@ -943,6 +943,7 @@ function IngresarFilaAduana(){
    
    var tipoDerecho = selectTipoDerecho('ingreso3','crea'); 
    var filaIngreso ="<tr>\n\
+                     <td></td>\n\
                      <td><input class='form-control' id='ingreso' placeholder='Carpeta...'/></td> \n\
                      <td colspan='2'><input class='form-control' id='ingreso1' placeholder='Proveedor...'/></td> \n\
                      <td colspan='4'>\n\
@@ -965,8 +966,9 @@ function IngresarFilaAduana(){
                      <td colspan='3'><input class='form-control' id='ingreso4' placeholder='Otro Cargo...'/></td>\n\
                      <td colspan='2'><input class='form-control' id='ingreso5' placeholder='Fecha...'/></td>\n\
                      <td colspan='3'><input class='form-control' id='ingreso6' placeholder='Carpeta Relacionada...'/></td>\n\
-                     <td colspan='1'><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoAduana('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','seleccion','ingreso4','ingreso5','ingreso6');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span>\n\
-                     <td colspan='12'></td>\n\
+                     <td><button class='btn btn-default' type='button' onclick="+'"'+"cancelaIngreso();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td>\n\
+                     <td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoAduana('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','seleccion','ingreso4','ingreso5','ingreso6');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></td>\n\
+                     <td colspan='11'></td>\n\
                       </button>\n\
                      </td>\n\
                      </tr>";
@@ -1023,6 +1025,34 @@ function selectTipoDerecho(id,tipo){
     
     
 }
+
+function verificaCarpeta(carpeta){
+   
+
+   
+     $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/CarpetasRelacionadas/BuscaCarpetaRelacionda.php",
+                        data:{carpeta:carpeta}
+                        }).done(function(msg){
+                          ///alert(msg);
+                          a=false;
+                        if(msg ==="1"){
+                            
+                           a = true;
+                            
+                        }   
+                       else{a = false;}
+                       
+                       //alert(a);
+                        
+                        });
+                        
+                    //alert(a);
+    return a;
+}
+
+
 function validaIngresoAduana(d,d1,d2,d3,d4,d5,d6,d7,d8){
  
    
@@ -1053,8 +1083,8 @@ function validaIngresoAduana(d,d1,d2,d3,d4,d5,d6,d7,d8){
     if (campo6 === ""){mensaje +='Falta ingresar una fecha!\n';control=1;}
     
     if(campo7 !== ""){
-    
-    if (!verificaCarpeta(campo7)){mensaje +='No existe la carpeta ingresada!\n';control=1;}
+    //por ver doble ajax 
+    if (verificaCarpeta(campo7) === false){mensaje +='No existe la carpeta ingresada!\n';control=1;}
     }
     if(control===0){
         
@@ -1072,27 +1102,13 @@ function validaIngresoAduana(d,d1,d2,d3,d4,d5,d6,d7,d8){
                         alert(msg);
                         }); 
                         
-                         cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Aduanas/Listado_Aduanas.html');
-                             
+                         cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Aduanas/Listado_Aduanas.html'); 
                          }
         
     }else{alert(mensaje);}
     
 }
 
-function verificaCarpeta(carpeta){
-    
-     $.ajax({
-                        type:"POST",
-                            url: "/Estadistica-Finanza/Finanza/Controlador/CarpetasRelacionadas/BuscaCarpetaRelacionada.php",
-                        data:{carpeta:carpeta}
-                        }).done(function(msg){
-                        if (msg === "1"){return true;} 
-                        else{return false;}
-                        
-                        }); 
-    
-}
 
 
 function sessiont(id){
@@ -1105,6 +1121,28 @@ function sessiont(id){
                       
                            document.getElementById(id).innerHTML += msg;
                         });
+    
+    
+}
+
+function cancelaIngreso(){
+    
+    
+     cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Aduanas/Listado_Aduanas.html'); 
+    
+    
+}
+
+function listarCoberturas(id){
+    
+         $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Coberturas/ListarCorberturas.php",
+                        data:{}
+                        }).done(function(msg){document.getElementById(id).innerHTML += msg;});
+                       
+                            
+    
     
     
 }
