@@ -33,7 +33,7 @@ if (!mysql_select_db($conexión->base())) {
 
 
 
-$sql_0 = "SELECT ID_TIPO_DOLAR from tipo_dolar where NOMBRETDO='Aduana'";
+$sql_0 = "SELECT ID_TIPO_DOLAR from tipo_dolar where NOMBRETDO='Cobertura'";
 $resultado_0 = mysql_query($sql_0);
 
 if (mysql_num_rows($resultado_0) != 0) {
@@ -45,6 +45,8 @@ if (mysql_num_rows($resultado_0) != 0) {
 
     $sql_1 = "SELECT * from dolar where tipo_dolar_ID_TIPO_DOLAR=".$dolar->getIdTipoDolar();
     $resultado_1 = mysql_query($sql_1);
+    
+   if (mysql_num_rows($resultado_1) != 0) {
 
     while ($fila_1 = mysql_fetch_assoc($resultado_1)) {
         $dolar->setIdDolar($fila_1["ID_DOLAR"]);
@@ -52,12 +54,21 @@ if (mysql_num_rows($resultado_0) != 0) {
         $dolar->setIdTipoDolar($fila_0["tipo_dolar_ID_TIPO_DOLAR"]);
         $dolar->setFecha($fila_1["FECHADO"]);
     }
-    
+                                         }
+                                         
+       else{$dolar->setValor(0) ;}                                  
 } else {
     $dolar->setValor(0) ;
 }
 
+
+
+
+
+
 $dolar_aduna = number_format($dolar->getValor(), 2, ',','.');
+
+
 
 
 
@@ -114,6 +125,7 @@ if (!$resultadoZ) {
 
     exit;
 }
+
 
 if (mysql_num_rows($resultadoZ) == 0) {
 
@@ -180,8 +192,9 @@ if (mysql_num_rows($resultadoZ) == 0) {
       
                           <tr id='filaIngreso'>
                           <td></td> 
-                         <td><button class='btn btn-default' type='button'onclick=" . '"' . "IngresarFilaAduana();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='24 '></td>
+                         <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaAduana();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='24 '></td>
                          </tr>";
+    echo ($TABLA1);
     exit;
 } else {
 
@@ -202,7 +215,7 @@ if (mysql_num_rows($resultadoZ) == 0) {
         $TotalMesSeptiembre=0;
         $TotalMesOctubre=0;
         $TotalMesNoviembre=0;
-        $TotalMesDiciembre=0;
+        $TotalMesDiciembre=0.0;
     
     
     while ($filaZ = mysql_fetch_assoc($resultadoZ)) {
@@ -230,7 +243,7 @@ if (mysql_num_rows($resultadoZ) == 0) {
         }
 
 
-        $CostoCif = number_format( floatval($cargoCif->getCostoCif()) + floatval($cargoCif->getFleteCif()) + floatval($cargoCif->getPrimaCif()), 2, ',','');
+        $CostoCif = floatval($cargoCif->getCostoCif()) + floatval($cargoCif->getFleteCif()) + floatval($cargoCif->getPrimaCif());
 
         
         
@@ -246,27 +259,27 @@ if (mysql_num_rows($resultadoZ) == 0) {
        
 
         if ($tipoDerecho->getNombreTipoDerecho() == "6") {
-            $Costo6 =  number_format( $CostoCif * 0.6, 2, ',','.');
+            $Costo6 =  $CostoCif * 0.6;
         } else {
-            $Costo6 =  number_format( 0, 2, ',','.');
+            $Costo6 =  0;
         }
 
         
          
         
         
-        $Costo19 = number_format( $CostoCif * 0.19, 2, ',','.');
+        $Costo19 = $CostoCif * 0.19;
 
-        $TotalCosto = number_format( $Costo6 + $Costo19, 2, ',','.'); 
+        $TotalCosto =  $Costo6 + $Costo19; 
 
-        $Costo030 = number_format( $CostoCif * 0.003, 2, ',','.');
+        $Costo030 = $CostoCif * 0.003;
 
-        $Costo_Dolar = number_format($dolar->getValor()*($TotalCosto+$Costo030), 2, ',','.');
+        $Costo_Dolar = $dolar->getValor()*$TotalCosto+$Costo030;
          
         ///****************************************************
         
         //id cargo otros
-        
+       
         $sql_c = "SELECT MARGEN_CO from cargo_otro where ID_CARGO_OTROS=" .$remesa1->getIdCargoOtro();
         $resultado_c = mysql_query($sql_c);
 
@@ -275,85 +288,98 @@ if (mysql_num_rows($resultadoZ) == 0) {
         }
         
         
-        $carOtro = number_format($CargoOtro->getMargen(), 2, ',','.');
+        $carOtro = $CargoOtro->getMargen();
         
-        $TotalRemesa =  number_format($Costo_Dolar + $carOtro, 2, ',','.');
+        $TotalRemesa = $Costo_Dolar + $carOtro;
         
         
          
         
         //pasear datos por meses
         
+        
+        
+       // $dato +=0.1;
+      
+        
+      
+       
+     //  echo ($dato." / ");
+        
         $datoMes = $Costo19*$dolar_aduna + $Costo030*0.15966387*$dolar_aduna + $carOtro*0.15966387;
         
         
-        if( substr($remesa1->getFechare(),-5,2) == "1"){$MesEnero = number_format($datoMes , 2, ',','.'); }
-        else{$MesEnero = number_format(0 , 2, ',','.');}
         
-        if( substr($remesa1->getFechare(),-5,2) == "2"){$MesFebrero = number_format($datoMes , 2, ',','.'); }
-        else{$MesFebrero = number_format(0 , 2, ',','.');}
         
-        if( substr($remesa1->getFechare(),-5,2) == "3"){$MesMarzo = number_format($datoMes , 2, ',','.'); }
-        else{$MesMarzo = number_format(0 , 2, ',','.');}
         
-        if( substr($remesa1->getFechare(),-5,2) == "4"){$MesAbril = number_format($datoMes , 2, ',','.'); }
-        else{$MesAbril = number_format(0 , 2, ',','.');}
         
-        if( substr($remesa1->getFechare(),-5,2) == "5"){$MesMayo = number_format($datoMes , 2, ',','.'); }
-        else{$MesMayo = number_format(0 , 2, ',','.');}
+        if( substr($remesa1->getFechare(),-5,2) == "1"){$MesEnero = $datoMes; }
+        else{$MesEnero = 0;}
         
-        if( substr($remesa1->getFechare(),-5,2) == "6"){$MesJunio = number_format($datoMes , 2, ',','.'); }
-        else{$MesJunio = number_format(0 , 2, ',','.');}
+        if( substr($remesa1->getFechare(),-5,2) == "2"){$MesFebrero = $datoMes; }
+        else{$MesFebrero = 0 ;}
         
-        if( substr($remesa1->getFechare(),-5,2) == "7"){$MesJulio = number_format($datoMes , 2, ',','.'); }
-        else{$MesJulio = number_format(0 , 2, ',','.');}
+        if( substr($remesa1->getFechare(),-5,2) == "3"){$MesMarzo = $datoMes; }
+        else{$MesMarzo = 0;}
         
-        if( substr($remesa1->getFechare(),-5,2) == "8"){$MesAgosto = number_format($datoMes , 2, ',','.'); }
-        else{$MesAgosto = number_format(0 , 2, ',','.');}
+        if( substr($remesa1->getFechare(),-5,2) == "4"){$MesAbril =$datoMes; }
+        else{$MesAbril = 0 ;}
         
-        if( substr($remesa1->getFechare(),-5,2) == "9"){$MesSeptiembre = number_format($datoMes , 2, ',','.'); }
-        else{$MesSeptiembre = number_format(0 , 2, ',','.');}
+        if( substr($remesa1->getFechare(),-5,2) == "5"){$MesMayo = datoMes ; }
+        else{$MesMayo = 0;}
         
-        if( substr($remesa1->getFechare(),-5,2) == "10"){$MesOctubre = number_format($datoMes , 2, ',','.'); }
-        else{$MesOctubre = number_format(0 , 2, ',','.');}
+        if( substr($remesa1->getFechare(),-5,2) == "6"){$MesJunio =$datoMes; }
+        else{$MesJunio = 0 ;}
         
-        if( substr($remesa1->getFechare(),-5,2) == "11"){$MesNoviembre = number_format($datoMes , 2, ',','.'); }
-        else{$MesNoviembre = number_format(0 , 2, ',','.');}
+        if( substr($remesa1->getFechare(),-5,2) == "7"){$MesJulio = $datoMes; }
+        else{$MesJulio = 0 ;}
         
-        if( substr($remesa1->getFechare(),-5,2) == "12"){$MesDiciembre = number_format($datoMes , 2, ',','.'); }
-        else{$MesDiciembre = number_format(0 , 2, ',','.');}
+        if( substr($remesa1->getFechare(),-5,2) == "8"){$MesAgosto = $datoMes; }
+        else{$MesAgosto = 0;}
+        
+        if( substr($remesa1->getFechare(),-5,2) == "9"){$MesSeptiembre = $datoMes; }
+        else{$MesSeptiembre = 0 ;}
+        
+        if( substr($remesa1->getFechare(),-5,2) == "10"){$MesOctubre = $datoMes; }
+        else{$MesOctubre = 0 ;}
+        
+        if( substr($remesa1->getFechare(),-5,2) == "11"){$MesNoviembre = $datoMes; }
+        else{$MesNoviembre = 0 ;}
+        
+        if( substr($remesa1->getFechare(),-5,2) == "12"){$MesDiciembre =$datoMes; }
+        else{$MesDiciembre = 0;}
        
-            
+         // echo($MesDiciembre." - ");  
         
         
         
         
         ///******sumo totales**********
         
-        $TotalCosto19 = (float)$TotalCosto19 + (float)$Costo19;
-        $TotalCosto030 += (float)$Costo030;
-        $TotalcarOtro += (float)$carOtro;
-        $TotalRemesaFila += (float)$TotalRemesa;
-        $TotalCuadraturaIzquierda = $TotalCosto19* $dolar_aduna + (($TotalCosto030* $dolar_aduna)/1.19)*0.19  + (($TotalcarOtro/1.19)-$TotalcarOtro)*-1 ;
+        $TotalCosto19 =$TotalCosto19 + $Costo19;
+        $TotalCosto030 = $TotalCosto030 + $Costo030;
+        $TotalcarOtro = $TotalcarOtro + $carOtro;
+        $TotalRemesaFila = $TotalRemesaFila + $TotalRemesa;
        
         
         //columana meses
         
-        $TotalMesEnero = number_format($TotalMesEnero + $MesEnero , 2, ',','.');
-        $TotalMesFebrero= number_format($TotalMesFebrero + $MesFebrero , 2, ',','.');
-        $TotalMesMarzo= number_format($TotalMesMarzo + $MesMarzo , 2, ',','.');
-        $TotalMesAbril= number_format($TotalMesAbril + $MesAbril , 2, ',','.');
-        $TotalMesMayo= number_format($TotalMesMayo + $MesMayo , 2, ',','.');
-        $TotalMesJunio= number_format($TotalMesJunio + $MesJunio , 2, ',','.');
-        $TotalMesJulio= number_format($TotalMesJulio + $MesJulio , 2, ',','.');
-        $TotalMesAgosto=  number_format($TotalMesAgosto + $MesAgosto , 2, ',','.');
-        $TotalMesSeptiembre= number_format($TotalMesSeptiembre + $MesSeptiembre , 2, ',','.');
-        $TotalMesOctubre= number_format($TotalMesOctubre + $MesOctubre , 2, ',','.');
-        $TotalMesNoviembre= number_format($TotalMesNoviembre + $MesNoviembre , 2, ',','.');
-        $TotalMesDiciembre= number_format($TotalMesDiciembre + $MesDiciembre , 2, ',','.');
-      //  echo ($TotalMesDiciembre." , ");
-    $TotalCuadraturaDerecha = number_format($TotalMesEnero+$TotalMesFebrero+$TotalMesMarzo+$TotalMesMayo+ $TotalMesAbril+$TotalMesJunio+$TotalMesJulio+$TotalMesAgosto+$TotalMesSeptiembre+$TotalMesOctubre+$TotalMesNoviembre+$TotalMesDiciembre , 2, ',','.');
-    $CuadraturaFinal  = number_format($TotalCuadraturaIzquierda - $TotalCuadraturaDerecha , 2, ',','.');   
+        $TotalMesEnero = $TotalMesEnero + $MesEnero;
+        $TotalMesFebrero= $TotalMesFebrero + $MesFebrero;
+        $TotalMesMarzo= $TotalMesMarzo + $MesMarzo ;
+        $TotalMesAbril= $TotalMesAbril + $MesAbril;
+        $TotalMesMayo= $TotalMesMayo + $MesMayo;
+        $TotalMesJunio= $TotalMesJunio + $MesJunio ;
+        $TotalMesJulio= $TotalMesJulio + $MesJulio ;
+        $TotalMesAgosto=  $TotalMesAgosto + $MesAgosto;
+        $TotalMesSeptiembre= $TotalMesSeptiembre + $MesSeptiembre ;
+        $TotalMesOctubre= $TotalMesOctubre + $MesOctubre;
+        $TotalMesNoviembre = $TotalMesNoviembre + $MesNoviembre ;
+        $TotalMesDiciembre = $TotalMesDiciembre + $MesDiciembre;
+                
+       // $TotalMesDiciembre = number_format($TotalMesDiciembre , 2, ',','.');
+       //echo ($MesDiciembre." = ".$TotalMesDiciembre." - ");
+  
     
         //****************************
     // para un posterior analisis
@@ -362,34 +388,46 @@ if (mysql_num_rows($resultadoZ) == 0) {
                                      <td align='center' ></td>
                                      <td align='center' >" . $remesa1->getNumeroCarpeta() . "</td>
                                      <td align='center' >" . $remesa1->getProveedor() . "</td> 
-                                     <td align='center' >" . $CostoCif . "</td>
+                                     <td align='center' >" .  number_format($CostoCif , 2, ',','.') . "</td>
                                      <td align='center' >" . $tipoDerecho->getNombreTipoDerecho() . " </td>
-                                     <td align='center' >" . $Costo6 . "</td>
-                                     <td align='center' >" . $Costo19 . "</td>
-                                     <td align='center' >" . $TotalCosto . "</td>
-                                     <td align='center' > " . $Costo030 . "</td> 
-                                     <td align='center' >".$Costo_Dolar."</td>
-                                     <td align='center' style='background-color: darkgray'>".$carOtro."</td>
-                                     <td align='center' style='background-color: yellow'> ".$TotalRemesa."</td>
+                                     <td align='center' >" . number_format($Costo6 , 2, ',','.') . "</td>
+                                     <td align='center' >" .number_format($Costo19 , 2, ',','.')  . "</td>
+                                     <td align='center' >" . number_format($TotalCosto , 2, ',','.') . "</td>
+                                     <td align='center' > " . number_format($Costo030 , 2, ',','.') . "</td> 
+                                     <td align='center' >".number_format($Costo_Dolar , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($carOtro , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: yellow'> ".number_format($TotalRemesa , 2, ',','.')."</td>
                                      <td align='center' >".$remesa1->getFechare()."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesEnero."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesFebrero."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesMarzo."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesAbril."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesMayo."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesJunio."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesJulio."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesAgosto."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesSeptiembre."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesOctubre."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesNoviembre."</td>
-                                     <td align='center' style='background-color: darkgray'>".$MesDiciembre."</td>
-                                     <td align='center' ><button class='btn btn-default' type='button' onclick=".'"'."EliminaRemesa();".'"'." ><span class='glyphicon glyphicon-minus-sign'></span></button></td> 
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesEnero , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesFebrero , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesMarzo , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesMayo , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesEnero , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesJunio , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesJulio , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesAgosto , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesSeptiembre , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesOctubre , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesNoviembre , 2, ',','.')."</td>
+                                     <td align='center' style='background-color: darkgray'>".number_format($MesDiciembre , 2, ',','.')."</td>
+                                     <td align='center' ><button class='btn btn-default  btn-sm'  type='button' onclick=".'"'."EliminaRemesa();".'"'." ><span class='glyphicon glyphicon-minus-sign'></span></button></td> 
                                   
 
                                 </tr> ";
     }
 }
+
+
+
+
+    $TotalCuadraturaIzquierda = $TotalCosto19* $dolar_aduna + (($TotalCosto030* $dolar_aduna)/1.19)*0.19  + (($TotalcarOtro/1.19)-$TotalcarOtro)*-1 ;
+    $TotalCuadraturaDerecha = $TotalMesEnero + $TotalMesFebrero + $TotalMesMarzo + $TotalMesAbril +  $TotalMesMayo + $TotalMesJunio + $TotalMesJulio + $TotalMesAgosto + $TotalMesSeptiembre + $TotalMesOctubre + $TotalMesNoviembre + $TotalMesDiciembre;
+    $CuadraturaFinal  =$TotalCuadraturaIzquierda - $TotalCuadraturaDerecha;  
+
+    
+  
+    
+    
 //Final
 $TABLA1 .="           <tr>
                                    
@@ -403,18 +441,18 @@ $TABLA1 .="           <tr>
                                      <td style='background-color: darkgray'>".number_format( $TotalcarOtro , 2, ',','.')."</td>
                                      <td style='background-color: darkgray'>".number_format( $TotalRemesaFila , 2, ',','.')."</td>
                                      <td style='background-color: darkgray'></td>
-                                     <td style='background-color: darkgray'>".$TotalMesEnero."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesFebrero."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesMarzo."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesAbril."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesMayo."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesJunio."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesJulio."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesAgosto."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesSeptiembre."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesOctubre."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesNoviembre."</td>
-                                     <td style='background-color: darkgray'>".$TotalMesDiciembre."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesEnero , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesFebrero , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesMarzo , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesAbril , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesMayo , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesJunio , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesJulio , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesAgosto , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesSeptiembre , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesOctubre , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>".number_format($TotalMesNoviembre , 2, ',','.')."</td>
+                                     <td style='background-color: darkgray'>". number_format($TotalMesDiciembre , 2, ',','.')."</td>
                                      <td></td>    
                                          
                                </tr>
@@ -436,7 +474,7 @@ $TABLA1 .="           <tr>
         <tr>
                                    
                                      <td colspan='11'></td>
-                                     <td style='background-color: darkgray'>".$TotalCuadraturaDerecha." </td>
+                                     <td style='background-color: darkgray'>".number_format( $TotalCuadraturaDerecha , 2, ',','.')." </td>
                                      <td colspan='14'></td>
                                     
                                      
@@ -447,13 +485,13 @@ $TABLA1 .="           <tr>
                                 <tr>
                                     
                                      <td colspan='11'></td>
-                                     <td style='background-color: darkgray; color:red'> ".$CuadraturaFinal." </td>
+                                        <td style='background-color: darkgray; color:red'> ".number_format( $CuadraturaFinal , 2, ',','.')." </td>
                                      <td colspan='14'></td>
                                     
                                </tr>
                           <tr id='filaIngreso'>
                           <td></td>
-                            <td><button class='btn btn-default' type='button'onclick=" . '"' . "IngresarFilaAduana();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='24 '></td>
+                            <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaAduana();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='24 '></td>
                          </tr>
 </table>
       ";

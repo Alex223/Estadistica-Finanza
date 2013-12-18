@@ -4,4 +4,17 @@
 INSERT INTO usuario(NOMBRE_1, NOMBRE_2, AP_PA, AP_MA, RUT, RUT_DV, USER_LOGIN, PASSWORD, ESTADO) VALUES('USUARIO','ADMINISTRADOR','DEL','SISTEMA',1,'9','ADMIN','1234',1);
 INSERT INTO Cargos(Titulo, Descripcion) VALUES('ADMINISTRADOR','ADMINISTRADOR DEL SISTEMA');
 INSERT INTO Usuario_vs_Cargos(Cargos_IdCargos, usuario_ID_USUARIO) VALUES(1,1);
-
+INSERT INTO tipo_dolar VALUES(1,'Aduana');
+INSERT INTO tipo_dolar VALUES(2,'Cobertura');
+INSERT INTO tipo_estado_bodega values(1,'En Transito');
+INSERT INTO tipo_estado_bodega values(2,'En Puerto');
+INSERT INTO tipo_estado_bodega values(3,'En Bodega');
+INSERT INTO dolar VALUES(1,472.28,1,'2013-12-11');
+INSERT INTO dolar VALUES(2,472.28,2,'2013-12-11');
+INSERT INTO forma_de_pago values(1,'Carta de Crédito');
+INSERT INTO forma_de_pago values(2,'Cheque');
+INSERT INTO forma_de_pago values(3,'Tranferencia');
+INSERT INTO tipo_carga values(1,'Pack de 12',12);
+INSERT INTO tipo_carga values(2,'Lote Completo',10000);
+INSERT INTO tipo_derechos values(1,'0');
+INSERT INTO tipo_derechos values(2,'6');

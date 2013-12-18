@@ -924,6 +924,30 @@ function CargasSeleccion(lugar,id){
 
 
 //***************Modulo Remesas**************************
+function validaRegistrosAduana(){
+    
+    $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/RemesasAduanas/ValidaRegistros.php",
+                        data:{}
+                        }).done(function(msg){
+                          
+                         mensaje;  
+                    if (msg !== "1"){
+                       
+                        if(msg ==="2") {mensaje +="Falta un tipo derecho!";}
+                        if(msg ==="3") {mensaje +="Falta un tipo carga!";}
+                        alert(mensaje);
+                           cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Modulo_Parametricos/Parametricos.html');
+                    }    
+                    
+                    });
+                       
+                   
+    
+    
+}
+
 function listarRemesaAduanas(id){
     
     
@@ -962,7 +986,7 @@ function IngresarFilaAduana(){
                       <td>Costo Cif: </td><td><div id='totalCif'></div></td>\n\
                      </tr>\n\
                      </table></td>\n\
-                     <td><div id='ingreso3'></div></td>\n\
+                     <td><div >Estado Bodega</div><div id='ingreso3'></div></td>\n\
                      <td colspan='3'><input class='form-control' id='ingreso4' placeholder='Otro Cargo...'/></td>\n\
                      <td colspan='2'><input class='form-control' id='ingreso5' placeholder='Fecha...'/></td>\n\
                      <td colspan='3'><input class='form-control' id='ingreso6' placeholder='Carpeta Relacionada...'/></td>\n\
@@ -1137,12 +1161,87 @@ function listarCoberturas(id){
     
          $.ajax({
                         type:"POST",
-                            url: "/Estadistica-Finanza/Finanza/Controlador/Coberturas/ListarCorberturas.php",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Coberturas/ListarCoberturas.php",
                         data:{}
                         }).done(function(msg){document.getElementById(id).innerHTML += msg;});
                        
                             
     
+    
+    
+}
+
+
+function IngresarFilaCobertura(){
+       
+   var tipoDerecho = selectTipoDerecho('ingreso3','crea'); 
+   var filaIngreso ="<tr>\n\
+                     <td></td>\n\
+                     <td><input class='form-control' id='ingreso' placeholder='Carpeta...'/></td> \n\
+                     <td colspan='2'><input class='form-control' id='ingreso1' placeholder='Proveedor...'/></td> \n\
+                     <td colspan='4'>\n\
+                     <table class='table table-striped' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'>\n\
+                     <tr><td colspan='2'>Datos Costo Cif</td></tr>\n\
+                     <tr>\n\
+                       <td>Cif: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_1' placeholder='Costo Cif...'/></td> \n\
+                     </tr>\n\
+                     <tr>\n\
+                       <td>Flete: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_2' placeholder='Costo Flete...'/></td> \n\
+                     </tr>\n\
+                     <tr>\n\
+                       <td>Prima: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_3' placeholder='Costo Prima...'/></td> \n\
+                     </tr>\n\
+                     <tr>\n\
+                      <td>Costo Cif: </td><td><div id='totalCif'></div></td>\n\
+                     </tr>\n\
+                     </table></td>\n\
+                     <td><span id='estado'>Estado Bodega:</span><div id='ingreso3'></div></td>\n\
+                     <td colspan='3'><input class='form-control' id='ingreso4' placeholder='Otro Cargo...'/></td>\n\
+                     <td colspan='2'><input class='form-control' id='ingreso5' placeholder='Fecha...'/></td>\n\
+                     <td colspan='3'><input class='form-control' id='ingreso6' placeholder='Carpeta Relacionada...'/></td>\n\
+                     <td><button class='btn btn-default' type='button' onclick="+'"'+"cancelaIngresoCobertura();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td>\n\
+                     <td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoAduana('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','seleccion','ingreso4','ingreso5','ingreso6');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></td>\n\
+                     <td colspan='11'></td>\n\
+                      </button>\n\
+                     </td>\n\
+                     </tr>";
+    document.getElementById('filaIngreso').innerHTML=filaIngreso;
+    $( "#ingreso" ).focus();
+
+    
+       
+}
+
+function cancelaIngresoCobertura(){
+    
+         cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Coberturas/Listado_Coberturas.html'); 
+    
+    
+    
+}
+
+function validaRegistros(){
+    
+      $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Coberturas/ValidaRegistros.php",
+                        data:{}
+                        }).done(function(msg){
+                         mensaje;  
+                         
+                         if(msg !== "1"){
+                            
+                                if (msg==="2"){mesaje = "Se debe ingresar antes  al menos una cobertura!"; }
+                                if (msg==="3"){mesaje = "Se debe ingresar antes  al menos una forma de pagos!";}
+                                if (msg==="4"){mesaje = "Se debe ingresar antes  al menos un Banco!";}
+                                if (msg==="5"){mesaje = "Se debe ingresar antes  al menos un tipo estado cobertura!";}
+                                if (msg==="6"){mesaje = "Se debe ingresar antes  al menos un tipo estado bodega!";}
+                                
+                               alert(mensaje);
+                               cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Modulo_Parametricos/Parametricos.html');
+                        }
+                    });
+                       
     
     
 }
