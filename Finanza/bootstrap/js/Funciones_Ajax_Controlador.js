@@ -1,10 +1,47 @@
+function cuentaRegistros (tabla){
+    
+     $.ajax({
+                        type:"POST",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/CuentaRegistro/CuentaRegistro.php",
+                        data:{tabla:tabla}
+                        }).done(function(msg){
+                            
+                                
+                         if( msg === "No hay registros" || msg === null){
+        
+                            alert("No hay registros de Tipo Moneda, Se debe ingresar al menos una antes de poder ingresar un banco!");
+                            cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Monedas/Listado_Monedas.html' );
+                           }  
+                            
+                        
+                
+                        }); 
+    
+    
+}
 
 
-  function ModificaIngreso(){
-      
+
+function sessiont(id){
+    
+        $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/Session/UsuarioSession.php",
+                        data:{}
+                        }).done(function(msg){
+                      
+                           document.getElementById(id).innerHTML += msg;
+                        });
+    
+    
+}
+///***************************** Usuarios **************************************
+
+  function ModificaIngresoUsuario(){
+     
        var columna = document.getElementById('editor').getAttribute('name');
-       
-                    if (columna !== "Cargo"){
+    
+                    if (columna !== "Cargos"){
                   
                      
                       var dato = document.getElementById('editor').getAttribute('placeholder').trim();
@@ -48,10 +85,38 @@
                     
                 }else{
                     
-                      var dato = document.getElementById('elegido').value;
-                      var dato2 = document.getElementById('selecion').value;
                       
-                      alert(dato+" a "+ dato2);
+                      var seleccion2 = document.getElementById('seleccion').value;
+                      var actual_seleccionado = document.getElementById('seleccionado').value;
+                      var idReg = document.getElementById('idReg').getAttribute('name'); 
+                      
+                     
+                      
+                      if (seleccion2 === actual_seleccionado){
+                          
+                          alert("Es el mismo dato!" );
+                          
+                      }
+                      
+                           else{
+                       
+                       var r=confirm('¿desea realmente modificar el registro?');
+                         if (r === true){
+                             
+                            
+                       $.ajax({
+                        type:"POST",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Usuarios/ModificaRegistro.php",
+                        data:{id:idReg,col:columna,valor:seleccion2}
+                        }).done(function(msg){
+                        alert(msg);
+                        }); 
+                        
+                        cargarPHP( '#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Usuarios/Listado_Usuarios.html' );
+                             
+                         }
+                            
+                    }   
                     
                 }
             
@@ -59,7 +124,7 @@
 }
                 
                 
-                  function dobleclick(id,objetivo,idReg){
+   function dobleclick(id,objetivo,idReg){
        
                  var acceso = document.getElementById('editor');  
                  
@@ -67,8 +132,10 @@
                 var columna =  document.getElementById(id).getAttribute('name');
                 var dato = document.getElementById(id);
                var cuadro_editador;
-              if(columna === 'RUT') { cuadro_editador = "<input max='10'maxlength='10' class='form-control' onkeypress="+'"'+"unfocus(event)"+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'><span id='idReg' name='"+idReg+"'></span> <button class='btn btn-default' type='button'onclick="+'"'+"ModificaIngreso();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input>"; }
-              else {  cuadro_editador  ="<input class='form-control' onkeypress="+'"'+"unfocus(event)"+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default' type='button'onclick="+'"'+"ModificaIngreso();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";}
+              if(columna === 'Cargo') { 
+               
+               cuadro_editador = generaSelecBox('0','seleccion','/Estadistica-Finanza/Finanza/Controlador/CajaSeleccion/CajaSeleccion.php','Cargos','idCargos','Titulo',objetivo,idReg, (dato.innerHTML).trim());}
+              else {  cuadro_editador  ="<input class='form-control' onkeypress="+'"'+"unfocus(event)"+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default btn-sm' title='Guarda los cambios'  type='button'onclick="+'"'+"ModificaIngresoUsuario();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";}
                document.getElementById(objetivo).innerHTML=cuadro_editador;
                $( "#editor" ).focus();
            }
@@ -83,7 +150,30 @@
                                   
     }
              
-            
+         function habilitarUsuario(id){
+                
+                   
+         var r=confirm("¿Desea habilitar el usuario "+id.toString()+"?");
+            if (r === true)
+              {
+                  
+                        $.ajax({
+                        type:"POST",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/Usuarios/HabilitaUsuario.php",
+                        data:{id:id}
+                        }).done(function(msg){
+                        alert(msg);
+                        });
+                  
+             
+              }
+           
+          listarUsuarios('contenido_tabla',0);
+    
+    
+    
+                
+            }
     
     function eliminar(id){
     
@@ -109,19 +199,28 @@
     
     
     }
+    
+    function cancelaIngresoCliente(){
+        
+        
+         cargarPHP( '#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Usuarios/Listado_Usuarios.html' );
+        
+    }
+    
     function IngresarFila(){
     
     
     
-    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso' type='text' max='10' maxlength='10' placeholder='Rut...'/></td><td><input class='form-control'  id='ingreso2' type='text' placeholder='Primer Nombre...'/></td><td><input class='form-control'  id='ingreso3' type='text' placeholder='Segundo Nombre...'/></td><td><input class='form-control'  id='ingreso4' type='text' placeholder='Apellido Parteno...'/></td><td><input class='form-control'  id='ingreso5' type='text' placeholder='Apellido Materno...'/></td><td><input  class='form-control' id='ingreso6' type='text' placeholder='Nick'/></td><td><input  class='form-control' id='ingreso7' type='text' placeholder='Contraseña'/></td><td><input  class='form-control' id='ingreso8' type='text' placeholder='Cargo'/></td><td><button class='btn btn-default' type='button'onclick="+'"'+"validaIngresoCliente('ingreso','ingreso2','ingreso3','ingreso4','ingreso5','ingreso6','ingreso7','ingreso8');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td></tr>";
+    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso' type='text' max='10' maxlength='10' placeholder='Rut...'/></td><td><input class='form-control'  id='ingreso2' type='text' placeholder='Primer Nombre...'/></td><td><input class='form-control'  id='ingreso3' type='text' placeholder='Segundo Nombre...'/></td><td><input class='form-control'  id='ingreso4' type='text' placeholder='Apellido Parteno...'/></td><td><input class='form-control'  id='ingreso5' type='text' placeholder='Apellido Materno...'/></td><td><input  class='form-control' id='ingreso6' type='text' placeholder='Nick'/></td><td><input  class='form-control' id='ingreso7' type='password' placeholder='Contraseña'/></td><td id='SelectBox' align='center'><div>SelectBox</div></td><td><button class='btn btn-default btn-sm' title='Añade un nuevo registro' type='button' type='button'onclick="+'"'+"validaIngresoCliente('ingreso','ingreso2','ingreso3','ingreso4','ingreso5','ingreso6','ingreso7','seleccion');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>  <td><button title='Cancela Ingreso' class='btn btn-default btn-sm' type='button' onclick="+'"'+"cancelaIngresoCliente();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td></tr>";
         
   
     document.getElementById('filaIngreso').innerHTML=cuadro_editador;
+     generaSelecBox('1','ingreso','/Estadistica-Finanza/Finanza/Controlador/Bancos/SelectBoxBancos.php','Cargos','idCargos','Titulo','SelectBox',1,"no importa");
 
                $( "#ingreso" ).focus();
     
     }
-    function validaIngresoCliente(ingreso,ingreso2,ingreso3,ingreso4,ingreso5,ingreso6,ingreso7,ingreso8){
+    function validaIngresoCliente(ingreso,ingreso2,ingreso3,ingreso4,ingreso5,ingreso6,ingreso7, ingreso8){
         
         var validador=1;
         var alerta="";
@@ -135,6 +234,7 @@
         var dato6 = document.getElementById(ingreso6).value.trim();//USER_LOGIN
         var dato7 = document.getElementById(ingreso7).value.trim();//PASSWORD
         var dato8 = document.getElementById(ingreso8).value.trim();//id_cargo
+       
         
         if(dato === ""){validador=0;alerta+="Falta ingresar el rut!\n";}else{ 
          
@@ -146,7 +246,7 @@
         if(dato5 === ""){validador=0;alerta+="Falta ingresar el apellido materno!\n";}
         if(dato6 === ""){validador=0;alerta+="Falta ingresar el Nick!\n";}
         if(dato7 === ""){validador=0;alerta+="Falta ingresar el Contraseña!\n";}
-        if(dato8 === ""){validador=0;alerta+="Falta ingresar el cargo!\n";}
+        //if(dato8 === ""){validador=0;alerta+="Falta ingresar el cargo!\n";}
         
         if(validador === 0 ){
             
@@ -175,16 +275,16 @@
     }
 
 
-function listarUsuarios(id){
+function listarUsuarios(id,estado){
     
     
       $.ajax({
                         type:"POST",
                         url: "/Estadistica-Finanza/Finanza/Controlador/Usuarios/ListarUsuarios.php",
-                        data:{}
+                        data:{estado:estado}
                         }).done(function(msg){
                             
-                            document.getElementById(id).innerHTML += msg;
+                            document.getElementById(id).innerHTML = msg;
                        
                         });
 
@@ -356,7 +456,7 @@ function listarUsuarios(id){
                }
                
                
-               ///LISTAR BANCOS
+ //*********************************Modulo Bancos***********************************************
                
                function listarBancos(id){
     
@@ -372,21 +472,42 @@ function listarUsuarios(id){
                         });
 
                }
+               
+      function cancelaIngresoBanco(){
+    
+   cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Bancos/Listado_Bancos.html' );
+}       
+               
+               
     function IngresarFilaBanco(){
         
         
-        
+    cuentaRegistros("tipo_moneda");
     
-    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso'placeholder='Nombre banco...'/></td><td><input class='form-control'  id='ingreso2' type='text' placeholder='Numero Cuenta...'/></td><td><input class='form-control'  id='ingreso3' type='text' placeholder=' Saldo...'/></td><td id='SelectBox'><div>SelectBox</div></td><td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoBanco('ingreso','ingreso2','ingreso3');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td></tr>";
+    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso'placeholder='Nombre banco...'/></td><td><input class='form-control'  id='ingreso2' type='text' placeholder='Numero Cuenta...'/></td><td><input class='form-control'  id='ingreso3' type='text' placeholder=' Saldo...'/></td><td id='SelectBox' align='center'><div>SelectBox</div></td><td><button class='btn btn-default btn-sm' title='Añade un nuevo registro' type='button' onclick="+'"'+"validaIngresoBanco('ingreso','ingreso2','ingreso3');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>  <td><button title='Cancela Ingreso' class='btn btn-default btn-sm' type='button' onclick="+'"'+"cancelaIngresoBanco();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td> </tr>";
         
   
     document.getElementById('filaIngreso').innerHTML=cuadro_editador;
    
     generaSelecBox('1','ingreso','/Estadistica-Finanza/Finanza/Controlador/Bancos/SelectBoxBancos.php','tipo_moneda','ID_TIPO_MONEDA','NOMBRETM','SelectBox',1,"no importa");
 
-             //  $( "#ingreso" ).focus();
+          
     
     }
+    
+    ///Documentación muy importante
+    
+    /*
+     * edita_o_ingresa = si es 0 es una edición; si es 1 es una creación
+     * objetivoFocus = id donde sera foculizado el puntero luego de cargar el select 
+     * url = dirección del controlador que lista las el select objetivo
+     * tabla = tabla de la base de datos que trabaja el select o recurso
+     * tipoId = Nombre de la columna id de la tabla trabajada
+     * tipoTitulo = Nombre de la columna dato (especifico ej: reg: 1, casa; "casa" es el tipoTitulo) de la tabla trabajada
+     * objetivo = id del div donde se insertara
+     * idReg = solo si es edición de lo contrario 0 ingreso por defecto.
+     * TituloSelect = Es el dato selecionado ej: si hay "1-casa,2-hotel", esta campo es la "casa o hotel", en creación de un nuevo registro no importa
+     */
         
         
     function generaSelecBox(edita_o_ingresa,objetivoFocus ,url,tabla, tipoId, tipoTitulo,objetivo,idReg, TituloSelect){
@@ -425,6 +546,7 @@ function listarUsuarios(id){
                      
                 var columna =  document.getElementById(id).getAttribute('name');
                 var dato = document.getElementById(id);
+                
                  var cuadro_editador;
               
                   if (columna === 'TIPO_MONEDA'){
@@ -432,7 +554,7 @@ function listarUsuarios(id){
                       generaSelecBox('0','seleccion','/Estadistica-Finanza/Finanza/Controlador/Bancos/SelectBoxBancos.php','tipo_moneda','ID_TIPO_MONEDA','NOMBRETM',objetivo,idReg, dato.innerHTML);
                   }else{
               
-                cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocusb(event) "+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default' type='button'onclick="+'"'+"ModificaIngresoBanco();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";
+                cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocusb(event) "+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default btn-sm' title='Guarda los cambios'  type='button'onclick="+'"'+"ModificaIngresoBanco();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";
                   
                 document.getElementById(objetivo).innerHTML=cuadro_editador;
                 $( "#editor" ).focus();
@@ -590,6 +712,27 @@ function validaIngresoBanco(dato,dato1,dato2){
     
 }
 
+function EliminaBanco(id){
+    
+       
+    var r=confirm('¿Desea realmente eliminar el registro '+id+'?');
+                         if (r === true){
+                             
+                            
+                       $.ajax({
+                        type:"POST",
+                         url: "/Estadistica-Finanza/Finanza/Controlador/Bancos/EliminaBanco.php",
+                        data:{id:id}
+                        }).done(function(msg){
+                        alert(msg);
+                        }); 
+                        
+                         cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Bancos/Listado_Bancos.html' );
+                         
+                         }
+    
+    
+}
 
 //*********************** Modulos Cargos*************************************
 
@@ -619,7 +762,7 @@ function listarCargos(id){
                 var dato = document.getElementById(id);
                  var cuadro_editador;
               
-               cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocusc(event) "+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default' type='button'onclick="+'"'+"ModificaIngresoCargo();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";
+               cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocusc(event) "+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default btn-sm' title='Guarda los cambios' type='button'onclick="+'"'+"ModificaIngresoCargo();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";
                   
                 document.getElementById(objetivo).innerHTML=cuadro_editador;
                 $( "#editor" ).focus();
@@ -683,12 +826,17 @@ function listarCargos(id){
                                          
           }
           
+   function cancelaIngresoCargo(){
+    
+   cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Cargos/Listado_Cargos.html' );
+}       
+          
       function IngresarFilaCargo(){
         
         
         
     
-    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso'placeholder='Titulo...'/></td><td><input class='form-control'  id='ingreso2' type='text' placeholder='Descripcion...'/></td><td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoCargo('ingreso','ingreso2');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td></tr>";
+    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso'placeholder='Titulo...'/></td><td><input class='form-control'  id='ingreso2' type='text' placeholder='Descripcion...'/></td><td><button class='btn btn-default btn-sm' title='Añade un nuevo registro' type='button' onclick="+'"'+"validaIngresoCargo('ingreso','ingreso2');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>  <td><button title='Cancela Ingreso' class='btn btn-default btn-sm' type='button' onclick="+'"'+"cancelaIngresoCargo();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td></tr>";
     document.getElementById('filaIngreso').innerHTML=cuadro_editador;
     $( "#ingreso" ).focus();
     
@@ -732,6 +880,29 @@ function validaIngresoCargo(dato,dato1){
     
 }
 
+function EliminaCargo(id){
+    
+       
+    var r=confirm('¿Desea realmente eliminar el registro '+id+'?');
+                         if (r === true){
+                             
+                            
+                       $.ajax({
+                        type:"POST",
+                         url: "/Estadistica-Finanza/Finanza/Controlador/Cargos/EliminaCargo.php",
+                        data:{id:id}
+                        }).done(function(msg){
+                        alert(msg);
+                        }); 
+                        
+                         cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Cargos/Listado_Cargos.html' );
+                         
+                         }
+    
+    
+}
+
+
 //******************Modulo Tipo Monedas**************************************
 
 function listarTipoMonedas(id){
@@ -759,7 +930,7 @@ function listarTipoMonedas(id){
                 var dato = document.getElementById(id);
                  var cuadro_editador;
               
-               cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocustm(event) "+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default' type='button'onclick="+'"'+"ModificaIngresoTipoMoneda();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";
+               cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocustm(event) "+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default btn-sm' title='Guarda los cambios' type='button'onclick="+'"'+"ModificaIngresoTipoMoneda();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";
                   
                 document.getElementById(objetivo).innerHTML=cuadro_editador;
                 $( "#editor" ).focus();
@@ -822,12 +993,19 @@ function listarTipoMonedas(id){
                                          
           }
           
+          
+ function cancelaIngresoTipoMoneda(){
+    
+  cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Monedas/Listado_Monedas.html' );
+}
+
+          
   function IngresarFilaTipoMoneda(){
         
         
         
     
-    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso'placeholder='Nombre Moneda...'/></td><td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoTipoMoneda('ingreso');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td></tr>";
+    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso'placeholder='Nombre Moneda...'/></td><td><button title='Añade un nuevo registro' class='btn btn-default btn-sm' type='button' onclick="+'"'+"validaIngresoTipoMoneda('ingreso');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>  <td><button title='Cancela Ingreso' class='btn btn-default btn-sm' type='button' onclick="+'"'+"cancelaIngresoTipoMoneda();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td></tr>";
     document.getElementById('filaIngreso').innerHTML=cuadro_editador;
     $( "#ingreso" ).focus();
     
@@ -866,6 +1044,201 @@ function listarTipoMonedas(id){
                          }
         
     }else{alert(mensaje);}
+    
+}
+
+function EliminaTipoMoneda(id){
+    
+    
+    var r=confirm('¿Desea realmente eliminar el registro '+id+'?');
+                         if (r === true){
+                             
+                            
+                       $.ajax({
+                        type:"POST",
+                         url: "/Estadistica-Finanza/Finanza/Controlador/TipoMonedas/EliminaTipoMoneda.php",
+                        data:{id:id}
+                        }).done(function(msg){
+                        alert(msg);
+                        }); 
+                        
+                         cargarPHP('#contenido', '/Estadistica-Finanza/Finanza/Vista/Monedas/Listado_Monedas.html');
+                         
+                         }
+    
+    
+}
+
+
+
+//*****************************Modulo Tipo Derecho************************************
+
+function listarTipoDerechos(id){
+    
+       $.ajax({
+                        type:"POST",
+                        url: "/Estadistica-Finanza/Finanza/Controlador/TipoDerechos/ListarTipoDerechos.php",
+                        data:{}
+                        }).done(function(msg){
+                           
+                            document.getElementById(id).innerHTML += msg;
+                       
+                        });
+    
+}
+
+
+
+  function dobleclickTDE(id,objetivo,idReg){
+       
+                 var acceso = document.getElementById('editor');  
+                 
+                 if (acceso === null){
+                     
+                     
+                var columna =  document.getElementById(id).getAttribute('name');
+                var dato = document.getElementById(id);
+                 var cuadro_editador;
+              
+               cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocustde(event) "+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default btn-sm' title='Guarda los cambios' type='button'onclick="+'"'+"ModificaIngresoTipoDerecho();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></input></input>";
+                  
+                document.getElementById(objetivo).innerHTML=cuadro_editador;
+                $( "#editor" ).focus();
+            
+                    
+           }
+                 
+           }
+        
+       function unfocustde(e){
+          
+           if (e.keyCode === 27) {
+       
+              cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Tipos_Derechos/Listado_Tipos_Derechos.html');
+        }
+    
+       
+      }
+      
+      function ModificaIngresoTipoDerecho(){
+
+                      var columna = document.getElementById('editor').getAttribute('name');
+                      var dato = document.getElementById('editor').getAttribute('placeholder').trim();
+                      var dato2 = document.getElementById('editor').value;
+                      var idReg = document.getElementById('idReg').getAttribute('name'); 
+                      
+                    
+                   
+                     if (dato2 === ""){
+                         alert('Se debe ingresar datos!');
+                     }else{
+                   if( dato === dato2){
+                       
+                       alert("Es el mismo dato! '"+dato+"'" );
+                       
+                             cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Tipos_Derechos/Listado_Tipos_Derechos.html');
+                     
+                   }
+                   
+                   else{
+                       
+                       var r=confirm('¿desea realmente modificar el registro '+ dato +' por el: '+ dato2 +'?');
+                         if (r === true){
+                             
+                            
+                       $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/TipoDerechos/ModificaRegistro.php",
+                        data:{id:idReg,col:columna,valor:dato2}
+                        }).done(function(msg){
+                        alert(msg);
+                        }); 
+                        
+                              cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Tipos_Derechos/Listado_Tipos_Derechos.html');
+                             
+                         }
+                            
+                    }     
+                   }
+                                         
+          }
+          
+ function IngresarFilaTipoDerecho(){
+        
+        
+        
+    
+    var cuadro_editador ="<tr><td></td><td><input class='form-control' id='ingreso' placeholder='Número Derecho...'/></td><td><button title='Añade un nuevo registro' class='btn btn-default btn-sm' type='button' onclick="+'"'+"validaIngresoTipoDerecho('ingreso');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>   <td><button title='Cancela Ingreso' class='btn btn-default btn-sm' type='button' onclick="+'"'+"cancelaIngresoTipoDerecho();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td></tr>";
+    
+    document.getElementById('filaIngreso').innerHTML=cuadro_editador;
+    $( "#ingreso" ).focus();
+    
+    }
+
+
+function cancelaIngresoTipoDerecho(){
+    
+       cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Tipos_Derechos/Listado_Tipos_Derechos.html' );
+}
+
+ function validaIngresoTipoDerecho(dato){
+    
+    var campo1 = document.getElementById(dato).value;
+   
+    
+    
+    var control = 0;
+    var mensaje = "";
+    if (campo1 ===""){mensaje +='Falta nombre tipo derecho!\n';control=1;}
+   
+
+    
+    if(control===0){
+        
+        
+                
+                       var r=confirm('¿Desea realmente ingresar un nuevo registro?');
+                         if (r === true){
+                             
+                            
+                       $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/TipoDerechos/IngresaTipoDerecho.php",
+                        data:{Nombre:campo1}
+                        }).done(function(msg){
+                        alert(msg);
+                        }); 
+                        
+                         cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Tipos_Derechos/Listado_Tipos_Derechos.html' );
+                             
+                         }
+        
+    }else{alert(mensaje);}
+    
+    
+    
+    
+}
+
+function EliminaTipoDerecho(id){
+    
+    
+    var r=confirm('¿Desea realmente eliminar el registro '+id+'?');
+                         if (r === true){
+                             
+                            
+                       $.ajax({
+                        type:"POST",
+                         url: "/Estadistica-Finanza/Finanza/Controlador/TipoDerechos/EliminaTipoDerecho.php",
+                        data:{id:id}
+                        }).done(function(msg){
+                        alert(msg);
+                        }); 
+                        
+                         cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Tipos_Derechos/Listado_Tipos_Derechos.html' );
+                             
+                         }
+    
     
 }
 
@@ -919,11 +1292,15 @@ function CargasSeleccion(lugar,id){
                                                   }
 
 
-//***************************Modulo Bancos ******************************************
+//***************************Modulo Transaciones Bancos ************************
 
 
 
-//***************Modulo Remesas**************************
+
+
+
+
+//***********  *************** Modulo Remesas Aduanas **************************
 function validaRegistrosAduana(){
     
     $.ajax({
@@ -963,11 +1340,10 @@ function listarRemesaAduanas(id){
 
 
 
-function IngresarFilaAduana(){
+function IngresarFilaRemesa(){
    
-   var tipoDerecho = selectTipoDerecho('ingreso3','crea'); 
+   selectTipoDerecho('ingreso3','crea'); 
    var filaIngreso ="<tr>\n\
-                     <td></td>\n\
                      <td><input class='form-control' id='ingreso' placeholder='Carpeta...'/></td> \n\
                      <td colspan='2'><input class='form-control' id='ingreso1' placeholder='Proveedor...'/></td> \n\
                      <td colspan='4'>\n\
@@ -990,10 +1366,9 @@ function IngresarFilaAduana(){
                      <td colspan='3'><input class='form-control' id='ingreso4' placeholder='Otro Cargo...'/></td>\n\
                      <td colspan='2'><input class='form-control' id='ingreso5' placeholder='Fecha...'/></td>\n\
                      <td colspan='3'><input class='form-control' id='ingreso6' placeholder='Carpeta Relacionada...'/></td>\n\
-                     <td><button class='btn btn-default' type='button' onclick="+'"'+"cancelaIngreso();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td>\n\
-                     <td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoAduana('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','seleccion','ingreso4','ingreso5','ingreso6');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></td>\n\
-                     <td colspan='11'></td>\n\
-                      </button>\n\
+                     <td><button class='btn btn-default' type='button' onclick="+'"'+"cancelaIngresoRemesa();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td>\n\
+                     <td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoRemesa('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','seleccion','ingreso4','ingreso5','ingreso6');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>\n\
+                     <td colspan='12'></td>\n\
                      </td>\n\
                      </tr>";
     document.getElementById('filaIngreso').innerHTML=filaIngreso;
@@ -1038,6 +1413,7 @@ function selectTipoDerecho(id,tipo){
                             if(msg === "0"){ 
                                 alert("No hay registros de Tipo Derecho, se debe ingresar primero al menos uno, en el modulo datos parametricos!");
                                 cargarPHP('#contenido_dinamico','/Estadistica-Finanza/Finanza/Vista/Modulo_Parametricos/Parametricos.html');
+                             //   cargarPHP( '#contenido', '/Estadistica-Finanza/Finanza/Vista/Tipos_Derechos/Listado_Tipos_Derechos.html');
                             }
                             else{
                                
@@ -1077,7 +1453,64 @@ function verificaCarpeta(carpeta){
 }
 
 
-function validaIngresoAduana(d,d1,d2,d3,d4,d5,d6,d7,d8){
+  function dobleclickRemesa(id,objetivo,idReg){
+       
+                 var acceso = document.getElementById('editor');  
+                 
+                 if (acceso === null){
+                     
+                     
+                var columna =  document.getElementById(id).getAttribute('name');
+               
+                if (columna === 'CodigoCif'){
+                    //genero la vista cif
+                    
+                     
+                    var idCif =  document.getElementById('CodigoCif_'+id.substring(4,5)).getAttribute('name');
+                  
+                      $.ajax({
+                        type:"POST",
+                            url: "/Estadistica-Finanza/Finanza/Controlador/RemesasAduanas/EditaCifs.php",
+                        data:{idCif:idCif}
+                        }).done(function(msg){
+                            
+                            
+                          document.getElementById(objetivo).innerHTML = msg; 
+                          $( "#ingreso2_1" ).focus();
+                            
+                        });
+                    
+                    
+                }else{
+                var dato = document.getElementById(id);
+                var cuadro_editador;
+                cuadro_editador  ="<input class='form-control'  onkeypress="+'"'+"unfocuRemesa(event)"+";return event.keyCode!=13;"+'"'+" name ='"+columna+"' type='text' id='editor' placeholder='"+dato.innerHTML+"'/><span id='idReg' name='"+idReg+"'></span><button class='btn btn-default btn-sm' title='Guarda los cambios' type='button'onclick="+'"'+"ModificaRemesa();"+'""'+" ><span class='glyphicon glyphicon-plus-sign'></span></button>";
+                 document.getElementById(objetivo).innerHTML=cuadro_editador;
+                $( "#editor" ).focus();
+                }
+               
+                
+            
+                    
+           }
+                 
+           }
+        
+
+
+  function unfocuRemesa(e){
+         
+           if (e.keyCode === 27) {
+              
+           cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Aduanas/Listado_Aduanas.html');
+        }
+
+  }
+  
+  
+  
+
+function validaIngresoRemesa(d,d1,d2,d3,d4,d5,d6,d7,d8){
  
    
      var campo = document.getElementById(d).value;
@@ -1133,29 +1566,16 @@ function validaIngresoAduana(d,d1,d2,d3,d4,d5,d6,d7,d8){
     
 }
 
-
-
-function sessiont(id){
-    
-        $.ajax({
-                        type:"POST",
-                            url: "/Estadistica-Finanza/Finanza/Controlador/Session/UsuarioSession.php",
-                        data:{}
-                        }).done(function(msg){
-                      
-                           document.getElementById(id).innerHTML += msg;
-                        });
-    
-    
-}
-
-function cancelaIngreso(){
+function cancelaIngresoRemesa(){
     
     
      cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Aduanas/Listado_Aduanas.html'); 
     
     
 }
+
+
+///************************Coberturas********************************************************
 
 function listarCoberturas(id){
     
@@ -1174,9 +1594,8 @@ function listarCoberturas(id){
 
 function IngresarFilaCobertura(){
        
-   var tipoDerecho = selectTipoDerecho('ingreso3','crea'); 
+   selectTipoDerecho('ingreso3','crea'); 
    var filaIngreso ="<tr>\n\
-                     <td></td>\n\
                      <td><input class='form-control' id='ingreso' placeholder='Carpeta...'/></td> \n\
                      <td colspan='2'><input class='form-control' id='ingreso1' placeholder='Proveedor...'/></td> \n\
                      <td colspan='4'>\n\
@@ -1200,9 +1619,8 @@ function IngresarFilaCobertura(){
                      <td colspan='2'><input class='form-control' id='ingreso5' placeholder='Fecha...'/></td>\n\
                      <td colspan='3'><input class='form-control' id='ingreso6' placeholder='Carpeta Relacionada...'/></td>\n\
                      <td><button class='btn btn-default' type='button' onclick="+'"'+"cancelaIngresoCobertura();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td>\n\
-                     <td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoAduana('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','seleccion','ingreso4','ingreso5','ingreso6');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></td>\n\
-                     <td colspan='11'></td>\n\
-                      </button>\n\
+                     <td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoAduana('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','seleccion','ingreso4','ingreso5','ingreso6');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'></span></button></td>\n\
+                     <td colspan='12'></td>\n\
                      </td>\n\
                      </tr>";
     document.getElementById('filaIngreso').innerHTML=filaIngreso;

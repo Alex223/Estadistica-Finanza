@@ -1,7 +1,7 @@
 <?php
 
 require_once '../../Modelo/Conexion.php';
-require_once '../../Modelo/TipoMoneda/TipoMoneda.php';
+require_once '../../Modelo/CajaSeleccion/CajaSeleccion.php';
 
 $edita_o_ingresa=$_POST["edita_o_ingresa"];
 $registro = $_POST["id"];
@@ -16,7 +16,7 @@ $TituloSelect =$_POST["TituloSelect"];
 
   $conexión = new Conexion();
   $conexión -> conectar();
-  $TM = new TipoMoneda();    
+  $selecion = new CajaSeleccion();    
   
   
   
@@ -51,20 +51,22 @@ $TituloSelect =$_POST["TituloSelect"];
                
                            if ($edita_o_ingresa == '0') {
                         
-                    $insert ="<div name='TIPO_MONEDA' id='editor' onkeypress=".'"'."unfocusb(event);return event.keyCode!=13;".'"'."> <select id='seleccion' class='selectpicker' data-style='btn-primary'>";
+                    $insert ="<div name='".$tabla."' id='editor' onkeypress=".'"'."unfocusb(event);return event.keyCode!=13;".'"'."> <select id='seleccion' class='selectpicker' data-style='btn-primary'>";
                        
                      while ($fila1 = mysql_fetch_assoc($resultado1)) {
                                 
                                     
-                                    $TM->setId($fila1[$tipoId]);
-                                    $TM->setNombre($fila1[$tipoTitulo]);
+                                    $selecion->setIdSelect($fila1[$tipoId]);
+                                    $selecion->setNombreSelect($fila1[$tipoTitulo]);
                                     
-                                   if($TituloSelect == $TM->getNombre()){
-                                       
-                                       $insert  =$insert."<option id='seleccionado' selected value='".$TM->getId()."'>".$TM->getNombre()."</option>";
+                                   
+                                    
+                                   if(strcmp($TituloSelect , $selecion->getNombreSelect()) == 0){
+                                    
+                                       $insert  =$insert."<option id='seleccionado' selected value='".$selecion->getIdSelect()."'>".$selecion->getNombreSelect()."</option>";
                                    }else{ 
                                     
-                                   $insert  =$insert."<option value='".$TM->getId()."'>".$TM->getNombre()."</option>"; }   
+                                   $insert  =$insert."<option value='".$selecion->getIdSelect()."'>".$selecion->getNombreSelect()."</option>"; }   
                                     
                                 }
   
@@ -72,26 +74,27 @@ $TituloSelect =$_POST["TituloSelect"];
                     
                      
                       $insert = $insert."<span id='idReg' name='".$registro."'></span>
-                        <button class='btn btn-default btn-sm' type='button' onclick=".'"'."ModificaIngresoBanco();".'""'." ><span class='glyphicon glyphicon-plus-sign'></span></button>";  
+                        <button class='btn btn-default btn-sm' title='Guarda los cambios'  type='button' onclick=".'"'."ModificaIngreso".$tabla."();".'"'." ><span class='glyphicon glyphicon-plus-sign'></span></button>";  
                     
                            }
                            
                            else{
-                                $insert ="<div name='TIPO_MONEDA' id='editor'> <select id='seleccion' class='selectpicker' data-style='btn-primary'>";
+                                $insert ="<div name='".$tabla."' id='editor'> <select id='seleccion' class='selectpicker' data-style='btn-primary'>";
                           
                                 
                                  while ($fila1 = mysql_fetch_assoc($resultado1)) {
                                 
                                     
-                                    $TM->setId($fila1[$tipoId]);
-                                    $TM->setNombre($fila1[$tipoTitulo]);
+                                    $selecion->setIdSelect($fila1[$tipoId]);
+                                    $selecion->setNombreSelect($fila1[$tipoTitulo]);
                                     
-                                   if( $TM->getId() == 1 ){
+                                    
+                                   if( $selecion->getIdSelect() == 1 ){
                                        
-                                       $insert  =$insert."<option id='seleccionado' selected value='".$TM->getId()."'>".$TM->getNombre()."</option>";
+                                       $insert  =$insert."<option id='seleccionado' selected value='".$selecion->getIdSelect()."'>".$selecion->getNombreSelect()."</option>";
                                    }else{ 
                                     
-                                   $insert  =$insert."<option value='".$TM->getId()."'>".$TM->getNombre()."</option>"; }   
+                                   $insert  =$insert."<option value='".$selecion->getIdSelect()."'>".$selecion->getNombreSelect()."</option>"; }   
                                     
                                 }
   

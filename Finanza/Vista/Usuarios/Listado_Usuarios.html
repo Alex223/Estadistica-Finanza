@@ -18,8 +18,31 @@
               return false;
             }
            }
-           addEvent(window, 'load', listarUsuarios('contenido_tabla'));
-           addEvent(window, 'load', paginacion('usuario','paginacion' ));
+           addEvent(window, 'load', listarUsuarios('contenido_tabla',1));
+           //addEvent(window, 'load', paginacion('usuario','paginacion' ));
+           
+           
+           function habilitar(){
+              
+             
+            var estado = document.getElementById('habilitador_1').getAttribute('name');
+              
+           
+        if(estado === 'activado') {
+               
+              listarUsuarios('contenido_tabla',1);
+               document.getElementById('habilitador_1').setAttribute('name','desactivado');
+               document.getElementById('habilitador_1').innerHTML= 'Usuarios Habilitados';
+             
+      }
+       else{
+            listarUsuarios('contenido_tabla',0);
+              
+              document.getElementById('habilitador_1').setAttribute('name','activado');
+              document.getElementById('habilitador_1').innerHTML = 'Usuarios Deshabilitados';
+         }
+              
+           }
         </script>
         
     </head>
@@ -42,7 +65,7 @@
                     
             
                  </div>
-                  
+                  <div align="right"><button id="habilitador_1" name="desactivado" type='button' onclick="habilitar();" class='btn btn-default btn-sm' title='Vista usuarios deshabilitados' data-toggle='button'> Usuarios Habilitados </button></div>
                   <h2 id='paginacion'></h2>
         
          

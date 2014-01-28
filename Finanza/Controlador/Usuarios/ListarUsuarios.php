@@ -5,7 +5,7 @@
                      require_once '../../Modelo/Conexion.php';
                      require_once '../Cargos/Seleccion_Cargo.php';
 
-
+                     $estado = $_POST["estado"]; 
 
 
                         $conexión = new Conexion();
@@ -13,10 +13,10 @@
                  
                  
                  
-                     echo("   <table class='table table-striped'> 
+                     echo("   <table class='table table-striped' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'> 
                           
                       <tr>
-                          <td><b> ID</b> </td><td><b>Rut</b></td><td><b> Primer Nombre </b></td><td><b> Segundo Nombre </b></td><td><b> Apellido Paterno </b></td><td><b> Apellido Materno </b></td><td><b> Nick </b></td><td><b> Contraseña </b></td><td><b> Cargo </b></td><td><b> </b> </td>
+                          <td><b> ID</b> </td><td><b>Rut</b></td><td><b> Primer Nombre </b></td><td><b> Segundo Nombre </b></td><td><b> Apellido Paterno </b></td><td><b> Apellido Materno </b></td><td><b> Nick </b></td><td><b> Contraseña </b></td><td><b> Cargo </b></td><td colspan='2'><b> </b> </td>
                           
                       </tr>");
                                          
@@ -31,9 +31,11 @@
                             echo "No ha sido posible seleccionar la BD: " . mysql_error();
                             exit;
                         }
-
-                        $sql1 = "SELECT * FROM usuario WHERE ESTADO=1";
-                     
+                        
+                        $sql1="";
+                       if ($estado == 1){ $sql1 = "SELECT * FROM usuario WHERE ESTADO=1";}
+                       else{  $sql1 = "SELECT * FROM usuario WHERE ESTADO=0";}
+                       
                         
                         $resultado1 = mysql_query($sql1);
                        
@@ -104,21 +106,33 @@
                                 <td><div onkeypress=".'"'."unfocus(event);".'"'." id='id13_".$indice."'><span name='USER_LOGIN' id='id14_".$indice."' ondblclick=" .'"'."dobleclick('id14_".$indice."','id13_".$indice."','".$fila1['ID_USUARIO']."')".';"'.">".$fila1['USER_LOGIN']."</span></div> </td>
                                 <td><div onkeypress=".'"'."unfocus(event);".'"'." id='id15_".$indice."'><span name='PASSWORD' id='id16_".$indice."' ondblclick=" .'"'."dobleclick('id16_".$indice."','id15_".$indice."','".$fila1['ID_USUARIO']."')".';"'."> ****** </span></div> </td>
                                 <td><div onkeypress=".'"'."unfocus(event);".'"'." id='id17_".$indice."'><span name='Cargo' id='id18_".$indice."' ondblclick=" .'"'."dobleclick('id18_".$indice."','id17_".$indice."','".$fila1['ID_USUARIO']."')".';"'.">".$idCargo." </span></div></td>
-                                <td><button class='btn btn-default' type='button' onclick=".'"'."eliminar(".$fila1['ID_USUARIO'].");".'""'."><span class='glyphicon glyphicon-remove-sign'></span></button></td>
-                                </tr> 
+                                    
 
-"); 
+");
+                                if ($fila1['ID_USUARIO'] != 1 && $estado != 0 ){
+
+                            echo( " <td colspan='2'><button title='Deshabilita el registro : ".$fila1['ID_USUARIO']."' class='btn btn-default btn-sm' type='button' onclick=".'"'."eliminar(".$fila1['ID_USUARIO'].");".'""'."><span class='glyphicon glyphicon glyphicon-folder-close'></span></button></td>");
+                              
+                                }
+                                else{
+                                    if ($estado == 0){ echo("<td colspan='2'><button title='Habilita el registro : ".$fila1['ID_USUARIO']."' class='btn btn-default btn-sm' type='button' onclick=".'"'."habilitarUsuario(".$fila1['ID_USUARIO'].");".'""'."><span class='glyphicon glyphicon glyphicon-folder-open'></span></button></td>");
+                                                       
+                                    }
+                                    else{ echo("<td colspan='2'></td>");}
+                                }
+echo("</tr> "); 
                                 
                                 $indice=$indice + 1;
                                 }
                                 
                              
-                     
+                     if($estado != 0){
                        
                           echo("<tr id='filaIngreso'>
-                                         <td><button class='btn btn-default' type='button'onclick=".'"'."IngresarFila();".'""'." ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='9'></td>
+                                     
+                                    <td><button title='Crea un registro' class='btn btn-default btn-sm' type='button'onclick=".'"'."IngresarFila();".'""'." ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='9'></td>
                                     </tr>");
-                                
+                     }          
                                 echo("</table>");
                        ?>
                    

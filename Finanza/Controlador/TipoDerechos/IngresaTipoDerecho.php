@@ -1,11 +1,24 @@
 <?php
-include_once '../../Modelo/Conexion.php';
-   $id=$_POST['id'];
+
+
+require_once '../../Modelo/TipoDerecho/TipoDerecho.php';
+require_once '../../Modelo/Conexion.php';
+
+
+
+
+$conexión = new Conexion();
+$conexión -> conectar();
+
+
+$TipoD= new TipoDerecho();
+
+$TipoD->setNombreTipoDerecho($_POST['Nombre']);
+
+ 
    
-   
-                   $conexión = new Conexion();
-                   $conexión -> conectar();
-                      
+                   
+                    
 
                         if (!$conexión) {
                             echo "No pudo conectarse a la BD: " . mysql_error();
@@ -19,8 +32,8 @@ include_once '../../Modelo/Conexion.php';
 
                     
                         
-                        
-                         $sql1 = "update usuario set ESTADO=0 where ID_USUARIO=".$id;
+                        $sql1 = "insert into tipo_derechos(NOMBRETDE) values('".$TipoD->getNombreTipoDerecho()."')";
+                   
                         
                         $resultado1 = mysql_query($sql1);
 
@@ -30,9 +43,9 @@ include_once '../../Modelo/Conexion.php';
                         }
 
                        if ($resultado1) {
-                            echo "El usuario ha sido Deshabilitado!";
+                            echo "Registro Creado!";
                             exit;
                         }
-            
-       
 ?>
+
+

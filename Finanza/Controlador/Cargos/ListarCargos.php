@@ -15,7 +15,7 @@
                      echo("   <table class='table table-striped'> 
                           
                       <tr>
-                          <td align='center' ><b> ID</b> </td><td align='center'><b> Titulo </b></td><td align='center'><b> Descripcion </b></td><td><td>
+                          <td align='center' ><b> ID</b> </td><td align='center'><b> Titulo </b></td><td align='center'><b> Descripcion </b></td><td colspan='2'></td>
                           
                       </tr>");
                                          
@@ -45,7 +45,7 @@
                         if (mysql_num_rows($resultado1) == 0) {
                            
                            echo("<tr id='filaIngreso'>
-                                         <td><button class='btn btn-sm btn-default btn-block' type='button'onclick=".'"'."IngresarFilaCargo();".'""'." ><span class='glyphicon glyphicon-plus-sign'> Agregar </span></button></td><td colspan='4'></td>
+                                         <td><button class='btn btn-sm btn-default' title='Crea un registro' type='button'onclick=".'"'."IngresarFilaCargo();".'""'." ><span class='glyphicon glyphicon-plus-sign'> Agregar </span></button></td><td colspan='5'></td>
                                     </tr>");
                                 
                                 echo("</table>"); 
@@ -72,10 +72,23 @@
                                 <td align='center'><div id_".$indice."'> <a  href='#'><span id='id2_".$indice."' >".$cargo->getId()."</span></a></div></td>
                                 <td align='center'><div id='id3_".$indice."'><span name='Titulo' id='id4_".$indice."'  ondblclick=" .'"'."dobleclickC('id4_".$indice."','id3_".$indice."','".$cargo->getId()."')".';"'.">".$cargo->getCargo()."</div></td>
                                 <td align='center'><div id='id5_".$indice."'><span name='Descripcion' id='id6_".$indice."' ondblclick=" .'"'."dobleclickC('id6_".$indice."','id5_".$indice."','".$cargo->getId()."')".';"'.">".$cargo->getDescripcion()."</span></div> </td>
-                                <td><td>
-                                 </tr> 
+                               ");
+                                 
+                                 
+                                if ($indice != 0){
+                                    
+                                    echo (" <td colspan='2' align='center'><button title='Elimina el registro : ".$cargo->getId()."' class='btn btn-default  btn-sm' onclick='EliminaCargo(".$cargo->getId().");' type='button'><span class='glyphicon glyphicon glyphicon-trash'></span></button></td>");
+                                    
+                                }
+                                else{
+                                    echo ("<td colspan='2'></td>");
+                                    
+                                }
+                                 
+                               echo("</tr>");  
+                                  
 
-"); 
+
                                 
                                 $indice=$indice + 1;
                                 }
@@ -88,7 +101,7 @@
                      
                        
                           echo("<tr id='filaIngreso'>
-                                         <td><button class='btn btn-sm btn-default btn-block' type='button'onclick=".'"'."IngresarFilaCargo();".'""'." ><span class='glyphicon glyphicon-plus-sign'> Agregar </span></button></td><td colspan='4'></td>
+                                         <td><button class='btn btn-sm btn-default' title='Crea un registro' type='button'onclick=".'"'."IngresarFilaCargo();".'""'." ><span class='glyphicon glyphicon-plus-sign'> Agregar </span></button></td><td colspan='5'></td>
                                     </tr>");
                                 
                                 echo("</table>");

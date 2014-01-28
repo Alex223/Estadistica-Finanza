@@ -1,10 +1,15 @@
 <?php
-include_once '../../Modelo/Conexion.php';
-   $id=$_POST['id'];
-   
-   
-                   $conexión = new Conexion();
-                   $conexión -> conectar();
+require_once '../../Modelo/Conexion.php';
+
+            $id=$_POST['id'];
+            $col =$_POST['col'];
+            $valor =$_POST['valor'];
+            
+       
+
+                        $conexión = new Conexion();
+                        $conexión -> conectar();            
+                                   
                       
 
                         if (!$conexión) {
@@ -17,22 +22,26 @@ include_once '../../Modelo/Conexion.php';
                             exit;
                         }
 
-                    
+                       
                         
-                        
-                         $sql1 = "update usuario set ESTADO=0 where ID_USUARIO=".$id;
+                        $sql1 = "update tipo_derechos set ".$col."='".$valor."' where ID_TIPO_DERECHOS=".$id;
+                   
                         
                         $resultado1 = mysql_query($sql1);
-
+  
                         if (!$resultado1) {
                             echo "No se pudo ejecutar con exito la consulta ($sql1) en la BD: " . mysql_error();
                             exit;
                         }
-
-                       if ($resultado1) {
-                            echo "El usuario ha sido Deshabilitado!";
+                         
+                        if ($resultado1) {
+                            echo "Registro Modificado";
                             exit;
                         }
+                      
             
        
+        
+
+
 ?>

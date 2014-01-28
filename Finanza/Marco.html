@@ -39,7 +39,7 @@
     <script src="bootstrap/js/dropdown.js" ></script>
     <script src="bootstrap/js/Funciones_Ajax_Controlador.js" ></script>
    
-    
+    <script>function estatico(){}</script>
     
    
     <style>
@@ -79,7 +79,7 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
           </button>
-          <a class="navbar-brand" href="#" onclick="cargarPHP('#contenido_dinamico','/Estadistica-Finanza/Finanza/Vista/Home.html');" >Finanza Estadistico</a>
+            <a class="navbar-brand" href="#" onclick="cargarPHP('#contenido_dinamico','/Estadistica-Finanza/Finanza/Vista/Home.html');" style="color:black" >Finanza Estadistico</a>
          
         </div>
         <div class="navbar-collapse collapse" >
@@ -89,13 +89,13 @@
                      <!-- usuario--> 
                 
                      <li class="dropdown" >
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario<b class="caret"></b></a>
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Usuario<b class="caret"></b></a>
                        <ul class="dropdown-menu" >
-                        <li><a href="#" onclick="exit(0);" >Cambiar de Usuario</a></li>
+                        <li><a href="javascript:estatico();"  onclick="exit(0);" >Cambiar de Usuario</a></li>
                         <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Usuarios/Cambia_Clave.html');">Cambiar contraseña</a></li>
                        <!-- <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Login.html');">Cerrar sesi&oacute;n</a></li>-->
                         <li class="divider"></li>
-                        <li><a href="#" onclick="exit(1);">Salir</a></li>
+                        <li><a href="javascript:estatico();" onclick="exit(1);">Salir</a></li>
                  
                       </ul>
                     </li>
@@ -103,7 +103,7 @@
                      <!---->
                      
                     <li class="dropdown" >
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modulos <b class="caret"></b></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Modulos <b class="caret"></b></a>
                       <ul class="dropdown-menu" >
                         <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Modulo_Bancos/Listados_Cuentas_Bancos.html');">Trasacciones Bancos</a></li>
                         <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Datos_Cabranza/Lista_Datos_Cabranza.html');">Documentos por cobrar</a></li>
@@ -121,7 +121,7 @@
                      <!--Adminitración-->
             
                     <li class="dropdown" >
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administraci&oacute;n <b class="caret"></b></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Administraci&oacute;n <b class="caret"></b></a>
                       <ul class="dropdown-menu"  >
                           
                           
@@ -143,7 +143,7 @@
                     <!-- Sistema -->
                     
                     <li class="dropdown" >
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sistema <b class="caret"></b></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Sistema <b class="caret"></b></a>
                       <ul class="dropdown-menu" >
                         <!--<li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Sistema/Ayuda.html');">Ayuda</a></li>
                         <li class="divider"></li>-->
@@ -153,10 +153,10 @@
                     </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li class="navbar-nav" style="background:#639BF8; color: black"><a href="#" ><i class="glyphicon glyphicon-user"></i></a></li>
-              <li class="navbar-nav" style="background:#639BF8; color: black"><a href="#" ><div id="usuarioLogin"></div></a></li>
-              <li id="boton_primario" class="navbar-nav"><a href="#" style="background:#639BF8;color: black" onclick="exit(1);">Salir <i class="glyphicon glyphicon-log-out"></i></a></li>
-              <li><a href="#" style="background:#639BF8;color: black" >Subir <i class="glyphicon glyphicon-circle-arrow-up"></i></a></li>
+              <li class="navbar-nav" style="background:#639BF8"><a href="javascript:estatico();" style="color: black"><i class="glyphicon glyphicon-user"></i></a></li>
+              <li class="navbar-nav" style="background:#639BF8"><a href="javascript:estatico();" style="color: black"><div id="usuarioLogin"></div></a></li>
+              <li id="boton_primario" class="navbar-nav"><a href="javascript:estatico();"  style="background:#639BF8;color: black" onclick="exit(1);">Salir <i class="glyphicon glyphicon-log-out"></i></a></li>
+              <li><a href="#"  style="background:#639BF8;color: black" >Subir <i class="glyphicon glyphicon-circle-arrow-up"></i></a></li>
           </ul>
         </div>
       </div>

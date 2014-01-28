@@ -27,7 +27,13 @@ require_once '../../Modelo/Conexion.php';
                          
                         }else{
                         
-                        $sql1 = "update usuario set ".$col."='".$valor."' where ID_USUARIO=".$id;
+                            
+                            if($col == 'Cargos'){
+                                
+                                $sql1 = "update Usuario_vs_Cargos set Cargos_idCargos='".$valor."' where usuario_ID_USUARIO=".$id;
+                                
+                            }
+                            else{$sql1 = "update usuario set ".$col."='".$valor."' where ID_USUARIO=".$id;}
                    
                         }
                         $resultado1 = mysql_query($sql1);

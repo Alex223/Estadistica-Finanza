@@ -83,7 +83,7 @@ $TABLA1 = "<table class='table table-striped' style='border-width:1px;border-sty
                                 </tr> 
                                 <!--Segunda Fila Tabla -->
                                  <tr>
-                                     <td align='center' ></td>
+                                     
                                      <td align='center' style='background-color: darkgray'>Carperta</td>
                                      <td align='center' style='background-color: darkgray'>Proveedor</td> 
                                      <td align='center' style='background-color: darkgray'>Cif </td>
@@ -108,7 +108,7 @@ $TABLA1 = "<table class='table table-striped' style='border-width:1px;border-sty
                                      <td align='center' style='background-color: darkgray'>Octubre</td>
                                      <td align='center' style='background-color: darkgray'>Noviembre</td>
                                      <td align='center' style='background-color: darkgray'>Diciembre</td>
-                                     <td align='center' ></td>
+                                     <td colspan='2' align='center' ></td>
                                  </tr> ";
 
 
@@ -132,7 +132,7 @@ if (mysql_num_rows($resultadoZ) == 0) {
     $TABLA1 .="
                                  <tr>
                                    
-                                     <td></td>   
+                                      
                                      <td style='background-color: darkgray'>Total Internación</td> 
                                      <td style='background-color: darkgray' colspan='4'></td> 
                                      <td style='background-color: darkgray'>0</td>
@@ -154,12 +154,12 @@ if (mysql_num_rows($resultadoZ) == 0) {
                                      <td style='background-color: darkgray'>0</td>
                                      <td style='background-color: darkgray'>0</td>
                                      <td style='background-color: darkgray'>0</td>
-                                     <td></td> 
+                                     <td colspan='2'></td> 
                                </tr>
                                
 
         <tr>
-                                     <td></td> 
+                                     
                                      <td>Comprobación IVA</td>
                                      <td colspan='4'></td> 
                                      <td style='color:red'>0</td>
@@ -168,14 +168,14 @@ if (mysql_num_rows($resultadoZ) == 0) {
                                      <td></td>
                                      <td style='color:red'>0</td>
                                      <td style='background-color: darkgray; color:red'>0</td>
-                                     <td colspan='14'></td>  
+                                     <td colspan='15'></td>  
                                </tr>
 
         <tr>
                                    
-                                     <td colspan='11'></td>
+                                     <td colspan='10'></td>
                                      <td style='background-color: darkgray'>0</td>
-                                     <td colspan='14'></td>
+                                     <td colspan='15'></td>
                                     
                                      
                                </tr>
@@ -184,15 +184,15 @@ if (mysql_num_rows($resultadoZ) == 0) {
 
                                 <tr>
                                     
-                                     <td colspan='11'></td>
+                                     <td colspan='10'></td>
                                      <td style='background-color: darkgray; color:red'> 0 </td>
-                                     <td colspan='14'></td>
+                                     <td colspan='15'></td>
                                     
                                </tr>
       
                           <tr id='filaIngreso'>
-                          <td></td> 
-                         <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaAduana();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='24 '></td>
+                          
+                         <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaAduana();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='25 '></td>
                          </tr>";
     echo ($TABLA1);
     exit;
@@ -216,13 +216,13 @@ if (mysql_num_rows($resultadoZ) == 0) {
         $TotalMesOctubre=0;
         $TotalMesNoviembre=0;
         $TotalMesDiciembre=0.0;
-    
+        $indice = 0;
     
     while ($filaZ = mysql_fetch_assoc($resultadoZ)) {
 
         
         
-        
+        $remesa1->setId($filaZ["ID_REMESAS_ADUANA"]);  
         $remesa1->setNumeroCarpeta($filaZ["NUMEROCARPETARA"]);
         $remesa1->setProveedor($filaZ["PROVEEDORRA"]);
         $remesa1->setIdCarga($filaZ["tipo_carga_ID_CARGA"]);
@@ -295,7 +295,7 @@ if (mysql_num_rows($resultadoZ) == 0) {
         
          
         
-        //pasear datos por meses
+        //parsear datos por meses
         
         
         
@@ -385,17 +385,17 @@ if (mysql_num_rows($resultadoZ) == 0) {
     // para un posterior analisis
     // <td align='center' ><button class='btn btn-default' type='button' onclick=".'"'."IngresoCobertura();".'"'." ><span class='glyphicon glyphicon-chevron-right'></span></button></td> 
         $TABLA1 .="<tr>
-                                     <td align='center' ></td>
-                                     <td align='center' >" . $remesa1->getNumeroCarpeta() . "</td>
-                                     <td align='center' >" . $remesa1->getProveedor() . "</td> 
-                                     <td align='center' >" .  number_format($CostoCif , 2, ',','.') . "</td>
-                                     <td align='center' >" . $tipoDerecho->getNombreTipoDerecho() . " </td>
-                                     <td align='center' >" . number_format($Costo6 , 2, ',','.') . "</td>
-                                     <td align='center' >" .number_format($Costo19 , 2, ',','.')  . "</td>
-                                     <td align='center' >" . number_format($TotalCosto , 2, ',','.') . "</td>
-                                     <td align='center' > " . number_format($Costo030 , 2, ',','.') . "</td> 
-                                     <td align='center' >".number_format($Costo_Dolar , 2, ',','.')."</td>
-                                     <td align='center' style='background-color: darkgray'>".number_format($carOtro , 2, ',','.')."</td>
+                                     
+                                     <td align='center' ><div id='id_".$indice."'><span name='NUMEROCARPETARA' id='id2_".$indice."' ondblclick=" .'"'."dobleclickRemesa('id2_".$indice."','id_".$indice."','".$remesa1->getId()."')".';"'.">". $remesa1->getNumeroCarpeta() ."</span></div></td>
+                                     <td align='center' ><div id='id3_".$indice."'><span name='PROVEEDORRA' id='id4_".$indice."' ondblclick=" .'"'."dobleclickRemesa('id4_".$indice."','id3_".$indice."','".$remesa1->getId()."')".';"'.">".$remesa1->getProveedor()."</span></div></td> 
+                                     <td align='center' ><div id='id5_".$indice."'><span name='CodigoCif' id='id6_".$indice."' ondblclick=" .'"'."dobleclickRemesa('id6_".$indice."','id5_".$indice."','".$remesa1->getId()."')".';"'.">".number_format($CostoCif , 2, ',','.') ."</span></div><div id='CodigoCif_".$indice."' name='".$remesa1->getIdCargoCif()."'></div></td>
+                                     <td align='center' ><div id='id7_".$indice."'><span name='tipo_derechos_ID_TIPO_DERECHOS' id='id8_".$indice."' ondblclick=" .'"'."dobleclickRemesa('id8_".$indice."','id7_".$indice."','".$remesa1->getId()."')".';"'.">".$tipoDerecho->getNombreTipoDerecho() ."</span></div></td>
+                                     <td align='center' style='background-color: gainsboro' >".number_format($Costo6 , 2, ',','.') . "</td>
+                                     <td align='center' style='background-color: gainsboro' >".number_format($Costo19 , 2, ',','.')  . "</td>
+                                     <td align='center' style='background-color: gainsboro' >".number_format($TotalCosto , 2, ',','.') . "</td>
+                                     <td align='center' style='background-color: gainsboro' > ".number_format($Costo030 , 2, ',','.') . "</td> 
+                                     <td align='center' style='background-color: gainsboro' >".number_format($Costo_Dolar , 2, ',','.')."</td>
+                                     <td align='center' >".number_format($carOtro , 2, ',','.')."</td>
                                      <td align='center' style='background-color: yellow'> ".number_format($TotalRemesa , 2, ',','.')."</td>
                                      <td align='center' >".$remesa1->getFechare()."</td>
                                      <td align='center' style='background-color: darkgray'>".number_format($MesEnero , 2, ',','.')."</td>
@@ -410,10 +410,11 @@ if (mysql_num_rows($resultadoZ) == 0) {
                                      <td align='center' style='background-color: darkgray'>".number_format($MesOctubre , 2, ',','.')."</td>
                                      <td align='center' style='background-color: darkgray'>".number_format($MesNoviembre , 2, ',','.')."</td>
                                      <td align='center' style='background-color: darkgray'>".number_format($MesDiciembre , 2, ',','.')."</td>
-                                     <td align='center' ><button class='btn btn-default  btn-sm'  type='button' onclick=".'"'."EliminaRemesa();".'"'." ><span class='glyphicon glyphicon-minus-sign'></span></button></td> 
+                                     <td colspan='2' align='center' ><button class='btn btn-default  btn-sm'  type='button' onclick=".'"'."EliminaRemesa();".'"'." ><span class='glyphicon glyphicon-minus-sign'></span></button></td> 
                                   
 
                                 </tr> ";
+        $indice ++;
     }
 }
 
@@ -431,7 +432,7 @@ if (mysql_num_rows($resultadoZ) == 0) {
 //Final
 $TABLA1 .="           <tr>
                                    
-                                     <td></td>
+                                
                                      <td style='background-color: darkgray'>Total Internación</td> 
                                      <td style='background-color: darkgray' colspan='4'></td> 
                                      <td style='background-color: darkgray'>".number_format( $TotalCosto19 , 2, ',','.')." </td>
@@ -453,13 +454,13 @@ $TABLA1 .="           <tr>
                                      <td style='background-color: darkgray'>".number_format($TotalMesOctubre , 2, ',','.')."</td>
                                      <td style='background-color: darkgray'>".number_format($TotalMesNoviembre , 2, ',','.')."</td>
                                      <td style='background-color: darkgray'>". number_format($TotalMesDiciembre , 2, ',','.')."</td>
-                                     <td></td>    
+                                     <td colspan='2'></td>    
                                          
                                </tr>
                                
 
         <tr>
-                                     <td></td>
+                                     
                                      <td>Comprobación IVA</td>
                                      <td colspan='4'></td> 
                                      <td style='color:red'>".number_format( $TotalCosto19* $dolar_aduna , 2, ',','.')."</td>
@@ -468,14 +469,14 @@ $TABLA1 .="           <tr>
                                      <td></td>
                                      <td style='color:red'>".number_format( (($TotalcarOtro/1.19)-$TotalcarOtro)*-1 , 2, ',','.')."</td>
                                      <td style='background-color: darkgray; color:red'>".number_format($TotalCuadraturaIzquierda   , 2, ',','.')."</td>
-                                     <td colspan='14'></td>  
+                                     <td colspan='15'></td>  
                                </tr>
 
         <tr>
                                    
-                                     <td colspan='11'></td>
+                                     <td colspan='10'></td>
                                      <td style='background-color: darkgray'>".number_format( $TotalCuadraturaDerecha , 2, ',','.')." </td>
-                                     <td colspan='14'></td>
+                                     <td colspan='15'></td>
                                     
                                      
                                </tr>
@@ -484,14 +485,14 @@ $TABLA1 .="           <tr>
 
                                 <tr>
                                     
-                                     <td colspan='11'></td>
+                                     <td colspan='10'></td>
                                         <td style='background-color: darkgray; color:red'> ".number_format( $CuadraturaFinal , 2, ',','.')." </td>
                                      <td colspan='14'></td>
                                     
                                </tr>
                           <tr id='filaIngreso'>
-                          <td></td>
-                            <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaAduana();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='24 '></td>
+                         
+                            <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaRemesa();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='25'></td>
                          </tr>
 </table>
       ";

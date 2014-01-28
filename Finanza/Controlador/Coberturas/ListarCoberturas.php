@@ -260,7 +260,7 @@ else{
         
         
    $tablaCobertura .= "
-                                     <td  align='center' style='background-color: darkgray'>".."</td> 
+                                     <td  align='center' style='background-color: darkgray'></td> 
                                      <td  align='center' style='background-color: darkgray'>Carpeta</td>
                                      <td  align='left' style='background-color: darkgray' colspan='2'>Totales $</td>
                                      <td  align='center' style='background-color: darkgray' colspan='3' ></td> 

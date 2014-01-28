@@ -17,7 +17,7 @@
                      echo("   <table class='table table-striped'> 
                           
                       <tr>
-                          <td align='center' ><b> ID</b> </td><td align='center'><b> Nombre Banco </b></td><td align='center'><b> Número de Cuenta </b></td><td align='center'><b> Saldo </b></td><td align='center'><b> Tipo Moneda </b></td><td><td>
+                          <td align='center' ><b> ID</b> </td><td align='center'><b> Nombre Banco </b></td><td align='center'><b> Número de Cuenta </b></td><td align='center'><b> Saldo </b></td><td align='center'><b> Tipo Moneda </b></td><td colspan='2'></td>
                           
                       </tr>");
                                          
@@ -58,7 +58,7 @@
                         $indice=0;
                                 while ($fila1 = mysql_fetch_assoc($resultado1)) {
                                     
-                                   $banco->setIdTipoMoneda($fila1["ID_BANCO"]); 
+                                   $banco->setId($fila1["ID_BANCO"]); 
                                    $banco->setNombre($fila1["NOMBREBA"]);
                                    $banco->setNumeroCuenta($fila1["NUMEROCUENTABA"]);
                                    $banco->setSaldo($fila1["SALDOBA"]);
@@ -82,12 +82,12 @@
                                 echo("
                             
                                 <tr>
-                                <td align='center'><div id_".$indice."'> <a  href='#'><span id='id2_".$indice."' >".$banco->getIdTipoMoneda()."</span></a></div></td>
-                                <td align='center'><div id='id3_".$indice."'><span name='NOMBREBA' id='id4_".$indice."'  ondblclick=" .'"'."dobleclickB('id4_".$indice."','id3_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$banco->getNombre()."</div></td>
-                                <td align='center'><div id='id5_".$indice."'><span name='NUMEROCUENTABA' id='id6_".$indice."' ondblclick=" .'"'."dobleclickB('id6_".$indice."','id5_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$banco->getNumeroCuenta()."</span></div> </td>
-                                <td align='center'><div id='id7_".$indice."'><span name='SALDOBA' id='id8_".$indice."' ondblclick=" .'"'."dobleclickB('id8_".$indice."','id7_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">". number_format($banco->getSaldo(), 2, ',','.')."</span></div></td>    
-                                <td align='center'><div id='id9_".$indice."'><span name='TIPO_MONEDA' id='id10_".$indice."' ondblclick=" .'"'."dobleclickB('id10_".$indice."','id9_".$indice."','".$banco->getIdTipoMoneda()."')".';"'.">".$ID_NOM_MON."</span></div> </td>
-                                <td><td>
+                                <td align='center'><div id_".$indice."'> <a  href='#'><span id='id2_".$indice."' >".$banco->getId()."</span></a></div></td>
+                                <td align='center'><div id='id3_".$indice."'><span name='NOMBREBA' id='id4_".$indice."'  ondblclick=" .'"'."dobleclickB('id4_".$indice."','id3_".$indice."','".$banco->getId()."')".';"'.">".$banco->getNombre()."</div></td>
+                                <td align='center'><div id='id5_".$indice."'><span name='NUMEROCUENTABA' id='id6_".$indice."' ondblclick=" .'"'."dobleclickB('id6_".$indice."','id5_".$indice."','".$banco->getId()."')".';"'.">".$banco->getNumeroCuenta()."</span></div> </td>
+                                <td align='center'><div id='id7_".$indice."'><span name='SALDOBA' id='id8_".$indice."' ondblclick=" .'"'."dobleclickB('id8_".$indice."','id7_".$indice."','".$banco->getId()."')".';"'.">". number_format($banco->getSaldo(), 2, ',','.')."</span></div></td>    
+                                <td align='center'><div id='id9_".$indice."'><span name='TIPO_MONEDA' id='id10_".$indice."' ondblclick=" .'"'."dobleclickB('id10_".$indice."','id9_".$indice."','".$banco->getId()."')".';"'.">".$ID_NOM_MON."</span></div> </td>
+                                <td colspan='2' align='center'><button title='Elimina el registro : ".$banco->getId()."' class='btn btn-default  btn-sm' onclick='EliminaBanco(".$banco->getId().");' type='button'><span class='glyphicon glyphicon glyphicon-trash'></span></button></td>
                                 </tr> 
 
 "); 
@@ -103,7 +103,7 @@
                      
                        
                           echo("<tr id='filaIngreso'>
-                                         <td><button class='btn btn-sm btn-default btn-block' type='button'onclick=".'"'."IngresarFilaBanco();".'""'." ><span class='glyphicon glyphicon-plus-sign'> Agregar </span></button></td><td colspan='6'></td>
+                                         <td><button class='btn btn-sm btn-default' title='Crea un registro' type='button'onclick=".'"'."IngresarFilaBanco();".'""'." ><span class='glyphicon glyphicon-plus-sign'> Agregar </span></button></td><td colspan='7'></td>
                                     </tr>");
                                 
                                 echo("</table>");

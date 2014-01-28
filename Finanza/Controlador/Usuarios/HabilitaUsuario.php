@@ -20,7 +20,7 @@ include_once '../../Modelo/Conexion.php';
                     
                         
                         
-                         $sql1 = "update usuario set ESTADO=0 where ID_USUARIO=".$id;
+                         $sql1 = "update usuario set ESTADO=1 where ID_USUARIO=".$id;
                         
                         $resultado1 = mysql_query($sql1);
 
@@ -30,7 +30,7 @@ include_once '../../Modelo/Conexion.php';
                         }
 
                        if ($resultado1) {
-                            echo "El usuario ha sido Deshabilitado!";
+                            echo "El usuario ha sido Habilitado!";
                             exit;
                         }
             
