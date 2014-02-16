@@ -45,7 +45,7 @@
                             exit;
                           }
 
-                  if (mysql_num_rows($resultado) == 0) {
+                  
                               
                        $sql1 = "insert into cargo_cif(COSTOCIF, FLETECIF, PRIMACIF) values(".$cargoCif->getCostoCif().",".$cargoCif->getFleteCif().",".$cargoCif->getPrimaCif() .")";
                        $resultado1 = mysql_query($sql1);     
@@ -54,30 +54,18 @@
                             exit;
                           }
                           
-                       $sql2 = "select * from  cargo_cif  where  COSTOCIF=".$cargoCif->getCostoCif()." && FLETECIF=".$cargoCif->getFleteCif()." && PRIMACIF=".$cargoCif->getPrimaCif();
+                       $sql2 = "select * from  cargo_cif  where  COSTOCIF=".$cargoCif->getCostoCif()." && FLETECIF=".$cargoCif->getFleteCif()." && PRIMACIF=".$cargoCif->getPrimaCif()."ORDER BY ID_CARGO_CIF DESC";
                        $resultado2 = mysql_query($sql2);
                           
-                          
+                         $indice=0; 
                         while ($fila2 = mysql_fetch_assoc($resultado2)) {
                             
                             //Seteo id en remesa
-                              $remesa->setIdCargoCif($fila2["ID_CARGO_CIF"]); 
+                            if($indice == 0){$remesa->setIdCargoCif($fila2["ID_CARGO_CIF"]);}
+                            $indice++;
                         }   
-                                                        }
-                           else{
-                               
-                             $sql2 = "select * from  cargo_cif  where  COSTOCIF=".$cargoCif->getCostoCif()." && FLETECIF=".$cargoCif->getFleteCif()." && PRIMACIF=".$cargoCif->getPrimaCif();
-                              $resultado2 = mysql_query($sql2);
-                          
-                          
-                                while ($fila2 = mysql_fetch_assoc($resultado2)) {
-
-                                    //Seteo id en remesa
-                                      $remesa->setIdCargoCif($fila2["ID_CARGO_CIF"]); 
-                                }   
-
-
-                         }
+                                                        
+                         
                                
                            
                           
@@ -114,6 +102,10 @@
     
          
          if($_POST["campo5"]!=""){
+             
+             
+          //cargo otro   
+             
    
                     $sql20 = "select * from  cargo_otro  where  MARGEN_CO=".$cargoOtro->getMargen();
                           $resultado20 = mysql_query($sql20);

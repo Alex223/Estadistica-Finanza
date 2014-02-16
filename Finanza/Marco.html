@@ -13,6 +13,7 @@
     <!-- Bootstrap core CSS -->  
     <link href="/bootstrap/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="bootstrap/dist/css/personalizados.css" type="text/css">
     <link rel="stylesheet" href="bootstrap/examples/navbar-static-top/navbar-static-top.css" type="text/css"/>
     <link rel="stylesheet" href="bootstrap/examples/signin/signin.css" type="text/css"/>
@@ -21,26 +22,33 @@
     <link rel="stylesheet" href="bootstrap/examples/navbar-fixed-top/navbar-fixed-top.css" type="text/css"/>
     <link rel="stylesheet" href="bootstrap/examples/jumbotron/jumbotron.css" type="text/css">
     <link rel="stylesheet" href="bootstrap/assets/css/docs.css" type="text/css"/>
-    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="bootstrap/assets/css/bootstrap-select.css" type="text/css"/> 
+
     
-    
-   
+ 
     
     
     <!-- para datepicker-->
    
-   
-   
-   <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
   
-  
-   <!-- <script src="/bootstrap/js/jquety.dropdown.js" ></script>-->
+  <script src="bootstrap/datepicker/js/jquery-1.8.3.js"></script>
+    
+    
+   <!---------FIN---------->
    
+        
+         
+        
+    
     <script src="bootstrap/js/dropdown.js" ></script>
     <script src="bootstrap/js/Funciones_Ajax_Controlador.js" ></script>
    
-    <script>function estatico(){}</script>
-    
+    <script>function estatico(){}
+$(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+    </script>
+       
    
     <style>
         body{
@@ -53,8 +61,7 @@
   
   
 
-   
-    
+ 
      
     
     
@@ -88,10 +95,10 @@
          <!--   <li class="active"><a href="#" style="background:#639BF8">Usuario</a></li>-->
                      <!-- usuario--> 
                 
-                     <li class="dropdown" >
+                     <li class="dropdown" id="usuario">
                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Usuario<b class="caret"></b></a>
-                       <ul class="dropdown-menu" >
-                        <li><a href="javascript:estatico();"  onclick="exit(0);" >Cambiar de Usuario</a></li>
+                       <ul class="dropdown-menu" id="lista_usuario">
+                        <li id="prueba"><a href="javascript:estatico();"  onclick="exit(0);" >Cambiar de Usuario</a></li>
                         <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Usuarios/Cambia_Clave.html');">Cambiar contraseña</a></li>
                        <!-- <li><a href="#" onclick="cargar('#contenido_dinamico', '/Vista/Login.html');">Cerrar sesi&oacute;n</a></li>-->
                         <li class="divider"></li>
@@ -102,9 +109,9 @@
             
                      <!---->
                      
-                    <li class="dropdown" >
+                    <li class="dropdown" id="modulo" >
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Modulos <b class="caret"></b></a>
-                      <ul class="dropdown-menu" >
+                      <ul class="dropdown-menu" id="lista_modulos">
                         <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Modulo_Bancos/Listados_Cuentas_Bancos.html');">Trasacciones Bancos</a></li>
                         <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Datos_Cabranza/Lista_Datos_Cabranza.html');">Documentos por cobrar</a></li>
                         <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Aduanas/Listado_Aduanas.html');">Remesas Aduanas</a></li>
@@ -120,9 +127,9 @@
                     
                      <!--Adminitración-->
             
-                    <li class="dropdown" >
+                    <li class="dropdown" id="administracion">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Administraci&oacute;n <b class="caret"></b></a>
-                      <ul class="dropdown-menu"  >
+                      <ul class="dropdown-menu" id="lista_administraciones"  >
                           
                           
                            <!-- <li class="dropdown-submenu">
@@ -142,12 +149,12 @@
                     
                     <!-- Sistema -->
                     
-                    <li class="dropdown" >
+                    <li class="dropdown" id="sistema" >
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black">Sistema <b class="caret"></b></a>
-                      <ul class="dropdown-menu" >
+                      <ul class="dropdown-menu" id="lista_sistemas" >
                         <!--<li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Sistema/Ayuda.html');">Ayuda</a></li>
                         <li class="divider"></li>-->
-                        <li><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Sistema/Sobre.html');">Acerca de...</a></li>
+                        <li id="prueba1"><a href="#" onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Sistema/Sobre.html');">Acerca de...</a></li>
                       
                       </ul>
                     </li>
@@ -172,7 +179,7 @@
             
             <h1>Bienvenido!!</h1>
             
-           
+               
             <img src="bootstrap/assets/ico/hj-empresa.jpg">
         </div>
         
@@ -184,7 +191,7 @@
     </div>
     
    
-    <script src="bootstrap/assets/js/jquery.js"></script>
+       <script src="bootstrap/dist/js/bootstrap.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     
     
@@ -203,7 +210,14 @@
             }
            }
            addEvent(window, 'load', sessiont('usuarioLogin'));
-     </script> 
+           
+     </script>
+     
+   <script src="bootstrap/datepicker/js/jquery.ui.datepicker.js"></script>
+   <script src="bootstrap/datepicker/js/jquery.ui.core.js"></script>
+   <script src="bootstrap/datepicker/js/jquery.ui.datepicker-es.js"></script>
+   <script src="bootstrap/assets/js/bootstrap-select.js"></script>
+ 
   </body>
   
   

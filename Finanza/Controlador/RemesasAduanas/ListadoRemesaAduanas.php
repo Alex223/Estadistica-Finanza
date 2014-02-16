@@ -192,7 +192,7 @@ if (mysql_num_rows($resultadoZ) == 0) {
       
                           <tr id='filaIngreso'>
                           
-                         <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaAduana();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='25 '></td>
+                         <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaRemesa();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='25 '></td>
                          </tr>";
     echo ($TABLA1);
     exit;

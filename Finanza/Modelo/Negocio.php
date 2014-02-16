@@ -10,7 +10,7 @@ require_once 'Conexion.php';
          
      }
      function Conectar(conexion $con){
-         return $con->conectar('localhost:3306', 'root', '1234');
+         return $con->conectar('localhost:3306', 'root', '');
          
      }
      

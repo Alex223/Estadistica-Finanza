@@ -1,35 +1,51 @@
-       <meta charset="utf-8">
+<html>      
+<head>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-datetimepicker-0.0.11/css/bootstrap-combined.min.css.css" type="text/css"/>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" type="text/css">
+
+  
+
+
+
+
+<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Test</title>
-        <link rel="stylesheet" type="text/css" href="../bootstrap/datepicker/css/datepicker.css">
-        <link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap-theme.min.css">
-        <   
+    
+        
+   <script type="text/javascript">
+    
+    // $('#dp3').datepicker();
 
+
+   // $('#sandbox-container input').datepicker({ });
+   $('.datepicker').datepicker({
+   
+    startDate: '-3d'
+});
+
+    </script>
+            
     </head>
 
     <body>
-        <div class="well">
-           <input type="text" class="datepicker" placeholder="Click me!">
-        </div>
-
-        <script type="text/javascript" src="../bootstrap/js/jquery.js"></script>
-        <script type="text/javascript" src="../bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="../bootstrap/dist/js/bootstrap.js"></script>
-        <script type="text/javascript" src="../bootstrap/js/date-picker.js"></script>
+        <h1>fecha</h1>
+     
+      
+        <div class="datepicker">
+          <input class="form-control" data-date-format="mm/dd/yyyy">
         
-        <script>
-            
-            $(document).ready(function() {
-    $('.datepicker').datepicker();
-});
-        </script>
+          <span class="input-group-addon">
+          <i class="glyphicon glyphicon-calendar"></i>
+          </span>
+    
+        </div>          
+   
+          <script src="../bootstrap/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js"></script>
+          <script src="../bootstrap/assets/js/jquery.js"></script>
+     
+ 
     </body>
 </html>
     
-    
-    
-
-    
-  </body>
-</html>
