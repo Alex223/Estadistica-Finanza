@@ -33,7 +33,7 @@
             function fecha_inicio(){
              
              var f=new Date();
-             var mes = f.getMonth() +"";
+             var mes = (f.getMonth()+1) +"";
              var dia = f.getDate()+"";
             // alert("AQUI "+mes.length);
              if (mes.length === 1){
@@ -46,7 +46,7 @@
                  dia = "0"+dia;
              }
              
-             var fecha = f.getFullYear() + "-" + mes + "-" + dia;
+             var fecha = dia + "/" + mes + "/" +  f.getFullYear();
              return fecha;
                
                
@@ -66,7 +66,7 @@
            }
            
            addEvent(window, 'load', ListaModuloBanco('contenido_tabla', 1, fecha_inicio()));
-           addEvent(window, 'load', CargasSeleccion('bancos',1));
+           addEvent(window, 'load', CargasSeleccion('selecccion',1));
            addEvent(window, 'load', armaSelect('selecccion'));  
     
     
@@ -87,20 +87,30 @@
         ListaModuloBanco('contenido_tabla', banco, fecha_inicio());
         
     }
+    
+    //funcion para armar select por javascript 
+    //importante siempre que se genere un elemento bootstrap se debe activar de nuevo
+    /*
     function armaSelect (){
         var select="<select id='selectpicker' class='selectpicker show-tick form-control' multiple='' data-live-search='true' >";
-        
-        
-      alert(null);
-        for(i=0; i< document.getElementById('listadoBancos').length;i++){
-      
-            if(document.getElementById("listadoBancos").options[i].defaultSelected===true){
+        var valor = false;
+        var limite = document.getElementById('listadoBancos').length;
+         
+         document.getElementById('datepicker').setAttribute("value", fecha_inicio());
+       
+     
+       var i=0;
+        while( i< limite){
+             valor=document.getElementById("listadoBancos").options[i].defaultSelected;
+             
+            if(valor===true){
            
              select += "<option selected value='"+document.getElementsByTagName("option")[i].value+"'> "+document.getElementById("listadoBancos").options[i].text+"</option";   
             }
             else{
             select += "<option value='"+document.getElementsByTagName("option")[i].value+"'> "+document.getElementById("listadoBancos").options[i].text+"</option";
             }
+        i++;
         }
      
         select+="</select>";
@@ -109,10 +119,13 @@
         
        
         document.getElementById('selecccion').innerHTML += select;
+       
          
+       
+          
     }
      
-    
+    */
     </script>
    
       
@@ -171,7 +184,7 @@
                  <table class='table table-striped' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'>
                      <tr >
                           <td  align="left"><b>Banco:</b></td><td align="left"><div id='selecccion' class="well span5"></div></td>
-                          <td align="left"><b >Fecha:</b></td><td align="left">  <div class="well"><div class="input-append date"><input id="datepicker"  class="fecha" type="text" readonly=""><span class="add-on" ><i class="glyphicon glyphicon-calendar"></i></span> <button class="btn btn-default btn-sm" type="button" onclick="ListaPorFecha()" >Mostrar</button></div></div>
+                          <td align="left"><b >Fecha:</b></td><td align="left">  <div class="well"><div class="input-append date"><input id="datepicker"  class="fecha" value="" type="text" readonly=""><span class="add-on" ><i class="glyphicon glyphicon-calendar"></i></span> <button class="btn btn-default btn-sm" type="button" onclick="ListaPorFecha()" >Mostrar</button></div></div>
                              
                           
                           </td>
@@ -201,7 +214,7 @@
                 
               </form>
               <div id="bancos" style="display: none;"></div>
-               
+                <div id="pr" ></div>
               <script type="text/javascript">$(function() {  $( "#selectpicker" ).focus();});</script>     
               
  </body>

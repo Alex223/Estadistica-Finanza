@@ -6823,6 +6823,8 @@ td.visible-print {
 
 .input-append .add-on,.input-prepend .add-on{display:inline-block;width:auto;height:30px;min-width:16px;padding:4px 5px;font-size:14px;font-weight:normal; vertical-align: middle;line-height:20px;text-align:center;text-shadow:0 1px 0 #ffffff;background-color:#eeeeee;border:1px solid #ccc;border-radius:0 3px 3px 0;}
 
+.add-on-propio{display:inline-block;width:auto;height:30px;min-width:16px;padding:4px 5px;font-size:14px;font-weight:normal; vertical-align: middle;line-height:20px;text-align:center;text-shadow:0 1px 0 #ffffff;background-color:#eeeeee;border:1px solid #ccc;border-radius:0 3px 3px 0;}
+
 
 .fecha{
   
@@ -6841,6 +6843,9 @@ td.visible-print {
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
           transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+
+
+
 
 .fecha[readonly],
 fieldset[disabled] .fecha{

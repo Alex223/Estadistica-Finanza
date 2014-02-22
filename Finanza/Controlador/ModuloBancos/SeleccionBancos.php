@@ -46,8 +46,8 @@ include_once '../../Modelo/Conexion.php';
                  
                     $i=1;
                     $resultadoQuery0="";
-                 //   $resultadoQuery = "<select class='selectpicker show-tick form-control' data-live-search='true' id='selectpicker' onchange=".'"'."cambiaBanco()".'"'.";>";
-                    $resultadoQuery = "<select id=listadoBancos ";
+                    $resultadoQuery = "<select class='selectpicker show-tick form-control' data-live-search='true' id='selectpicker' onchange=".'"'."cambiaBanco()".'"'.";";
+                    //$resultadoQuery = "<select id=listadoBancos ";
                     while ($fila = mysql_fetch_assoc($resultado1)) {
 
                       
@@ -67,12 +67,12 @@ include_once '../../Modelo/Conexion.php';
                             
                             
                             if( $i == $id){
-                           $resultadoQuery0 .="<option selected value='".$banco->getId()."' >".$banco->getId()."| ".$banco->getNombre()."-".$banco->getNumeroCuenta()." ( ".$TIPO->getNombre()." )</option>"; 
+                           $resultadoQuery0 .="<option selected value='".$banco->getId()."' >".$banco->getId()."| ".$banco->getNombre()." - N°: ".$banco->getNumeroCuenta()." ( ".$TIPO->getNombre()." )</option>"; 
                            $resultadoQuery.= "name=".$banco->getId().">";
                            }
                             else{
                                 
-                                $resultadoQuery0 .="<option value='".$banco->getId()."' >".$banco->getId()."| ".$banco->getNombre()."-".$banco->getNumeroCuenta()." ( ".$TIPO->getNombre()." )</option>";  
+                                $resultadoQuery0 .="<option value='".$banco->getId()."' >".$banco->getId()."| ".$banco->getNombre()." - N°: ".$banco->getNumeroCuenta()." ( ".$TIPO->getNombre()." )</option>";  
                                 
                             }
                            $i++;
