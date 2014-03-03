@@ -575,9 +575,11 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-***************************************************************************************************************
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
-//MYSQL LLENADO DE DATOS BÁSICOS//
+
+--MYSQL LLENADO DE DATOS BÁSICOS--
 
 INSERT INTO usuario(NOMBRE_1, NOMBRE_2, AP_PA, AP_MA, RUT, RUT_DV, USER_LOGIN, PASSWORD, ESTADO) VALUES('ADMINISTRADOR ','TOTAL','DEL SISTEMA','FINANZA-ESTADISTICO',1,'9','ADMIN','1234',1);
 INSERT INTO Cargos(Titulo, Descripcion) VALUES('ADMINISTRADOR','ADMINISTRADOR DEL SISTEMA');

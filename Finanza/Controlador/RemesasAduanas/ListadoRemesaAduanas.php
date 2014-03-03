@@ -495,6 +495,7 @@ $TABLA1 .="           <tr>
                             <td><button class='btn btn-default btn-sm' type='button'onclick=" . '"' . "IngresarFilaRemesa();" . '""' . " ><span class='glyphicon glyphicon-plus-sign'> Agregar</span></button></td><td colspan='25'></td>
                          </tr>
 </table>
+ 
       ";
 echo $TABLA1;
 exit;

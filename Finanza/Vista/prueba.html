@@ -1,50 +1,47 @@
 <html>      
 <head>
-    <link rel="stylesheet" href="../bootstrap/bootstrap-datetimepicker-0.0.11/css/bootstrap-combined.min.css.css" type="text/css"/>
-    <link rel="stylesheet" href="../bootstrap/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" type="text/css"/>
-    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" type="text/css">
-
-  
-
+   
 
 
 
 <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Test</title>
-    
-        
-   <script type="text/javascript">
-    
-    // $('#dp3').datepicker();
+  <!-- Include the heartcode canvasloader js file -->
+  <script src="../bootstrap/js/heartcode-canvasloader-min-0.9.1.js"></script>  
+ <style type="text/css">
+     
+		.wrapper {
+			position:absolute;
+			top:50%;
+			left:50%;
+		}
+	</style>       
 
-
-   // $('#sandbox-container input').datepicker({ });
-   $('.datepicker').datepicker({
-   
-    startDate: '-3d'
-});
-
-    </script>
-            
     </head>
 
     <body>
-        <h1>fecha</h1>
-     
-      
-        <div class="datepicker">
-          <input class="form-control" data-date-format="mm/dd/yyyy">
         
-          <span class="input-group-addon">
-          <i class="glyphicon glyphicon-calendar"></i>
-          </span>
-    
-        </div>          
-   
-          <script src="../bootstrap/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js"></script>
-          <script src="../bootstrap/assets/js/jquery.js"></script>
      
+      <!-- Create a div which will be the canvasloader wrapper -->	
+	<div id="canvasloader-container" class="wrapper"></div>
+		
+	<!-- This script creates a new CanvasLoader instance and places it in the wrapper div -->
+<script type="text/javascript">
+		var cl = new CanvasLoader('canvasloader-container');
+                cl.setShape('spiral'); // default is 'oval'
+		cl.setDiameter(40); // default is 40
+		cl.setDensity(26); // default is 40
+		cl.setRange(0.7); //        default is 1.3
+		cl.setFPS(20); // default is 24
+		cl.show(); // Hidden by default
+		
+		// This bit is only for positioning - not necessary
+		  var loaderObj = document.getElementById("canvasLoader");
+  		loaderObj.style.position = "absolute";
+  		loaderObj.style["top"] = cl.getDiameter() * -0.5 + "px";
+  		loaderObj.style["left"] = cl.getDiameter() * -0.5 + "px";
+    </script>	
  
     </body>
 </html>

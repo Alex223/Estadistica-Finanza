@@ -1,7 +1,3 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,10 +16,14 @@ and open the template in the editor.
               return false;
             }
            }
+           
+       
+       
            addEvent(window, 'load', validaRegistrosAduana());
-           addEvent(window, 'load', listarRemesaAduanas('contenido_tabla'));
-          
-        </script>
+           addEvent(window, 'load', listarRemesaAduanas('contenido_tabla', iniciarLoad()));
+         
+          </script>
+        
     </head>
     <body>
               <!--Vista de ingresos de las trasacciones de los bancos a la cuenta de empresa-->
@@ -43,13 +43,12 @@ and open the template in the editor.
                   <div class="panel panel-default" style="overflow-x: scroll" id='contenido_tabla'>
                   
                  
-                    
+                 <div id="canvasloader-container" style = "display: inline; position: absolute ;z-index: 1; margin-left: 0%; margin-top: 6% " class="wrapper"></div>
             
                  </div>
                   
                   
-                  <button style="float: right" class='btn btn-default' type='button' onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Coberturas/Listado_Coberturas.html');"> Cobertura </button>
-                  <h2 id='paginacion'></h2>
+                 <button style="float: right" class='btn btn-default' type='button' onclick="cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Coberturas/Listado_Coberturas.html');"> Cobertura </button>                 <h2 id='paginacion'></h2>
         
          
                    

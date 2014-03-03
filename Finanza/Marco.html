@@ -37,8 +37,9 @@
    <!---------FIN---------->
    
         
-         
+    <!---------Para barra load---------->
         
+    <script src="bootstrap/js/heartcode-canvasloader-min-0.9.1.js"></script>
     
     <script src="bootstrap/js/dropdown.js" ></script>
     <script src="bootstrap/js/Funciones_Ajax_Controlador.js" ></script>
@@ -47,6 +48,7 @@
 $(document).ready(function () {
         $('.dropdown-toggle').dropdown();
     });
+     iniciarLoad();
     </script>
        
    
@@ -56,6 +58,7 @@ $(document).ready(function () {
             background: #f5f5f5;
             
         }
+   
         
     </style>
   
@@ -170,23 +173,26 @@ $(document).ready(function () {
     </div>
     
   
-    <div class="container" style="padding: 0 0px; max-width:100%;">
-        
-        <div style="background-color:black;border-bottom-color:red;border-radius: 5px;height: 50%" ></div>
-        
+    <div class="container" id="principal" style="padding: 0 0px; max-width:100%;">
+         
+       
+              
         
         <div id="contenido_dinamico" style="text-align: center">
-            
-            <h1>Bienvenido!!</h1>
-            
+          
+          <h1>Bienvenido!!</h1>
+            <!--<div id="canvasloader-container" style = "display: inline; position: absolute ;z-index: 1; margin-left: 19%; margin-top: 6% " class="wrapper"></div> -->
+          
                
-            <img src="bootstrap/assets/ico/hj-empresa.jpg">
+           <img src="bootstrap/assets/ico/hj-empresa.jpg">
+            
         </div>
         
     </div> 
     
     
      <div class="barra_información">
+         
        <!--  <div class="barra_separador"> </div> -->
     </div>
     
@@ -212,12 +218,16 @@ $(document).ready(function () {
            addEvent(window, 'load', sessiont('usuarioLogin'));
            
      </script>
+    
      
    <script src="bootstrap/datepicker/js/jquery.ui.datepicker.js"></script>
    <script src="bootstrap/datepicker/js/jquery.ui.core.js"></script>
    <script src="bootstrap/datepicker/js/jquery.ui.datepicker-es.js"></script>
    <script src="bootstrap/assets/js/bootstrap-select.js"></script>
- 
+
+   
+   
+   
   </body>
   
   

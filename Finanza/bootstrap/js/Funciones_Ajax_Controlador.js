@@ -1,4 +1,19 @@
-   function fecha_inicio(){
+
+function iniciarLoad(){
+    
+    	var cl = new CanvasLoader('canvasloader-container');
+                cl.setShape('spiral'); // default is 'oval'
+		cl.setDiameter(30); // default is 40
+		cl.setDensity(26); // default is 40
+		cl.setRange(0.7); //        default is 1.3
+		cl.setFPS(20); // default is 24
+		//cl.show(); // Hidden by default
+    return cl;
+}
+
+
+
+function fecha_inicio(){
              
              var f=new Date();
              var mes = (f.getMonth()+1) +"";
@@ -52,8 +67,12 @@ function sessiont(id){
                             url: "/Estadistica-Finanza/Finanza/Controlador/Session/UsuarioSession.php",
                         data:{}
                         }).done(function(msg){
-                      
-                           document.getElementById(id).innerHTML += msg;
+                           if (msg !== 'redireccionar'){  document.getElementById(id).innerHTML += msg;}
+                           else{
+                               alert("Seccion no iniciada, favor identificate");
+                               location.href="/Estadistica-Finanza/Finanza/index.html";
+                              }
+                         
                         });
     
     
@@ -367,14 +386,16 @@ function listarUsuarios(id,estado){
 
        
             
-            function cargarPHP(divIdentificador, pagina)
+            function cargarPHP(divIdentificador, url)
                 {
-                var url=pagina;
+                      
+             
                     $.ajax({   
                         type: "POST",
                         url:url,
                         data:{},
                         success: function(datos){       
+                           
                             $(divIdentificador).html(datos);
                         }
                     });
@@ -1354,17 +1375,18 @@ function validaRegistrosAduana(){
     
 }
 
-function listarRemesaAduanas(id){
+function listarRemesaAduanas(id, cl){
     
+    cl.show();
     
-         $.ajax({
+    setTimeout (  function(){     $.ajax({
                         type:"POST",
                             url: "/Estadistica-Finanza/Finanza/Controlador/RemesasAduanas/ListadoRemesaAduanas.php",
                         data:{}
-                        }).done(function(msg){document.getElementById(id).innerHTML += msg;});
-                       
-                            
-    
+                        }).done(function(msg){document.getElementById(id).innerHTML += msg; });cl.kill();}  , 500);
+ 
+              
+ 
 }
 
 function agregarOtroCargo(){
@@ -1706,10 +1728,11 @@ function validaIngresoRemesa(d,d1,d2_1,d2_2,d2_3,d3,datepicker,d5){
      
      alert("0");
    var limite = document.getElementById('botonOtroCargo').getAttribute('name');
+    alert("0_2");
    var i;
    var dato;
    var valida=1;
-   if(validaFloat(valor)){
+  
        for(i=0;i<=limite;i++){
            dato =(document.getElementById('ingreso4_'+i).value).trim();
            if (i%2===0 && i <=1){
@@ -1735,7 +1758,7 @@ function validaIngresoRemesa(d,d1,d2_1,d2_2,d2_3,d3,datepicker,d5){
        alert("1");
        if(valida ===0){mensaje +='Falta completar Otro Cargos !\n';control=1;}
         if(valida ===2){mensaje +='Falta completar Otro Cargos !\n';control=1;}
-   }
+   
 alert("pasa1");
    //*******************************
 
@@ -1874,3 +1897,4 @@ function validaRegistros(){
     
     
 }
+
