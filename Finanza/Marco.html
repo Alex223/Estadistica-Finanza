@@ -25,7 +25,10 @@
     <link rel="stylesheet" href="bootstrap/assets/css/bootstrap-select.css" type="text/css"/> 
 
     
- 
+    <style>
+        input:focus, input:active
+        
+    </style>
     
     
     <!-- para datepicker-->
@@ -41,7 +44,9 @@
         
     <script src="bootstrap/js/heartcode-canvasloader-min-0.9.1.js"></script>
     
+    
     <script src="bootstrap/js/dropdown.js" ></script>
+    <script src="bootstrap/js/alert.js" ></script>
     <script src="bootstrap/js/Funciones_Ajax_Controlador.js" ></script>
    
     <script>function estatico(){}
@@ -49,6 +54,7 @@ $(document).ready(function () {
         $('.dropdown-toggle').dropdown();
     });
      iniciarLoad();
+      $(".alert").alert();
     </script>
        
    
@@ -183,6 +189,10 @@ $(document).ready(function () {
           <h1>Bienvenido!!</h1>
             <!--<div id="canvasloader-container" style = "display: inline; position: absolute ;z-index: 1; margin-left: 19%; margin-top: 6% " class="wrapper"></div> -->
           
+            
+            
+
+            
                
            <img src="bootstrap/assets/ico/hj-empresa.jpg">
             
@@ -191,13 +201,16 @@ $(document).ready(function () {
     </div> 
     
     
-     <div class="barra_información">
-         
+    <div style="alignment-adjust: central" class="barra_información" id='barra_información'>
+    
+     <!--   <div  style="border: 5px;margin-left: auto; position: relative; text-align:center  ;vertical-align: text-top ;" class='alert alert-danger alert-dismissable ' >
+            
+            Se debe ingresar un monto para Costo Otro Cargo!</div>-->
        <!--  <div class="barra_separador"> </div> -->
     </div>
     
    
-       <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     
     

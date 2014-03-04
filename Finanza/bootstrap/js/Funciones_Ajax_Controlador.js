@@ -1383,7 +1383,7 @@ function listarRemesaAduanas(id, cl){
                         type:"POST",
                             url: "/Estadistica-Finanza/Finanza/Controlador/RemesasAduanas/ListadoRemesaAduanas.php",
                         data:{}
-                        }).done(function(msg){document.getElementById(id).innerHTML += msg; });cl.kill();}  , 500);
+                        }).done(function(msg){document.getElementById(id).innerHTML += msg; });cl.kill();}  , 350);
  
               
  
@@ -1409,7 +1409,12 @@ function agregarOtroCargo(){
       
     if (filtro===1){
         
-        alert("Deben estar llenos todos los campo del Otro Cargo anterior! ");
+      var  mensaje = "Deben estar llenos todos los campo del Otro Cargo anterior!";
+           document.getElementById('barra_información').innerHTML =  "<div  style='border: 5px; width: auto; position: relative; text-align:center ; padding: 0.7em ;vertical-align: top ;width: auto;' class='alert alert-danger alert-dismissable ' > "+mensaje+"</div>";
+           $(".alert").alert();
+           setTimeout (  function(){document.getElementById('barra_información').innerHTML = "";},3000); 
+        
+      //  alert("Deben estar llenos todos los campo del Otro Cargo anterior! ");
         
     }
     else{
@@ -1430,7 +1435,7 @@ function agregarOtroCargo(){
                       <td colspan='2'><input class='form-control' id='ingreso4_" + a + "'  placeholder='Tipo Otro Cargo...'/></td>\n\
                       </tr>\n\
                       <tr>\n\
-                      <td colspan='2'><input class='form-control' id='ingreso4_" +  b + "' onblur="+'"'+"sumaOtroCargo();"+'"'+" placeholder='Otro Cargo...'/></td>  \n\
+                      <td colspan='2'><input class='form-control' onKeyPress="+'"'+"return validarFloatIngreso(event);"+'"'+"  id='ingreso4_" +  b + "' onblur="+'"'+"sumaOtroCargo();"+'"'+" placeholder='Costo Otro Cargo...'/></td>  \n\
                       </table>";
       document.getElementById('botonOtroCargo').setAttribute('name',b);  
         
@@ -1452,7 +1457,13 @@ function EliminaOtroCargo(){
     sumaOtroCargo('ingreso4_1');
     
     }
-    else{alert('No hay Otros Cargos adicionales para eliminar!');}
+    else{
+         var  mensaje = "No hay Otros Cargos adicionales para eliminar!";
+           document.getElementById('barra_información').innerHTML =  "<div  style='border: 5px; width: auto; position: relative; text-align:center ; padding: 0.7em ;vertical-align: top ;width: auto;' class='alert alert-danger alert-dismissable ' > "+mensaje+"</div>";
+           $(".alert").alert();
+           setTimeout (  function(){document.getElementById('barra_información').innerHTML = "";},3000); 
+     //   alert('No hay Otros Cargos adicionales para eliminar!');
+    }
 }
 
 function IngresarFilaRemesa(){
@@ -1460,50 +1471,50 @@ function IngresarFilaRemesa(){
    selectTipoDerecho('ingreso3','crea'); 
    var filaIngreso ="<tr>\n\
                      <td colspan='2'><input class='form-control' id='ingreso' placeholder='Carpeta...'/></td> \n\
-                     <td colspan='2'><input class='form-control' id='ingreso1' placeholder='Proveedor...'/></td> \n\
+                     <td colspan='3'><input class='form-control' id='ingreso1' placeholder='Proveedor...'/></td> \n\
                      <td colspan='4'>\n\
                      <table class='table table-striped' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'>\n\
                      <tr><td colspan='2'>Datos Costo Cif</td></tr>\n\
                      <tr>\n\
-                       <td>Cif: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_1' placeholder='Costo Cif...'/></td> \n\
+                       <td>Cif: </td><td><input   type='number' step='0.01' onKeyPress="+'"'+"return validarFloatIngreso(event);"+'"'+" class='form-control' onblur="+'"'+"sumaCif()"+'"'+" id='ingreso2_1' placeholder='Costo Cif...'/></td> \n\
                      </tr>\n\
                      <tr>\n\
-                       <td>Flete: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_2' placeholder='Costo Flete...'/></td> \n\
+                       <td>Flete: </td><td><input  type='number' step='0.01' onKeyPress="+'"'+"return validarFloatIngreso(event);"+'"'+" class='form-control' onblur="+'"'+"sumaCif()"+'"'+" id='ingreso2_2' placeholder='Costo Flete...'/></td> \n\
                      </tr>\n\
                      <tr>\n\
-                       <td>Prima: </td><td><input class='form-control' onchange="+'"'+"sumaCif()"+'"'+" id='ingreso2_3' placeholder='Costo Prima...'/></td> \n\
+                       <td>Prima: </td><td><input  type='number' step='0.01' onKeyPress="+'"'+"return validarFloatIngreso(event);"+'"'+" class='form-control' onblur="+'"'+"sumaCif()"+'"'+" id='ingreso2_3' placeholder='Costo Prima...'/></td> \n\
                      </tr>\n\
                      <tr>\n\
                       <td>Costo Cif: </td><td><div id='totalCif'></div></td>\n\
                      </tr>\n\
                      </table></td>\n\
                      <td><div >Estado Bodega</div><div id='ingreso3'></div></td>\n\
-                     <td colspan='2'>\n\
+                     <td colspan='3'>\n\
                       <div id='otroCargo'>\n\
                       <table class='table table-striped' id='otroCargo_1' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'>     \n\
                       <tr>\n\
-                      <td colspan='2'><input class='form-control' id='ingreso4_0' placeholder='Tipo Otro Cargo...'/></td>\n\
+                      <td  colspan='3'><div id='unos'><input class='form-control' id='ingreso4_0' placeholder='Tipo Otros Cargos...'/></div</td>\n\
                       </tr>\n\
                       <tr>\n\
-                      <td colspan='2'><input class='form-control' id='ingreso4_1' onblur="+'"'+"sumaOtroCargo();"+'"'+" placeholder='Otro Cargo...'/></td>  \n\
+                      <td colspan='3'><input class='form-control' id='ingreso4_1' type='number' step='0.01' onKeyPress="+'"'+"return validarFloatIngreso(event);"+'"'+"  onblur="+'"'+"sumaOtroCargo();"+'"'+" placeholder='Costo Otros Cargos...'/></td>  \n\
                       </table>\n\
                        </div>\n\
                        <table class='table table-striped' style='border-width:1px;border-style: solid;border-color: #d5d5d5;border-radius: 5px'>\n\
                          </tr>\n\
-                         <td colspan='2' align='right'>\n\
-                         <button id='botonOtroCargoMenos' name='1' class='btn btn-default' title='Elimina Otro Cargo' type='button' onclick="+'"'+"EliminaOtroCargo();"+'"'+" ><span class='glyphicon glyphicon-minus-sign'> </span></button>\n\
-                         <button id='botonOtroCargo' name='1' class='btn btn-default' title='Agrega Otro Cargo' type='button' onclick="+'"'+"agregarOtroCargo();"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>\n\
-                         </tr>\n\
+                         <td colspan='3' align='right'>\n\
+                          <button id='botonOtroCargo' name='1' class='btn btn-default btn-sm' title='Agrega Otro Cargo' type='button' onclick="+'"'+"agregarOtroCargo();"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button>\n\
+                          <button id='botonOtroCargoMenos' name='1' class='btn btn-default btn-sm' title='Elimina Otro Cargo' type='button' onclick="+'"'+"EliminaOtroCargo();"+'"'+" ><span class='glyphicon glyphicon-minus-sign'> </span></button></td>\n\
+                        </tr>\n\
                         <tr>\n\
                          <td align='left'>Total:</td><td><div id='totalOtroCargo'></div></td> \n\
                         </tr>\n\
                         </table>\n\
                      </td>\n\
-                     <td colspan='3'><input  id='datepicker' class='fecha' style='width:75%;' readonly='' /><span class='add-on-propio' ><i class='glyphicon glyphicon-calendar'></i></span></td>\n\
-                     <td colspan='3'><input class='form-control' id='ingreso5' placeholder='Carpeta Relacionada...'/></td>\n\
-                     <td><button class='btn btn-default' type='button' onclick="+'"'+"cancelaIngresoRemesa();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td>\n\
-                     <td><button class='btn btn-default' type='button' onclick="+'"'+"validaIngresoRemesa('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','ingreso3','datepicker','ingreso5');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>\n\
-                     <td colspan='11'></td>\n\
+                     <td colspan='3'><input  id='datepicker' title='Seleccionar fecha' class='fecha' style='width:75%;' readonly='' /><span class='add-on-propio' ><i class='glyphicon glyphicon-calendar'></i></span></td>\n\
+                     <td colspan='4'><input class='form-control' id='ingreso5' placeholder='Carpeta Relacionada...'/></td>\n\
+                     <td><button class='btn btn-default btn-sm'  title='Añade una nueva Remesa de Aduana' type='button' onclick="+'"'+"validaIngresoRemesa('ingreso','ingreso1','ingreso2_1','ingreso2_2','ingreso2_3','ingreso3','datepicker','ingreso5');"+'"'+" ><span class='glyphicon glyphicon-plus-sign'> </span></button></td>\n\
+                     <td><button class='btn btn-default btn-sm' title='Cancela el Ingreso de la Remesa' type='button' onclick="+'"'+"cancelaIngresoRemesa();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td>\n\
+                     <td colspan='8'></td>\n\
                      </tr>";
     document.getElementById('filaIngreso').innerHTML=filaIngreso;
     $( "#ingreso" ).focus();
@@ -1516,64 +1527,68 @@ function sumaOtroCargo(){
    //var campo = document.getElementById(valor).value.trim();
    var i;
    var tag="";
-   var dato;
+   var dato="";
   // var control=1;
-   var sumaTotal=0.0;
+   var sumaTotal=parseFloat(0);
    
        for(i=1;i<=limite;i+=2){
-           
-           dato =(document.getElementById('ingreso4_'+i).value).trim();
-          
-          
-          
+           tag = "ingreso4_"+i;
+           dato =(document.getElementById(tag).value).trim();
+        
+         
            if(dato!==""){
-             if(validaFloat('ingreso4_'+i)) { 
-               sumaTotal +=parseFloat(dato);}
-           else{
-              tag = "#ingreso4_"+i;
-              alert(tag);
-               document.getElementById('totalOtroCargo').innerHTML = sumaTotal;
-               $( tag+"" ).focus();
-               break;
-           }
-               
+           
+               //cambiar coma por punto; antes de trabajar
+               sumaTotal +=parseFloat(dato.toString().replace(/,/g,"."));
            }
            else{
-               alert("Se debe ingresar un monto para el Otro Cargo");
-               document.getElementById('totalOtroCargo').innerHTML = sumaTotal;
-               break;
+              document.getElementById('barra_información').innerHTML =  "<div  style='border: 5px; width: auto; position: relative; text-align:center ; padding: 0.7em ;vertical-align: top ;width: auto;' class='alert alert-danger alert-dismissable ' > Se debe ingresar un monto para Costo Otro Cargo!</div>";
+              $(".alert").alert();
+               setTimeout (  function(){document.getElementById('barra_información').innerHTML = "";},3000); 
+            //alert("Se debe ingresar un monto para Costo Otro Cargo");
+            
            
         }
       
+      // alert(sumaTotal);
        
-       
-       document.getElementById('totalOtroCargo').innerHTML = sumaTotal;
+       document.getElementById('totalOtroCargo').innerHTML = sumaTotal.toString().replace(/\./g,','); 
    }
 
     
     
 }
 
-function validaFloat(valor){
-      var elemento = document.getElementById(valor).value+"";
+function validarFloatIngreso(e) {
+
+   var  tecla = (document.all) ? e.keyCode : e.which;
+  
+    if (tecla === 8 ) return true; //Tecla de retroceso (para poder borrar)
+    if (tecla === 0) return true;//tabulador
+    if (tecla === 44) return true; //Coma ( En este caso para diferenciar los decimales )
+    if (tecla === 48) return true;
+    if (tecla === 49) return true;
+    if (tecla === 50) return true;
+    if (tecla === 51) return true;
+    if (tecla === 52) return true;
+    if (tecla === 53) return true;
+    if (tecla === 54) return true;
+    if (tecla === 55) return true;
+    if (tecla === 56) return true;
+    if (tecla === 57) return true;
      
-      if (elemento===""){elemento=0;}
+    var patron = /1/; //ver nota
+    var te = String.fromCharCode(tecla);
+    return patron.test(te);
     
-      try{
-         parseFloat(elemento);
-            } 
-        catch(error){
-    
-                     }
-           if(isNaN(parseFloat(elemento))){
-                alert("Debes ingresar solo números!");
-            $( "#"+valor ).focus();
-            return false;
-     
- }else{return true;}
-}
+}  
+
+
+
 
 function sumaCif(){
+    
+    //dato.toString().replace(/,/g,".")
     
     
     var cif1 = document.getElementById('ingreso2_1').value+"";
@@ -1585,19 +1600,12 @@ function sumaCif(){
     if (cif1===""){cif1=0;}
     if (cif2===""){cif2=0;}
     if (cif3===""){cif3=0;}
-    try{
-    total = parseFloat(cif1)+parseFloat(cif2)+parseFloat(cif3);
-} 
-catch(error){
     
+    total = parseFloat(cif1.toString().replace(/,/g,"."))+parseFloat(cif2.toString().replace(/,/g,"."))+parseFloat(cif3.toString().replace(/,/g,"."));
  
-}
- if(isNaN(total)){
-       alert("Debes ingresar solo números!");
-       $( "#ingreso2_1" ).focus();
-     
- }
- document.getElementById('totalCif').innerHTML=total;
+
+ 
+ document.getElementById('totalCif').innerHTML=total.toString().replace(/\./g,',');;
 
 }
 
@@ -1710,81 +1718,140 @@ function verificaCarpeta(carpeta){
 
 function validaIngresoRemesa(d,d1,d2_1,d2_2,d2_3,d3,datepicker,d5){
  
- 
-     var campo = document.getElementById(d).value;
-     var campo1 = document.getElementById(d1).value;
-     var campo2_1 = document.getElementById(d2_1).value;
-     var campo2_2 = document.getElementById(d2_2).value;
-     var campo2_3 = document.getElementById(d2_3).value;
-     //var campo4 = document.getElementById(d5).value;
-     var campo5 = document.getElementById(d3).value;
-     var campo6 = document.getElementById(datepicker).value;
-     var campo7 = document.getElementById(d5).value;
+   
+     var campo = document.getElementById(d).value;//Carpeta
+     var campo1 = document.getElementById(d1).value;//Proveedor
+     var campo2_1 = document.getElementById(d2_1).value; //Costo Cif
+     var campo2_2 = document.getElementById(d2_2).value;// Costo Flete 
+     var campo2_3 = document.getElementById(d2_3).value; //costo prima
+     var campo5 = document.getElementById(d3).value;//Estado en Bodega
+     var campo6 = document.getElementById(datepicker).value; //Fecha
+     var campo7 = document.getElementById(d5).value;//Carpeta Relacionada
      
     var control = 0;
     var mensaje = "";
      
+     
+     
     //Validacióm campos de Otro Cargo 
      
-     alert("0");
+     
    var limite = document.getElementById('botonOtroCargo').getAttribute('name');
-    alert("0_2");
+   var umbral = (parseInt(limite)+1)/2;
+   
    var i;
-   var dato;
+   var dato,dato1;
    var valida=1;
   
-       for(i=0;i<=limite;i++){
-           dato =(document.getElementById('ingreso4_'+i).value).trim();
-           if (i%2===0 && i <=1){
-               
-               if(dato === ""){
-                   
-                   valida=2;
-               }
-               
-           }
-           if(i%2===1){
-           
-          
-           if(dato!==""){
-             if(isNaN(parseFloat(dato)))  
-               valida=0;
-               
-               }
-           }
-           
-       }
-       //veredicto
-       alert("1");
-       if(valida ===0){mensaje +='Falta completar Otro Cargos !\n';control=1;}
-        if(valida ===2){mensaje +='Falta completar Otro Cargos !\n';control=1;}
+       for(i=0;i<umbral;i++){
+           dato =(document.getElementById('ingreso4_'+2*i).value).trim();
+           dato1 =(document.getElementById('ingreso4_'+(2*i+1)).value).trim();
+    
+             
+            if(dato !== ""){
+                
+                if(dato1 === ""){valida=2;}
+                
+            }else{
+                
+               if(dato1 !== ""){valida = 0;}
+                 }
+    
+    
+    
+       }  
    
-alert("pasa1");
+     
+       
+   
+   
+
    //*******************************
 
-    if (campo === ""){mensaje +='Falta el número de carpeta!\n';control=1;}
+    if (campo === ""){mensaje +='Falta el número de carpeta! \n';control=1;}
     else{
-       if(isNaN(parseInt(campo))){mensaje +='Se debe ingresar sólo números para la carpeta!\n';control=1;}
+       if(isNaN(parseInt(campo))){mensaje +='Se debe ingresar sólo números para la carpeta! \n';control=1;}
        }
         
     
-    if (campo1 === ""){mensaje +='Falta una Proveedor!\n';control=1;}
-    if (campo2_1 === "" && campo2_2==="" && campo2_3 ===""){ mensaje +='Falta al menos un costo Cif!\n';control=1;}
-  //if (isNaN(parseFloat(campo5))){mensaje +='Se debe Ingresa una número en otro cargo!\n';control=1;}
- //   if (campo6 === ""){mensaje +='Falta ingresar una fecha!\n';control=1;}
-    
-    if(campo7 !== ""){
-    //por ver doble ajax 
-    if (verificaCarpeta(campo7) === false){mensaje +='No existe la carpeta ingresada!\n';control=1;}
+    if (campo1 === ""){mensaje +='Falta una Proveedor! \n';control=1;}
+    if (campo2_1 === "" && campo2_2 === "" && campo2_3 === ""){ mensaje +='Falta al menos un costo Cif! \n';control=1;}
+    if (valida ===0){mensaje +='Falta completar Tipo Otro Cargos ! \n';control=1;}
+    if (valida ===2){mensaje +='Falta completar Costo Otro Cargos ! \n';control=1;}
+    if (campo7 !== ""){
+   
+    if (verificaCarpeta(campo7) === false){mensaje +='No existe la carpeta ingresada! \n';control=1;}
     }
-    if(control===0){
+    
+    
+    if(control === 0) {
         
+        // alert bootstrap
         
-                
-                       var r=confirm('¿Desea realmente ingresar un nuevo registro?');
-                         if (r === true){
+       //var confimacion ="<button class='btn btn-primary btn-lg' data-toggle='modal" data-target="#myModal">Launch demo modal</button>
+
+
+                        $('#myModal').modal('show');
+
+                       //var r=confirm('¿Desea realmente ingresar un nuevo registro?');
+                        // ((if (r === true){
                              
-                            
+                     
+                         
+        
+    }else{
+        
+           document.getElementById('barra_información').innerHTML =  "<div  style='border: 5px; width: auto; position: relative; text-align:center ; padding: 0.7em ;vertical-align: top ;width: auto;' class='alert alert-danger alert-dismissable ' > "+mensaje+"</div>";
+           $(".alert").alert();
+           setTimeout (  function(){document.getElementById('barra_información').innerHTML = "";},3000);
+                
+            //    alert(mensaje);
+            
+            }
+    
+}
+
+function agregarRemesaAduana(d,d1,d2_1,d2_2,d2_3,d3,datepicker,d5){
+    
+     var campo = document.getElementById(d).value;//Carpeta
+     var campo1 = document.getElementById(d1).value;//Proveedor
+     var campo2_1 = document.getElementById(d2_1).value; //Costo Cif
+     var campo2_2 = document.getElementById(d2_2).value;// Costo Flete 
+     var campo2_3 = document.getElementById(d2_3).value; //costo prima
+     var campo5 = document.getElementById(d3).value;//Estado en Bodega
+     var campo6 = document.getElementById(datepicker).value; //Fecha
+     var campo7 = document.getElementById(d5).value;//Carpeta Relacionada
+     
+     
+     
+     
+          
+   var limite = document.getElementById('botonOtroCargo').getAttribute('name');
+   var umbral = (parseInt(limite)+1)/2;
+   
+   var i;
+   var dato,dato1;
+  // var valida[limite+1] = new Array();
+  
+       for(i=0;i<umbral;i++){
+           dato =(document.getElementById('ingreso4_'+2*i).value).trim();
+           dato1 =(document.getElementById('ingreso4_'+(2*i+1)).value).trim();
+    
+             
+            if(dato !== ""){
+                
+                if(dato1 === ""){valida=2;}
+                
+            }else{
+                
+               if(dato1 !== ""){valida = 0;}
+                 }
+    
+    
+    
+       } 
+     
+     
                        $.ajax({
                         type:"POST",
                             url: "/Estadistica-Finanza/Finanza/Controlador/RemesasAduanas/IngresaRemesaAduana.php",
@@ -1794,9 +1861,6 @@ alert("pasa1");
                         }); 
                         
                          cargarPHP('#contenido_dinamico', '/Estadistica-Finanza/Finanza/Vista/Aduanas/Listado_Aduanas.html'); 
-                         }
-        
-    }else{alert(mensaje);}
     
 }
 
@@ -1849,7 +1913,7 @@ function IngresarFilaCobertura(){
                      </tr>\n\
                      </table></td>\n\
                      <td><span id='estado'>Estado Bodega:</span><div id='ingreso3'></div></td>\n\
-                     <td colspan='3'><input class='form-control' id='ingreso4' placeholder='Otro Cargo...'/></td>\n\
+                     <td colspan='3'><input class='form-control' id='ingreso4' placeholder='Otros Cargos...'/></td>\n\
                      <td colspan='2'><input class='form-control' id='ingreso5' placeholder='Fecha...'/></td>\n\
                      <td colspan='3'><input class='form-control' id='ingreso6' placeholder='Carpeta Relacionada...'/></td>\n\
                      <td><button class='btn btn-default' type='button' onclick="+'"'+"cancelaIngresoCobertura();"+'"'+" ><span class='glyphicon glyphicon-remove-sign'> </span></button></td>\n\
